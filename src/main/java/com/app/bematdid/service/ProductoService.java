@@ -32,4 +32,40 @@ public class ProductoService {
 
     }
 
+    public void guardar(Producto producto){
+
+        productoRepository.save(producto);
+    }
+
+
+    public  Producto actualizar(Producto request,Long id){
+        Optional<Producto> productos = productoRepository.findById(id);
+
+        Producto producto = productos.get();
+        producto.setNombre(request.getNombre());
+        producto.setPrecioCosto(request.getPrecioCosto());
+        producto.setPrecioVenta(request.getPrecioVenta());
+        producto.setIva(request.getIva());
+        producto.setCantidadMinima(request.getCantidadMinima());
+        producto.setCantidad(request.getCantidad());
+
+
+
+        return productoRepository.save(producto);
+
+
+
+    }
+
+
+    public void borrar(Long id){
+        Optional<Producto> productos = productoRepository.findById(id);
+
+        Producto producto = productos.get();
+
+        producto.setEstado(false);
+
+        productoRepository.save(producto);
+    }
+
 }

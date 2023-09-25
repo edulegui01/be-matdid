@@ -39,4 +39,8 @@ public class Localidad {
     @JsonIgnore
     @OneToMany(mappedBy = "localidad",cascade = CascadeType.ALL)
     private List<Persona> personas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "localidad",cascade = CascadeType.ALL)
+    private List<Funcionario> funcionarios;
 }
