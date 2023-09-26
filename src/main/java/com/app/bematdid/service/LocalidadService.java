@@ -23,7 +23,7 @@ public class LocalidadService {
     }
 
     public List<LocalidadDTO> listar(){
-        List<Localidad> result = localidadRepository.findAllByOrderByDescripcionDistrito();
+        List<Localidad> result = localidadRepository.findAll();
 
         return localidadMapper.mapEntitiesIntoDTOs(result);
     }

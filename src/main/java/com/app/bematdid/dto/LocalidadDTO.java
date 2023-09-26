@@ -23,7 +23,7 @@ public class LocalidadDTO implements Serializable {
 
     public LocalidadDTO(Localidad localidad){
         this.id = localidad.getId();
-        this.codigo_distrito = localidad.getCodigoDistrito();
-        this.descripcion_distrito = localidad.getDescripcionDistrito();
+        this.codigo_distrito = localidad.getCodigo_distrito();
+        this.descripcion_distrito = localidad.getDescripcion_distrito();
     }
 }

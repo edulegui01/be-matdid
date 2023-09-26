@@ -21,8 +21,8 @@ public class LocalidadMapper {
     public LocalidadDTO mapEntityIntoDto(Localidad entity){
         LocalidadDTO dto = new LocalidadDTO();
         dto.setId(entity.getId());
-        dto.setCodigo_distrito(entity.getCodigoDistrito());
-        dto.setDescripcion_distrito(entity.getDescripcionDistrito());
+        dto.setCodigo_distrito(entity.getCodigo_distrito());
+        dto.setDescripcion_distrito(entity.getDescripcion_distrito());
 
 
         return dto;

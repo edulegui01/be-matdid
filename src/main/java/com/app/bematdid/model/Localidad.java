@@ -23,16 +23,16 @@ public class Localidad {
     private Integer id;
     @NotNull
     @Column(name = "codigo_departamento")
-    private Integer codigoDepartamento;
+    private String codigo_departamento;
     @NotBlank
     @Column(name = "descripcion_departamento")
-    private String descripcionDepartamento;
+    private String descripcion_departamento;
     @NotBlank
     @Column(name = "codigo_distrito")
-    private String codigoDistrito;
+    private String codigo_distrito;
     @NotBlank
     @Column(name = "descripcion_distrito")
-    private String descripcionDistrito;
+    private String descripcion_distrito;
 
 
 
