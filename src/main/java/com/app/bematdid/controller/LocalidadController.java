@@ -1,6 +1,7 @@
 package com.app.bematdid.controller;
 
 import com.app.bematdid.dto.LocalidadDTO;
+import com.app.bematdid.dto.ProductoDTO;
 import com.app.bematdid.model.Localidad;
 import com.app.bematdid.service.LocalidadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,17 @@ public class LocalidadController {
 
 
     @GetMapping("localidad/listar")
-    public List<LocalidadDTO> listar(){
-        return localidadService.listar();
+    public Page<LocalidadDTO> listar(Pageable pageable, @RequestParam String nombre ){
+
+
+
+        return localidadService.listar(pageable, nombre);
+
     }
 
-    @PostMapping("api/localidad")
+    @PostMapping("localidad/guardar")
     public Localidad guardar(@RequestBody Localidad localidad){
-        //localidadService.guardar(localidad);
+        localidadService.guardar(localidad);
         return localidad;
     }
 

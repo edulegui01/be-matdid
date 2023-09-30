@@ -22,10 +22,10 @@ public class LocalidadService {
         localidadRepository.save(localidad);
     }
 
-    public List<LocalidadDTO> listar(){
-        List<Localidad> result = localidadRepository.findAll();
+    public Page<LocalidadDTO> listar(Pageable pageable, String nombre){
+        Page<Localidad> result = localidadRepository.listarLocalidad(pageable,nombre);
 
-        return localidadMapper.mapEntitiesIntoDTOs(result);
+        return localidadMapper.mapEntityPageIntoDTOPage(pageable,result);
     }
 
 

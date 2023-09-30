@@ -19,20 +19,13 @@ import java.util.List;
 @Table(name = "localidad")
 public class Localidad {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @NotNull
-    @Column(name = "codigo_departamento")
-    private String codigo_departamento;
-    @NotBlank
-    @Column(name = "descripcion_departamento")
-    private String descripcion_departamento;
-    @NotBlank
-    @Column(name = "codigo_distrito")
-    private String codigo_distrito;
-    @NotBlank
-    @Column(name = "descripcion_distrito")
-    private String descripcion_distrito;
+    @Column(name = "nombre")
+    private String nombre;
+    private boolean estado=true;
 
 
 

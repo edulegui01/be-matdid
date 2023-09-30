@@ -16,14 +16,14 @@ import java.io.Serializable;
 public class LocalidadDTO implements Serializable {
 
     private Integer id;
-    private String codigo_distrito;
-    private String descripcion_distrito;
+    private String nombre;
+
 
 
 
     public LocalidadDTO(Localidad localidad){
         this.id = localidad.getId();
-        this.codigo_distrito = localidad.getCodigo_distrito();
-        this.descripcion_distrito = localidad.getDescripcion_distrito();
+        this.nombre = localidad.getNombre();
+
     }
 }
