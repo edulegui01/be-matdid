@@ -64,13 +64,12 @@ public class PersonaService {
 
         Persona persona = personas.get();
         persona.setNombre(request.getNombre());
-        persona.setApellido(request.getApellido());
         persona.setCedula(request.getCedula());
         persona.setRuc(request.getRuc());
         persona.setTelefono(request.getTelefono());
         persona.setDireccion(request.getDireccion());
         persona.setEmail(request.getEmail());
-        persona.setEs_cliente(request.getEs_cliente());
+        persona.setEsCcliente(request.getEsCcliente());
         persona.setLocalidad(request.getLocalidad());
 
 

@@ -27,11 +27,10 @@ public class ProductoMapper {
         ProductoDTO dto = new ProductoDTO();
         dto.setIdProducto(entity.getIdProducto());
         dto.setNombre(entity.getNombre());
-        dto.setPrecioCosto(entity.getPrecioCosto());
-        dto.setPrecioVenta(entity.getPrecioVenta());
+        dto.setCosto(entity.getCosto());
+        dto.setPrecio(entity.getPrecio());
         dto.setIva(entity.getIva());
-        dto.setCantidadMinima(entity.getCantidadMinima());
-        dto.setCantidad(entity.getCantidad());
+        dto.setStockActual(entity.getStockActual());
 
 
         return dto;

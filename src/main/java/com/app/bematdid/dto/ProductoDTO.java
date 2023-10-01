@@ -21,21 +21,19 @@ public class ProductoDTO implements Serializable {
 
     private Long idProducto;
     private String nombre;
-    private Integer precioCosto;
-    private Integer precioVenta;
+    private Integer costo;
+    private Integer precio;
     private Float iva;
-    private Integer cantidadMinima;
-    private Integer cantidad;
+    private int stockActual;
 
 
     public ProductoDTO(Producto producto){
         this.idProducto = producto.getIdProducto();
         this.nombre = producto.getNombre();
-        this.precioCosto = producto.getPrecioCosto();
-        this.precioVenta = producto.getPrecioVenta();
+        this.costo = producto.getCosto();
+        this.precio = producto.getPrecio();
         this.iva = producto.getIva();
-        this.cantidadMinima = producto.getCantidadMinima();
-        this.cantidad = producto.getCantidad();
+        this.stockActual = producto.getStockActual();
     }
 
 }

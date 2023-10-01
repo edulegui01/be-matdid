@@ -1,5 +1,6 @@
 package com.app.bematdid.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
+
+import java.util.List;
 
 
 @Getter
@@ -23,21 +26,27 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_persona")
     private Long idPersona;
-    @NotBlank
-    private String nombre;
-    @NotBlank
-    private String apellido;
     @NotNull
     private int cedula;
     @NotBlank
-    private String ruc;
+    private String nombre;
+    @Column(name = "nombre_encargado")
     @NotBlank
-    private String telefono;
+    private String nombreEncargado;
     @NotBlank
     private String direccion;
     @Email
     private String email;
-    private Boolean es_cliente;
+    @NotBlank
+    private String telefono;
+    @NotBlank
+    private String sector;
+    @NotBlank
+    private String ruc;
+    @NotBlank
+    private String razon_social;
+    @Column(name = "es_cliente")
+    private Boolean esCcliente;
     @NotNull
     private Boolean estado=true;
 
@@ -49,9 +58,16 @@ public class Persona {
 
 
     @ManyToOne()
-
     @JoinColumn(name = "id_localidad")
     Localidad localidad;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "persona",cascade = CascadeType.ALL)
+    private List<Compra> compras;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "persona",cascade = CascadeType.ALL)
+    private List<Factura> facturas;
 
 
 }

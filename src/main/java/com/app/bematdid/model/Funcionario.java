@@ -1,5 +1,6 @@
 package com.app.bematdid.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -9,9 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Calendar;
 import java.util.Date;
-
-
+import java.util.List;
 
 
 @Getter
@@ -25,29 +26,58 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_funcionario")
     private Long idFuncionario;
+    @NotNull
+    private int cedula;
     @NotBlank
     private String nombre;
     @NotBlank
     private String apellido;
-    @NotNull
-    private int cedula;
-
+    @NotBlank
+    private Calendar fechaNac;
+    @NotBlank
+    private String direccion;
+    @Email
+    private String email;
     @NotBlank
     private String telefono;
     @NotBlank
-    private String direccion;
-
-    private Date fechaNac;
-    private Date fechaAlta;
-    private Date fechaBaja;
+    @Column(name = "fecha_alta",updatable = false)
+    @Temporal(TemporalType.DATE)
+    private Calendar fechaAlta;
+    private Calendar fechaBaja;
+    @NotBlank
+    private String rol;
 
     @NotNull
     private Boolean estado=true;
     private Character activo;
 
 
-    @ManyToOne()
 
+    @ManyToOne()
     @JoinColumn(name = "id_localidad")
     Localidad localidad;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
+    private List<Gasto> gastos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
+    private List<Usuario> usuarios;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
+    private List<Compra> compras;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
+    private List<Movimiento> movimientos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
+    private List<Factura> facturas;
+
+
 }

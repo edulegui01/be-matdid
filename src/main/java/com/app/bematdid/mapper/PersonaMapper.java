@@ -27,7 +27,6 @@ public class PersonaMapper {
         PersonaDTO dto = new PersonaDTO();
         dto.setIdPersona(entity.getIdPersona());
         dto.setNombre(entity.getNombre());
-        dto.setApellido(entity.getApellido());
         dto.setDireccion(entity.getDireccion());
         dto.setCedula(entity.getCedula());
         dto.setRuc(entity.getRuc());

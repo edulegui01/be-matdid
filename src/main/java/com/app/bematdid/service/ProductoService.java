@@ -43,11 +43,10 @@ public class ProductoService {
 
         Producto producto = productos.get();
         producto.setNombre(request.getNombre());
-        producto.setPrecioCosto(request.getPrecioCosto());
-        producto.setPrecioVenta(request.getPrecioVenta());
+        producto.setCosto(request.getCosto());
+        producto.setPrecio(request.getPrecio());
         producto.setIva(request.getIva());
-        producto.setCantidadMinima(request.getCantidadMinima());
-        producto.setCantidad(request.getCantidad());
+        producto.setStockActual(request.getStockActual());
 
 
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -20,10 +21,10 @@ public class FuncionarioDTO implements Serializable {
     private  int cedula;
     private String telefono;
     private String direccion;
-    private Date fechaAlta;
+    private Calendar fechaAlta;
     private Localidad localidad;
     private Character activo;
-    private Date fechaNac;
+    private Calendar fechaNac;
 
 
     public FuncionarioDTO(Funcionario funcionario){
