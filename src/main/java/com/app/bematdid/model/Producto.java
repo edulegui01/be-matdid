@@ -51,6 +51,7 @@ public class Producto {
     private boolean estado=true;
 
 
+
     @JsonIgnore
     @OneToMany(mappedBy = "producto",cascade = CascadeType.ALL)
     private List<DetalleMovimiento> detalleMovimientos;

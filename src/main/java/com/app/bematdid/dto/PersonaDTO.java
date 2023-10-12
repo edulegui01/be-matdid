@@ -17,11 +17,13 @@ public class PersonaDTO implements Serializable {
 
     private Long idPersona;
     private String nombre;
-    private String apellido;
+    private String nombreEncargado;
     private int cedula;
     private String ruc;
     private String direccion;
     private  String telefono;
+    private String sector;
+    private String razonSocial;
     private Localidad localidad;
     private String email;
 

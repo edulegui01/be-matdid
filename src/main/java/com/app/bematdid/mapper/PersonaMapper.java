@@ -27,12 +27,15 @@ public class PersonaMapper {
         PersonaDTO dto = new PersonaDTO();
         dto.setIdPersona(entity.getIdPersona());
         dto.setNombre(entity.getNombre());
+        dto.setSector(entity.getSector());
+        dto.setRazonSocial(entity.getRazonSocial());
         dto.setDireccion(entity.getDireccion());
         dto.setCedula(entity.getCedula());
         dto.setRuc(entity.getRuc());
         dto.setLocalidad(entity.getLocalidad());
         dto.setEmail(entity.getEmail());
         dto.setTelefono(entity.getTelefono());
+        dto.setNombreEncargado(entity.getNombreEncargado());
 
         return dto;
     }

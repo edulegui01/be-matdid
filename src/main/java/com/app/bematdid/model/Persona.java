@@ -44,9 +44,9 @@ public class Persona {
     @NotBlank
     private String ruc;
     @NotBlank
-    private String razon_social;
+    private String razonSocial;
     @Column(name = "es_cliente")
-    private Boolean esCcliente;
+    private Boolean esCliente;
     @NotNull
     private Boolean estado=true;
 

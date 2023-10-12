@@ -23,9 +23,8 @@ public interface PersonaRepository extends JpaRepository<Persona,Long> {
     @Query(value = "SELECT * FROM PERSONA WHERE cast(cedula as varchar) ilike %:filtro% or ruc ilike %:filtro%", nativeQuery = true)
     Page<Persona> searchByCeduOrRuc(Pageable pageable,@Param("filtro") String filtro);
 
-    @Query(value = "SELECT id_persona, estado, cedula, apellido, direccion, nombre, email, es_cliente, ruc, id_localidad, telefono\n" +
-            "\tFROM persona where (estado is true and es_cliente = :esCliente) and (cast(cedula as varchar) ilike %:cedulaFilter% or ruc ilike %:cedulaFilter%) " +
-            "and concat(nombre,' ',apellido) ilike %:nombreFilter% order by id_persona desc",nativeQuery = true)
+    @Query(value = "SELECT * FROM persona where (estado is true and es_cliente = :esCliente) and (cast(cedula as varchar) ilike %:cedulaFilter% or ruc ilike %:cedulaFilter%) " +
+            "and nombre ilike %:nombreFilter% order by id_persona desc",nativeQuery = true)
     Page<Persona> listarPersonas(Pageable pageable,@Param("cedulaFilter") String cedulaFilter,@Param("nombreFilter") String nombreFilter,@Param("esCliente") boolean esCliente);
 
 

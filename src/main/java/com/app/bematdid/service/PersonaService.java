@@ -69,7 +69,7 @@ public class PersonaService {
         persona.setTelefono(request.getTelefono());
         persona.setDireccion(request.getDireccion());
         persona.setEmail(request.getEmail());
-        persona.setEsCcliente(request.getEsCcliente());
+        persona.setEsCliente(request.getEsCliente());
         persona.setLocalidad(request.getLocalidad());
 
 
