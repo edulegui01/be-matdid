@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -24,27 +25,31 @@ public class Compra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
     private Long idCompra;
-    @NotBlank
-    private Calendar fecha;
-    @NotBlank
+    @Column(name = "id_funcionario")
+    private Long idFuncionario;
+    @Column(name="id_persona")
+    private Long idPersona;
+
+    private Date fecha;
+
     @Column(name = "monto_total")
-    private int montoTotal;
-    @NotBlank
+    private Integer montoTotal;
+
     @Column(name = "num_folio")
     private String numFolio;
 
 
 
     @ManyToOne()
-    @JoinColumn(name = "id_persona")
+    @JoinColumn(name = "id_persona",insertable=false, updatable=false)
     Persona persona;
 
     @ManyToOne()
-    @JoinColumn(name = "id_funcionario")
+    @JoinColumn(name = "id_funcionario", insertable=false, updatable=false)
     Funcionario funcionario;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "compra",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "compra",cascade = {CascadeType.ALL})
     private List<DetalleCompra> detalleCompra;
 
 }
