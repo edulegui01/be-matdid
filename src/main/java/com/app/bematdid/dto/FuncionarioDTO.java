@@ -21,10 +21,10 @@ public class FuncionarioDTO implements Serializable {
     private  int cedula;
     private String telefono;
     private String direccion;
-    private Calendar fechaAlta;
+    private Date fechaAlta;
     private Localidad localidad;
     private Character activo;
-    private Calendar fechaNac;
+    private Date fechaNac;
 
 
     public FuncionarioDTO(Funcionario funcionario){

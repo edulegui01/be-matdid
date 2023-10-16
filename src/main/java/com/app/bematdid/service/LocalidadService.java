@@ -28,5 +28,13 @@ public class LocalidadService {
         return localidadMapper.mapEntityPageIntoDTOPage(pageable,result);
     }
 
+    public Page<LocalidadDTO> listar2(Pageable pageable, String nombre) {
+        Page<Localidad> result = localidadRepository.listarLocalidad(pageable,nombre);
+
+
+
+        return localidadMapper.mapEntityPageIntoDTOPage(pageable,result);
+    }
+
 
 }

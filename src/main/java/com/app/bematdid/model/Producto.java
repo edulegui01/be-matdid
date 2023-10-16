@@ -47,7 +47,7 @@ public class Producto {
     private Float iva;
     @Column(name = "stock_actual")
     @NotNull
-    private Integer stockActual;
+    private Integer stockActual=0;
     private boolean estado=true;
 
 

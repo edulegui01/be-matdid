@@ -27,10 +27,15 @@ public class ProductoMapper {
         ProductoDTO dto = new ProductoDTO();
         dto.setIdProducto(entity.getIdProducto());
         dto.setNombre(entity.getNombre());
+        dto.setDescripcion(entity.getDescripcion());
+        dto.setAutor(entity.getAutor());
+        dto.setEditorial(entity.getEditorial());
+        dto.setIsbn(entity.getIsbn());
+        dto.setMateria(entity.getMateria());
+        dto.setGradoCurso(entity.getGradoCurso());
         dto.setCosto(entity.getCosto());
         dto.setPrecio(entity.getPrecio());
         dto.setIva(entity.getIva());
-        dto.setStockActual(entity.getStockActual());
 
 
         return dto;

@@ -32,19 +32,19 @@ public class Funcionario {
     private String nombre;
     @NotBlank
     private String apellido;
-    @NotBlank
-    private Calendar fechaNac;
+    @NotNull
+    private Date fechaNac;
     @NotBlank
     private String direccion;
     @Email
     private String email;
     @NotBlank
     private String telefono;
-    @NotBlank
+    @NotNull
     @Column(name = "fecha_alta",updatable = false)
     @Temporal(TemporalType.DATE)
-    private Calendar fechaAlta;
-    private Calendar fechaBaja;
+    private Date fechaAlta = new Date();
+    private Date fechaBaja;
     @NotBlank
     private String rol;
 
