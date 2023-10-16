@@ -36,4 +36,5 @@ public class DetalleCompra {
     @ManyToOne()
     @JoinColumn(name = "id_producto",insertable = false, updatable = false)
     Producto producto;
+
 }
