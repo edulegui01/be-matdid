@@ -23,5 +23,5 @@ public class CompraDTO  implements Serializable {
     private Date fecha;
     private int montoTotal;
     private String numFolio;
-    private List<DetalleCompra> detalleCompra;
+    private List<DetalleCompraDTO> detalleCompra;
 }

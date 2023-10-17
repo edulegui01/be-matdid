@@ -30,7 +30,7 @@ public class Compra {
     @Column(name="id_persona")
     private Long idPersona;
 
-    private Date fecha;
+    private Date fecha = new Date();
 
     @Column(name = "monto_total")
     private Integer montoTotal;
