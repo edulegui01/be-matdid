@@ -21,6 +21,7 @@ public class CompraService {
     @Autowired
     private CompraMapper mapper;
 
+    @Autowired
     private ProductoService productoService;
 
     @Autowired
@@ -36,9 +37,9 @@ public class CompraService {
             detalleCompra.setCompra(compra);
 
             Optional<Producto> producto = productoRepository.findById(detalleCompra.getId().getIdProducto());
-            producto.get().setIdProducto(detalleCompra.getId().getIdProducto());
+            //producto.get().setIdProducto(detalleCompra.getId().getIdProducto());
             producto.get().setStockActual(producto.get().getStockActual()+detalleCompra.getCantidad());
-            productoService.actualizar(producto.get(),detalleCompra.getId().getIdProducto());
+            productoRepository.save(producto.get());
         });
         return mapper.compraACompraDTO(compraRepository.save(compra));
     }
