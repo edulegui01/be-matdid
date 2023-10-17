@@ -28,6 +28,15 @@ public class LocalidadController {
 
     }
 
+    @GetMapping("localidad_select/listar")
+    public List<Localidad> listarSelect(){
+
+
+
+        return localidadService.listarTodos();
+
+    }
+
     @PostMapping("localidad/guardar")
     public Localidad guardar(@RequestBody Localidad localidad){
         localidadService.guardar(localidad);

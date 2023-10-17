@@ -36,5 +36,10 @@ public class LocalidadService {
         return localidadMapper.mapEntityPageIntoDTOPage(pageable,result);
     }
 
+    public List<Localidad> listarTodos(){
+
+        return localidadRepository.findAll();
+    }
+
 
 }
