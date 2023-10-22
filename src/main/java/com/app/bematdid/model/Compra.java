@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +36,8 @@ public class Compra {
 
     @Column(name = "num_folio")
     private String numFolio;
+
+    private Boolean estado= true;
 
 
 

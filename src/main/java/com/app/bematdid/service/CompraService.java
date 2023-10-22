@@ -7,6 +7,9 @@ import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.CompraRepository;
 import com.app.bematdid.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +31,14 @@ public class CompraService {
     private ProductoRepository productoRepository;
 
     public List<CompraDTO> listarTodo () {
-        return mapper.comprasAComprasDTO((List<Compra>) compraRepository.findAll());
+        return mapper.comprasAComprasDTO(compraRepository.findAll());
+    }
+
+    public Page<CompraDTO> listar (Pageable pageable, String nombrePersona, String numFolio) {
+        Optional<List<CompraDTO>> lista = compraRepository.listarCompras(nombrePersona, numFolio).map(compras -> mapper.comprasAComprasDTO(compras));
+
+        return new PageImpl<>(lista.get(),  pageable, lista.get().size());
+
     }
 
     public CompraDTO guardar (CompraDTO compraDTO) {
@@ -37,11 +47,36 @@ public class CompraService {
             detalleCompra.setCompra(compra);
 
             Optional<Producto> producto = productoRepository.findById(detalleCompra.getId().getIdProducto());
-            //producto.get().setIdProducto(detalleCompra.getId().getIdProducto());
             producto.get().setStockActual(producto.get().getStockActual()+detalleCompra.getCantidad());
             productoRepository.save(producto.get());
         });
+        compraRepository.save(compra);
+        return mapper.compraACompraDTO(compra);
+    }
+
+
+
+    public CompraDTO actualizar (CompraDTO compraDTO){
+        Compra compra = mapper.compraDTOACompra(compraDTO);
+        compra.getDetalleCompra().forEach(detalle -> detalle.setCompra(compra));
+
         return mapper.compraACompraDTO(compraRepository.save(compra));
     }
+
+
+    public void borrar(Long idCompra){
+        Optional<Compra> compra = compraRepository.findById(idCompra);
+        compra.get().setEstado(false);
+        compra.get().getDetalleCompra().forEach(detalleCompra -> {
+            Optional<Producto> producto = productoRepository.findById(detalleCompra.getId().getIdProducto());
+            producto.get().setStockActual(producto.get().getStockActual()-detalleCompra.getCantidad());
+            productoRepository.save(producto.get());
+        });
+
+        compraRepository.save(compra.get());
+    }
+
+
+
 
 }

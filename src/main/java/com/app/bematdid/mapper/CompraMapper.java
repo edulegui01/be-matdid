@@ -11,13 +11,20 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {DetalleCompraMapper.class})
 public interface CompraMapper {
 
+    @Mappings({
+            @Mapping(source = "funcionario.nombre", target = "nombreFuncionario"),
+            @Mapping(source = "funcionario.apellido", target = "apellidoFuncionario"),
+            @Mapping(source = "persona.nombre", target = "nombrePersona")
+    })
     CompraDTO compraACompraDTO (Compra compra);
     List<CompraDTO> comprasAComprasDTO (List<Compra> compras);
 
 
     @Mappings({
-        @Mapping(target = "persona", ignore = true),
-        @Mapping(target = "funcionario", ignore = true)
+            @Mapping(target = "fecha", ignore = true),
+            @Mapping(target = "estado", ignore = true),
+            @Mapping(target = "persona", ignore = true),
+            @Mapping(target = "funcionario", ignore = true)
     })
     Compra compraDTOACompra (CompraDTO compraDTO);
 
