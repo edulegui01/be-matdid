@@ -25,9 +25,6 @@ public class CompraService {
     private CompraMapper mapper;
 
     @Autowired
-    private ProductoService productoService;
-
-    @Autowired
     private ProductoRepository productoRepository;
 
     public List<CompraDTO> listarTodo () {

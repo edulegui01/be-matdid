@@ -32,7 +32,7 @@ public class Compra {
     private Date fecha = new Date();
 
     @Column(name = "monto_total")
-    private Integer montoTotal;
+    private Long montoTotal;
 
     @Column(name = "num_folio")
     private String numFolio;

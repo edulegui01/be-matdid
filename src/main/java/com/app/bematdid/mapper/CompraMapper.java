@@ -2,6 +2,7 @@ package com.app.bematdid.mapper;
 
 import com.app.bematdid.dto.CompraDTO;
 import com.app.bematdid.model.Compra;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -19,7 +20,7 @@ public interface CompraMapper {
     CompraDTO compraACompraDTO (Compra compra);
     List<CompraDTO> comprasAComprasDTO (List<Compra> compras);
 
-
+    @InheritInverseConfiguration
     @Mappings({
             @Mapping(target = "fecha", ignore = true),
             @Mapping(target = "estado", ignore = true),

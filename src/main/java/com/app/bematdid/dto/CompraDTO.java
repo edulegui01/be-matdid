@@ -22,7 +22,7 @@ public class CompraDTO  implements Serializable {
     private Long idPersona;
     private String nombrePersona;
     private Date fecha;
-    private int montoTotal;
+    private Long montoTotal;
     private String numFolio;
     private List<DetalleCompraDTO> detalleCompra;
 }
