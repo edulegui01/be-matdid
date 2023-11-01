@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -26,18 +27,22 @@ public class Movimiento {
     @Column(name = "id_movimiento")
     private Long idMovimiento;
 
+    @Column(name = "id_funcionario")
+    private Long idFuncionario;
+
     @NotBlank
     private String motivo;
 
-    @NotBlank
-    private Calendar fecha;
+    private Date fecha;
 
     @NotNull
     @Column(name = "es_ingreso")
-    private boolean esIngreso;
+    private Boolean esIngreso;
+
+    private Boolean estado= true;
 
     @ManyToOne()
-    @JoinColumn(name = "id_funcionario")
+    @JoinColumn(name = "id_funcionario",insertable=false, updatable=false)
     Funcionario funcionario;
 
 

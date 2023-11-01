@@ -21,7 +21,7 @@ public class DetalleMovimiento {
 
 
     @NotNull
-    private int cantidad;
+    private Integer cantidad;
 
 
     @ManyToOne()
