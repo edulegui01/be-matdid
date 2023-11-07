@@ -31,6 +31,10 @@ public class PersonaService {
 
     }
 
+    public List<Persona> pruebaJoin(){
+        return personaRepository.listarPrueba();
+    }
+
 
     public void guardar(Persona persona){
 

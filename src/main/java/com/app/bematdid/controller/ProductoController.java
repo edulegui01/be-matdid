@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 public class ProductoController {
@@ -25,6 +27,15 @@ public class ProductoController {
 
 
         return productoService.listar(pageable, nombre);
+
+    }
+
+    @GetMapping("producto/listar_select")
+    public List<Producto> listarSelect(@RequestParam String search ){
+
+
+
+        return productoService.listarSelect(search);
 
     }
 

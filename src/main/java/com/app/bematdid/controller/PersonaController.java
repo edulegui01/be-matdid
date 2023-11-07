@@ -37,6 +37,11 @@ public class PersonaController {
 
     }
 
+    @GetMapping("persona/prueba_join")
+    public List<Persona> listarPrueba(){
+        return personaService.pruebaJoin();
+    }
+
 
     @PostMapping("persona/guardar")
     public Persona guardar(@RequestBody Persona persona){

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class ProductoService {
@@ -27,6 +28,18 @@ public class ProductoService {
 
 
         return productoMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
+
+
+
+    }
+
+    public List<Producto> listarSelect(String search){
+
+
+
+
+
+        return productoRepository.listarSelect(search);
 
 
 

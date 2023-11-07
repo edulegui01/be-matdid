@@ -28,6 +28,11 @@ public interface PersonaRepository extends JpaRepository<Persona,Long> {
     Page<Persona> listarPersonas(Pageable pageable,@Param("cedulaFilter") String cedulaFilter,@Param("nombreFilter") String nombreFilter,@Param("esCliente") boolean esCliente);
 
 
+    @Query(value = "select id_persona, cedula, direccion, email, es_cliente, p.estado, p.nombre, nombre_encargado, razon_social, ruc, sector, telefono, id_localidad\n" +
+            "from persona p\n" +
+            "join localidad l\n" +
+            "    on p.id_localidad = l.id",nativeQuery = true)
+    List<Persona> listarPrueba();
 
     Persona findByIdPersona(Long idPersona);
 
