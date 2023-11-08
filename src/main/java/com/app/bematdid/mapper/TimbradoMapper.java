@@ -2,6 +2,7 @@ package com.app.bematdid.mapper;
 
 import com.app.bematdid.dto.TimbradoDTO;
 import com.app.bematdid.model.Timbrado;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -13,7 +14,7 @@ public interface TimbradoMapper {
     TimbradoDTO timbradoATimbradoDTO (Timbrado timbrado);
     List<TimbradoDTO> timbradosATimbradosDTO (List<Timbrado> timbrados);
 
-
+    @InheritInverseConfiguration
     @Mapping(target = "facturas", ignore = true)
     Timbrado timbradoDTOATimbrado (TimbradoDTO timbradoDTO);
 }

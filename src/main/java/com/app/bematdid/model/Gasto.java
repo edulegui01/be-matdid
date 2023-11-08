@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Calendar;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -23,18 +24,21 @@ public class Gasto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_gasto")
     private Long idGasto;
-    @NotBlank
+    @Column(name = "id_funcionario")
+    private Long idFuncionario;
     @Column(name = "fecha")
-    private Calendar fecha;
+    private Date fecha;
     @NotBlank
     private String categoria;
     private String beneficiario;
     private String comentario;
     @NotNull
-    private int cantidad;
+    private Integer cantidad;
+
+    private Boolean estado = true;
 
     @ManyToOne()
-    @JoinColumn(name = "id_funcionario")
+    @JoinColumn(name = "id_funcionario", insertable=false, updatable=false)
     Funcionario funcionario;
 
 
