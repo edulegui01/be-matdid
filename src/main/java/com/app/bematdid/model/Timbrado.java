@@ -21,11 +21,13 @@ import java.util.List;
 public class Timbrado {
     @Id
     @Column(name = "nro_timbrado")
-    private Integer nroTimbrado;
+    private Long nroTimbrado;
+
     @Column(name = "fecha_inicio")
-    private Calendar fecha_inicio;
+    private Date fechainicio;
+
     @Column(name = "fecha_vencimiento")
-    private Calendar fecha_vencimiento;
+    private Date fechaVencimiento;
 
 
 

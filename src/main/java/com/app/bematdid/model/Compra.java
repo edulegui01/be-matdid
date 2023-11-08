@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -33,10 +32,12 @@ public class Compra {
     private Date fecha = new Date();
 
     @Column(name = "monto_total")
-    private Integer montoTotal;
+    private Long montoTotal;
 
     @Column(name = "num_folio")
     private String numFolio;
+
+    private Boolean estado= true;
 
 
 

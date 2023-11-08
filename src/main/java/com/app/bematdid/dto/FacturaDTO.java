@@ -13,16 +13,16 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompraDTO  implements Serializable {
-
-    private Long idCompra;
+public class FacturaDTO implements Serializable {
+    private Long idFactura;
     private Long idFuncionario;
     private String nombreFuncionario;
     private String apellidoFuncionario;
     private Long idPersona;
     private String nombrePersona;
+    private Long nroTimbrado;
     private Date fecha;
     private Long montoTotal;
-    private String numFolio;
-    private List<DetalleCompraDTO> detalleCompra;
+    private Long numFactura;
+    private List<DetalleFacturaDTO> detalleFacturas;
 }

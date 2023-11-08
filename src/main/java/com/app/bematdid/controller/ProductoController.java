@@ -24,8 +24,6 @@ public class ProductoController {
     @GetMapping("producto/listar")
     public Page<ProductoDTO> listar(Pageable pageable,@RequestParam String nombre ){
 
-
-
         return productoService.listar(pageable, nombre);
 
     }
