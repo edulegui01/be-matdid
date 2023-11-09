@@ -4,12 +4,16 @@ package com.app.bematdid.service;
 import com.app.bematdid.dto.PersonaDTO;
 import com.app.bematdid.mapper.PersonaMapper;
 import com.app.bematdid.model.Persona;
+import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +67,8 @@ public class PersonaService {
     }
 
 
+
+
     public  Persona actualizar(Persona request,Long id){
         Optional<Persona> personas = personaRepository.findById(id);
 
@@ -92,6 +98,19 @@ public class PersonaService {
         persona.setEstado(false);
 
         personaRepository.save(persona);
+    }
+
+
+    public List<Persona> listarSelect(String search){
+
+
+
+
+
+        return personaRepository.listarSelect(search);
+
+
+
     }
 
 

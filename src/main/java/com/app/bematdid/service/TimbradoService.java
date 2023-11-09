@@ -31,6 +31,10 @@ public class TimbradoService {
        return timbradoRepository.findById(id).map(timbrado -> timbradoMapper.timbradoATimbradoDTO(timbrado));
     }
 
+    public Timbrado getTimbradoValido(){
+        return timbradoRepository.getTimbradoValido();
+    }
+
     public TimbradoDTO guardar(TimbradoDTO timbradoDTO) {
         Timbrado timbrado = timbradoMapper.timbradoDTOATimbrado(timbradoDTO);
         return timbradoMapper.timbradoATimbradoDTO(timbradoRepository.save(timbrado));

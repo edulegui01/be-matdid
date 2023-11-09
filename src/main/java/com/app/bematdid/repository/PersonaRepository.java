@@ -3,6 +3,7 @@ package com.app.bematdid.repository;
 
 import com.app.bematdid.dto.PersonaDTO;
 import com.app.bematdid.model.Persona;
+import com.app.bematdid.model.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,6 +34,10 @@ public interface PersonaRepository extends JpaRepository<Persona,Long> {
             "join localidad l\n" +
             "    on p.id_localidad = l.id",nativeQuery = true)
     List<Persona> listarPrueba();
+
+
+    @Query(value = "SELECT * FROM persona where estado is true and razon_social ilike %:razonSocial% ;", nativeQuery = true)
+    List<Persona> listarSelect(@Param("razonSocial") String razonSocial);
 
     Persona findByIdPersona(Long idPersona);
 

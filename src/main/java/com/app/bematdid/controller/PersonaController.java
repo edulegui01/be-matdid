@@ -3,6 +3,7 @@ package com.app.bematdid.controller;
 import com.app.bematdid.dto.PersonaDTO;
 import com.app.bematdid.model.Localidad;
 import com.app.bematdid.model.Persona;
+import com.app.bematdid.model.Producto;
 import com.app.bematdid.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,6 +62,15 @@ public class PersonaController {
     public Page<PersonaDTO> buscarDocu(Pageable pageable,@RequestParam String filtro){
 
         return personaService.searchByCeduOrRuc(pageable,filtro);
+    }
+
+    @GetMapping("persona/listar_select")
+    public List<Persona> listarSelect(@RequestParam String search ){
+
+
+
+        return personaService.listarSelect(search);
+
     }
 
     @CrossOrigin("origins = http://localhost:4200")
