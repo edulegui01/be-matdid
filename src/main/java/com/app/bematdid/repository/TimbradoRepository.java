@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface TimbradoRepository extends JpaRepository<Timbrado, Long> {
     @Query(value = "SELECT * FROM timbrado where fecha_vencimiento is null;", nativeQuery = true)
-    Timbrado getTimbradoValido();
+    List<Timbrado> getTimbradoValido();
 }
