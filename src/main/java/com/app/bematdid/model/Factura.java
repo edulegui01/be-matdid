@@ -30,6 +30,7 @@ public class Factura {
     private Long idFuncionario;
     @Column(name="id_persona")
     private Long idPersona;
+
     @Column(name="nro_timbrado")
     private Long nroTimbrado;
 
@@ -42,6 +43,9 @@ public class Factura {
     private Long numFactura;
 
     private Boolean estado= true;
+
+    @Column(name = "tipo_factura")
+    private String tipoFactura;
 
 
     @ManyToOne()

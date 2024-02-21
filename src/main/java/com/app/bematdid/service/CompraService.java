@@ -1,6 +1,7 @@
 package com.app.bematdid.service;
 
 import com.app.bematdid.dto.CompraDTO;
+import com.app.bematdid.dto.PersonaDTO;
 import com.app.bematdid.mapper.CompraMapper;
 import com.app.bematdid.model.Compra;
 import com.app.bematdid.model.Producto;
@@ -32,9 +33,11 @@ public class CompraService {
     }
 
     public Page<CompraDTO> listar (Pageable pageable, String nombrePersona, String numFolio) {
-        Optional<List<CompraDTO>> lista = compraRepository.listarCompras(nombrePersona, numFolio).map(compras -> mapper.comprasAComprasDTO(compras));
+        Page<Compra> lista = compraRepository.listarCompras(pageable, nombrePersona, numFolio);
 
-        return new PageImpl<>(lista.get(),  pageable, lista.get().size());
+        List<CompraDTO> dtos = mapper.comprasAComprasDTO(lista.getContent());
+
+        return new PageImpl<>(dtos, pageable, lista.getTotalElements());
 
     }
 

@@ -8,6 +8,7 @@ import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,15 @@ public class PersonaService {
     private PersonaRepository personaRepository;
     private PersonaMapper personaMapper = new PersonaMapper();
     public Page<PersonaDTO> listar(Pageable pageable,String cedulaFilter,String nombreFilter,boolean esCliente){
-        System.out.println(esCliente);
+
         Page<Persona> resultPage = personaRepository.listarPersonas(pageable,cedulaFilter,nombreFilter,esCliente);
 
+        System.out.println(resultPage.getContent());
 
+        List<PersonaDTO> dtos = personaMapper.mapEntitiesIntoDTOs(resultPage.getContent());
 
-        return personaMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
+        //return personaMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
+        return new PageImpl<>(dtos, pageable, resultPage.getTotalElements());
 
 
 

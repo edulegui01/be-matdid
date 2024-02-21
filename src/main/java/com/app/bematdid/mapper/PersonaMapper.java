@@ -44,6 +44,9 @@ public class PersonaMapper {
 
     public Page<PersonaDTO> mapEntityPageIntoDTOPage(Pageable pageRequest, Page<Persona> source) {
         List<PersonaDTO> dtos = mapEntitiesIntoDTOs(source.getContent());
+
+        System.out.println("contenido: "+dtos);
+        System.out.println("size: "+source.getTotalElements());
         return new PageImpl<>(dtos, pageRequest, source.getTotalElements());
     }
 

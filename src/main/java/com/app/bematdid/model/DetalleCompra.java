@@ -23,7 +23,7 @@ public class DetalleCompra {
     @NotNull
     private int cantidad;
     @NotNull
-    private int precioCompra;
+    private int precio;
     @NotNull
     private Float descuento;
 

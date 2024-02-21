@@ -30,12 +30,20 @@ public class Compra {
     private Long idPersona;
 
     private Date fecha = new Date();
+    private Date fechaVencimiento;
 
     @Column(name = "monto_total")
     private Long montoTotal;
 
     @Column(name = "num_folio")
     private String numFolio;
+
+    @Column(name = "timbrado")
+    private String timbrado;
+
+    @Column(name = "tipo_factura")
+    private String tipo_factura;
+
 
     private Boolean estado= true;
 

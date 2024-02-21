@@ -15,7 +15,8 @@ public interface FacturaMapper {
     @Mappings({
             @Mapping(source = "funcionario.nombre", target = "nombreFuncionario"),
             @Mapping(source = "funcionario.apellido", target = "apellidoFuncionario"),
-            @Mapping(source = "persona.nombre", target = "nombrePersona")
+            @Mapping(source = "persona.nombre", target = "nombrePersona"),
+
     })
     FacturaDTO facturaAFacturaDTO (Factura factura);
     List<FacturaDTO> facturasAFacturasDTO (List<Factura> factura);
@@ -26,7 +27,7 @@ public interface FacturaMapper {
             @Mapping(target = "estado", ignore = true),
             @Mapping(target = "persona", ignore = true),
             @Mapping(target = "funcionario", ignore = true),
-            @Mapping(target = "timbrado", ignore = true),
+
     })
     Factura facturaDTOAFactura (FacturaDTO facturaDTO);
 }

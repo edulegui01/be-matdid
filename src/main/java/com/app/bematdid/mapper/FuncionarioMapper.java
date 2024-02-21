@@ -43,6 +43,7 @@ public class FuncionarioMapper {
 
     public Page<FuncionarioDTO> mapEntityPageIntoDTOPage(Pageable pageRequest, Page<Funcionario> source) {
         List<FuncionarioDTO> dtos = mapEntitiesIntoDTOs(source.getContent());
+
         return new PageImpl<>(dtos, pageRequest, source.getTotalElements());
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +31,18 @@ public class FuncionarioService {
 
 
         return funcionarioMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
+
+
+
+    }
+
+
+    public List<FuncionarioDTO> listar_select(String search){
+        List<Funcionario> resultPage = funcionarioRepository.listarFuncionariosSelect(search);
+
+
+
+        return funcionarioMapper.mapEntitiesIntoDTOs(resultPage);
 
 
 

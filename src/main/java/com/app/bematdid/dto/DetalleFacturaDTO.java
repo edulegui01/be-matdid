@@ -14,6 +14,8 @@ import java.io.Serializable;
 public class DetalleFacturaDTO implements Serializable {
     private long idProducto;
     private int cantidad;
-    private int precioVenta;
+    private int precio;
     private float descuento;
+    private String nombre;
+    private float iva;
 }

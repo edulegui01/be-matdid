@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class FuncionarioController {
 
@@ -22,6 +24,13 @@ public class FuncionarioController {
     public Page<FuncionarioDTO> listar(Pageable pageable, @RequestParam String cedulaFilter, @RequestParam String nombreFilter){
 
         return funcionarioService.listar(pageable,cedulaFilter,nombreFilter);
+
+    }
+
+    @GetMapping("funcionario/listar_select")
+    public List<FuncionarioDTO> listar_select(@RequestParam String search){
+
+        return funcionarioService.listar_select(search);
 
     }
 

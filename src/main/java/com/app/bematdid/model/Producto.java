@@ -41,6 +41,7 @@ public class Producto {
     private String gradoCurso;
     @NotNull
     private int costo;
+    @Column(name = "precio")
     @NotNull
     private int precio;
     @NotNull

@@ -11,7 +11,11 @@ import org.mapstruct.Mappings;
 public interface DetalleCompraMapper {
 
     @Mappings({
-            @Mapping(source = "id.idProducto", target = "idProducto")
+            @Mapping(source = "id.idProducto", target = "idProducto"),
+            @Mapping(source = "producto.nombre", target = "nombre"),
+            @Mapping(source = "producto.iva", target = "iva"),
+
+
     })
     DetalleCompraDTO detalleCompraADetalleCompraDTO (DetalleCompra detalleCompra);
 

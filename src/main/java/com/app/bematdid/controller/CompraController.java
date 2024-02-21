@@ -30,6 +30,7 @@ public class CompraController {
 
     @PostMapping("compra/guardar")
     public CompraDTO guardar (@RequestBody CompraDTO compraDTO) {
+        System.out.println(compraDTO);
         return compraService.guardar(compraDTO);
     }
 

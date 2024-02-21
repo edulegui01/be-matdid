@@ -15,7 +15,10 @@ public interface CompraMapper {
     @Mappings({
             @Mapping(source = "funcionario.nombre", target = "nombreFuncionario"),
             @Mapping(source = "funcionario.apellido", target = "apellidoFuncionario"),
-            @Mapping(source = "persona.nombre", target = "nombrePersona")
+            @Mapping(source = "persona.nombre", target = "nombrePersona"),
+            @Mapping(source = "persona.cedula", target = "cedula"),
+            @Mapping(source = "persona.ruc", target = "ruc"),
+
     })
     CompraDTO compraACompraDTO (Compra compra);
     List<CompraDTO> comprasAComprasDTO (List<Compra> compras);

@@ -22,7 +22,11 @@ public class CompraDTO  implements Serializable {
     private Long idPersona;
     private String nombrePersona;
     private Date fecha;
+    private Date fechaVencimiento;
     private Long montoTotal;
     private String numFolio;
+    private int cedula;
+    private String ruc;
+    private String timbrado;
     private List<DetalleCompraDTO> detalleCompra;
 }
