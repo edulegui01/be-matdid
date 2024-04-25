@@ -15,4 +15,5 @@ public class DetalleMovimientoDTO implements Serializable {
 
     private Long idProducto;
     private Integer cantidad;
+    private String nombre;
 }

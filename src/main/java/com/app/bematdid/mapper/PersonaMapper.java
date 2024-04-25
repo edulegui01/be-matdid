@@ -26,7 +26,6 @@ public class PersonaMapper {
     public PersonaDTO mapEntityIntoDto(Persona entity){
         PersonaDTO dto = new PersonaDTO();
         dto.setIdPersona(entity.getIdPersona());
-        dto.setNombre(entity.getNombre());
         dto.setSector(entity.getSector());
         dto.setRazonSocial(entity.getRazonSocial());
         dto.setDireccion(entity.getDireccion());

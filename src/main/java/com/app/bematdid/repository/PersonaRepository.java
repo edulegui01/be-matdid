@@ -25,7 +25,7 @@ public interface PersonaRepository extends JpaRepository<Persona,Long> {
     Page<Persona> searchByCeduOrRuc(Pageable pageable,@Param("filtro") String filtro);
 
     @Query(value = "SELECT * FROM persona where (estado is true and es_cliente = :esCliente) and (cast(cedula as varchar) ilike %:cedulaFilter% or ruc ilike %:cedulaFilter%) " +
-            "and nombre ilike %:nombreFilter% order by id_persona desc",nativeQuery = true)
+            "and razon_social ilike %:nombreFilter% order by id_persona desc",nativeQuery = true)
     Page<Persona> listarPersonas(Pageable pageable,@Param("cedulaFilter") String cedulaFilter,@Param("nombreFilter") String nombreFilter,@Param("esCliente") boolean esCliente);
 
 

@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
-    @Query(value = "SELECT id_factura, fecha, id_funcionario, f.id_persona, nro_timbrado, monto_total, num_factura, f.estado, f.tipo_factura   " +
+    @Query(value = "SELECT id_factura, fecha, id_funcionario, f.id_persona, nro_timbrado, monto_total, num_factura, f.estado, f.tipo_factura, p.razon_social   " +
             "FROM factura f JOIN persona p ON f.id_persona = p.id_persona " +
-            "WHERE f.estado is true and p.nombre ilike %:nombrePersonaFilter% and cast(f.num_factura as varchar) ilike %:numFacturaFilter% " +
+            "WHERE f.estado is true and p.nombre_encargado ilike %:nombrePersonaFilter% and cast(f.num_factura as varchar) ilike %:numFacturaFilter% " +
             "order by id_factura desc;", nativeQuery = true)
     Optional<List<Factura>> listarFacturas (@Param("nombrePersonaFilter") String nombrePersona, @Param("numFacturaFilter") String numFactura);
 
@@ -25,5 +25,9 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
             "from factura\n" +
             "where num_factura = (select max(num_factura) from factura)",nativeQuery = true)
     Factura getNextFolio();
+
+
+
+
 
 }

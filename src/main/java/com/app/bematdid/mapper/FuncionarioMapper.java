@@ -35,6 +35,9 @@ public class FuncionarioMapper {
         dto.setActivo(entity.getActivo());
         dto.setTelefono(entity.getTelefono());
         dto.setFechaNac(entity.getFechaNac());
+        dto.setRol(entity.getRol());
+        dto.setEmail(entity.getEmail());
+        dto.setEstado(entity.getEstado());
 
         return dto;
     }

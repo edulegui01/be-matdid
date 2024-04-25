@@ -11,7 +11,8 @@ import org.mapstruct.Mappings;
 public interface DetalleMovimientoMapper {
 
     @Mappings({
-            @Mapping(source = "id.idProducto", target = "idProducto")
+            @Mapping(source = "id.idProducto", target = "idProducto"),
+            @Mapping(source = "producto.nombre", target = "nombre"),
     })
     DetalleMovimientoDTO detalleMovimientoADetalleMovimientoDTO (DetalleMovimiento detalleMovimiento);
 

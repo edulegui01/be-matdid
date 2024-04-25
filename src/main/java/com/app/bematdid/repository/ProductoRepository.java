@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Long> {
@@ -19,4 +20,6 @@ public interface ProductoRepository extends JpaRepository<Producto,Long> {
 
     @Query(value = "SELECT * FROM producto where estado is true and nombre ilike %:nombre% ;", nativeQuery = true)
     List<Producto> listarSelect(@Param("nombre") String nombre);
+
+    Optional<Producto> findByImage(String nombreImagen);
 }

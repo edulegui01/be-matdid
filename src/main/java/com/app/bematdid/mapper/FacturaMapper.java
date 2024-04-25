@@ -15,7 +15,8 @@ public interface FacturaMapper {
     @Mappings({
             @Mapping(source = "funcionario.nombre", target = "nombreFuncionario"),
             @Mapping(source = "funcionario.apellido", target = "apellidoFuncionario"),
-            @Mapping(source = "persona.nombre", target = "nombrePersona"),
+            @Mapping(source = "persona.razonSocial", target = "cliente"),
+
 
     })
     FacturaDTO facturaAFacturaDTO (Factura factura);

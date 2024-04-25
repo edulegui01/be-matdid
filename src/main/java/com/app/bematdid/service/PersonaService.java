@@ -76,8 +76,8 @@ public class PersonaService {
     public  Persona actualizar(Persona request,Long id){
         Optional<Persona> personas = personaRepository.findById(id);
 
+
         Persona persona = personas.get();
-        persona.setNombre(request.getNombre());
         persona.setCedula(request.getCedula());
         persona.setRuc(request.getRuc());
         persona.setTelefono(request.getTelefono());
@@ -85,6 +85,8 @@ public class PersonaService {
         persona.setEmail(request.getEmail());
         persona.setEsCliente(request.getEsCliente());
         persona.setLocalidad(request.getLocalidad());
+        persona.setRazonSocial(request.getRazonSocial());
+        persona.setSector(request.getSector());
 
 
         return personaRepository.save(persona);

@@ -76,7 +76,6 @@ public class PersonaController {
     @CrossOrigin("origins = http://localhost:4200")
     @PutMapping("persona/actualizar/{idPer}")
     public Persona actualizar(@RequestBody Persona personaModi,@PathVariable Long idPer){
-        System.out.println(idPer);
         return personaService.actualizar(personaModi,idPer);
 
     }

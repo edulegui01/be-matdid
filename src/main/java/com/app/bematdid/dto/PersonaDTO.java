@@ -31,7 +31,6 @@ public class PersonaDTO implements Serializable {
 
     public PersonaDTO(Persona persona){
         this.idPersona = persona.getIdPersona();
-        this.nombre = persona.getNombre();
         this.cedula = persona.getCedula();
         this.ruc = persona.getRuc();
         this.direccion = persona.getDireccion();

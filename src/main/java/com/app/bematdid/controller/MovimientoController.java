@@ -2,6 +2,7 @@ package com.app.bematdid.controller;
 
 import com.app.bematdid.dto.FacturaDTO;
 import com.app.bematdid.dto.MovimientoDTO;
+import com.app.bematdid.dto.MovimientoSaveDTO;
 import com.app.bematdid.service.MovimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,7 +21,7 @@ public class MovimientoController {
     }
 
     @PostMapping("movimiento/guardar")
-    public MovimientoDTO guardar (@RequestBody MovimientoDTO movimientoDTO) {
+    public MovimientoDTO guardar (@RequestBody MovimientoSaveDTO movimientoDTO) {
         return movimientoService.guardar(movimientoDTO);
     }
 

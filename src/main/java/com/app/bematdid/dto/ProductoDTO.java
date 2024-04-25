@@ -30,6 +30,8 @@ public class ProductoDTO implements Serializable {
     private int costo;
     private int precio;
     private Float iva;
+    private String image;
+    private Integer stockActual;
 
 
     public ProductoDTO(Producto producto){
@@ -44,6 +46,7 @@ public class ProductoDTO implements Serializable {
         this.costo = producto.getCosto();
         this.precio = producto.getPrecio();
         this.iva = producto.getIva();
+        this.stockActual = producto.getStockActual();
 
 
     }

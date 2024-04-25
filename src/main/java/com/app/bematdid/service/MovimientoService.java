@@ -2,6 +2,7 @@ package com.app.bematdid.service;
 
 
 import com.app.bematdid.dto.MovimientoDTO;
+import com.app.bematdid.dto.MovimientoSaveDTO;
 import com.app.bematdid.mapper.MovimientoMapper;
 import com.app.bematdid.model.Factura;
 import com.app.bematdid.model.Movimiento;
@@ -37,7 +38,7 @@ public class MovimientoService {
     }
 
 
-    public MovimientoDTO guardar(MovimientoDTO movimientoDTO){
+    public MovimientoDTO guardar(MovimientoSaveDTO movimientoDTO){
         Movimiento movimiento = mapper.movimientoDTOAMovimiento(movimientoDTO);
         movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
             detalleMovimiento.setMovimiento(movimiento);

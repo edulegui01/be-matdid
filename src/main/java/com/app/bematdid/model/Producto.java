@@ -50,6 +50,7 @@ public class Producto {
     @NotNull
     private Integer stockActual=0;
     private boolean estado=true;
+    private String image;
 
 
 

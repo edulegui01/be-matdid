@@ -36,6 +36,8 @@ public class ProductoMapper {
         dto.setCosto(entity.getCosto());
         dto.setPrecio(entity.getPrecio());
         dto.setIva(entity.getIva());
+        dto.setImage(entity.getImage());
+        dto.setStockActual(entity.getStockActual());
 
 
         return dto;

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class MovimientoDTO implements Serializable {
     private String nombreFuncionario;
     private String apellidoFuncionario;
     private String motivo;
-    private Date fecha;
+    private String fecha;
     private Boolean esIngreso;
     private List<DetalleMovimientoDTO> detalleMovimientos;
 }

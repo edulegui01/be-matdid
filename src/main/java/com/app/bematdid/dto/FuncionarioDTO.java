@@ -25,6 +25,9 @@ public class FuncionarioDTO implements Serializable {
     private Localidad localidad;
     private Character activo;
     private Date fechaNac;
+    private String rol;
+    private String email;
+    private Boolean estado;
 
 
     public FuncionarioDTO(Funcionario funcionario){
@@ -38,6 +41,8 @@ public class FuncionarioDTO implements Serializable {
         this.fechaAlta = funcionario.getFechaAlta();
         this.activo = funcionario.getActivo();
         this.fechaNac = funcionario.getFechaNac();
+        this.rol= funcionario.getRol();
+        this.estado = funcionario.getEstado();
     }
 
 }

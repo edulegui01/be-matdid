@@ -28,8 +28,6 @@ public class Persona {
     private Long idPersona;
     @NotNull
     private int cedula;
-    @NotBlank
-    private String nombre;
     @Column(name = "nombre_encargado")
     @NotBlank
     private String nombreEncargado;
