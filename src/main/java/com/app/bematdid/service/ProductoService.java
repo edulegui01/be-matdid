@@ -8,6 +8,7 @@ import com.app.bematdid.model.Persona;
 import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.PersonaRepository;
 import com.app.bematdid.repository.ProductoRepository;
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

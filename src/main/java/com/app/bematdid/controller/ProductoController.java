@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -60,9 +62,16 @@ public class ProductoController {
 
 
     @PostMapping("producto/imagen")
-    public String uploadImage(@RequestParam MultipartFile image, @RequestParam Long idProducto) throws Exception{
+    public Map<String,String> uploadImage(@RequestParam MultipartFile image, @RequestParam Long idProducto) throws Exception{
 
-        return productoService.subirImagen(image,idProducto);
+
+        Map<String,String> imageResult = new HashMap<String,String>();
+
+        imageResult.put("imageName",productoService.subirImagen(image,idProducto));
+
+
+
+        return imageResult;
 
 
 
