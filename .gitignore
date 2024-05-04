@@ -19,6 +19,8 @@ target/
 *.iml
 *.ipr
 
+uploads
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -33,3 +35,5 @@ build/
 .vscode/
 
 src/main/resources/application.properties
+
+

@@ -7,6 +7,7 @@ import com.app.bematdid.model.Producto;
 import com.app.bematdid.service.PersonaService;
 import com.app.bematdid.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -59,6 +61,7 @@ public class ProductoController {
 
     @PostMapping("producto/imagen")
     public String uploadImage(@RequestParam MultipartFile image, @RequestParam Long idProducto) throws Exception{
+
         return productoService.subirImagen(image,idProducto);
 
 
@@ -67,10 +70,15 @@ public class ProductoController {
 
 
     @GetMapping("producto/imagen")
-    public ResponseEntity<?> getImage(@RequestParam String searchImagen ) throws IOException {
-        byte[] imagenSearch = productoService.getImage(searchImagen);
+    public ResponseEntity<Resource> getImage(@RequestParam String searchImagen ) throws IOException {
+        Resource resource = null;
+        try {
+            resource = productoService.getImage(searchImagen);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imagenSearch);
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(resource);
 
 
 

@@ -9,6 +9,8 @@ import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.PersonaRepository;
 import com.app.bematdid.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ import java.util.UUID;
 @Service
 public class ProductoService {
 
-    private final static String UPLOADS_FOLDER_PATH = "C:/Users/edu/Documents/matdidProyecto2/be-matdid/uploads/";
+    private final static String UPLOADS_FOLDER = "uploads";
 
     private final static String URL_GET_IMAGE = "http://localhost:8090/producto/imagen?searchImagen=";
 
@@ -85,36 +87,43 @@ public class ProductoService {
 
 
     public String subirImagen(MultipartFile image, Long idProducto) throws IOException{
-        String imagePath = UPLOADS_FOLDER_PATH+image.getOriginalFilename();
+
+        String uniqueFilename = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
 
         Optional<Producto> productoBuscado = productoRepository.findById(idProducto);
 
         Producto producto =  productoBuscado.get();
 
-        producto.setImage(URL_GET_IMAGE+image.getOriginalFilename());
+        producto.setImage(uniqueFilename);
 
         Producto productoSave = productoRepository.save(producto);
 
-        image.transferTo(new File(imagePath));
-
-        if (productoSave != null){
-            return "la ruta de la imagen guardo en: "+ imagePath;
+        if (!image.isEmpty()) {
+            if (producto.getIdProducto() > 0 && producto.getImage() != null && producto.getImage().length() > 0) {
+                deleteImage(producto.getImage());
+            }
         }
 
 
+        Path rootPath = getPath(uniqueFilename);
+        Files.copy(image.getInputStream(),rootPath);
+
+        return uniqueFilename;
 
 
-        return null;
     }
 
 
-    public byte[] getImage(String nombreImagen) throws IOException {
-        String imagePath = UPLOADS_FOLDER_PATH+nombreImagen;
-        System.out.println(imagePath);
+    public Resource getImage(String nombreImagen) throws IOException {
+        Path path = getPath(nombreImagen);
+        Resource resource = new UrlResource(path.toUri());
 
-        byte[] imagen = Files.readAllBytes(new File(imagePath).toPath());
+        if (!resource.exists() || !resource.isReadable()) {
+            //throw new RuntimeException("Error in path: " + path.toString());
 
-        return imagen;
+            resource = null;
+        }
+        return resource;
 
     }
 
@@ -126,6 +135,22 @@ public class ProductoService {
         producto.setEstado(false);
 
         productoRepository.save(producto);
+    }
+
+
+    public boolean deleteImage(String filename) {
+        Path rootPath = getPath(filename);
+        File file = rootPath.toFile();
+        if(file.exists() && file.canRead()) {
+            if(file.delete()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Path getPath(String filename) {
+        return Paths.get(UPLOADS_FOLDER).resolve(filename).toAbsolutePath();
     }
 
 }
