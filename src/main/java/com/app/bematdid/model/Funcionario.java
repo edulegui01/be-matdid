@@ -65,10 +65,6 @@ public class Funcionario {
 
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
-    private List<Usuario> usuarios;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
     private List<Compra> compras;
 
     @JsonIgnore
@@ -78,6 +74,10 @@ public class Funcionario {
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
     private List<Factura> facturas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
+    private List<User> users;
 
 
 }

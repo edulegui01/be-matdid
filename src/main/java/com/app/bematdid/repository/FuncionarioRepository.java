@@ -25,5 +25,8 @@ public interface FuncionarioRepository  extends JpaRepository<Funcionario,Long> 
     List<Funcionario> listarFuncionariosSelect(@Param("search") String search);
 
 
+    Funcionario findFuncionarioByIdFuncionario(Long idFuncionario);
+
+
 
 }
