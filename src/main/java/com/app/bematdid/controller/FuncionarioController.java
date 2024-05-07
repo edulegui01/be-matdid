@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"*"})
 public class FuncionarioController {
 
     @Autowired
     private FuncionarioService funcionarioService;
 
-
+    @CrossOrigin(origins = {"http://localhost:4200"})
     @GetMapping("funcionario/listar")
     public Page<FuncionarioDTO> listar(Pageable pageable, @RequestParam String cedulaFilter, @RequestParam String nombreFilter){
 
