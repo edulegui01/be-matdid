@@ -2,6 +2,7 @@ package com.app.bematdid.service;
 
 import com.app.bematdid.dto.LocalidadDTO;
 import com.app.bematdid.mapper.LocalidadMapper;
+import com.app.bematdid.model.Funcionario;
 import com.app.bematdid.model.Localidad;
 import com.app.bematdid.repository.LocalidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocalidadService {
@@ -41,5 +43,22 @@ public class LocalidadService {
         return localidadRepository.findAll();
     }
 
+    public Localidad actualizar(Localidad request, Long id) {
+        Optional<Localidad> localidades = localidadRepository.findById(id);
 
+        Localidad localidad = localidades.get();
+        localidad.setNombre(request.getNombre());
+
+        return localidadRepository.save(localidad);
+    }
+
+    public void borrar(Long id){
+        Optional<Localidad> localidades = localidadRepository.findById(id);
+
+        Localidad localidad = localidades.get();
+
+        localidad.setEstado(false);
+
+        localidadRepository.save(localidad);
+    }
 }

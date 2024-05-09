@@ -87,6 +87,7 @@ public class PersonaService {
         persona.setLocalidad(request.getLocalidad());
         persona.setRazonSocial(request.getRazonSocial());
         persona.setSector(request.getSector());
+        persona.setNombreEncargado(request.getNombreEncargado());
 
 
         return personaRepository.save(persona);

@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface LocalidadRepository extends JpaRepository<Localidad,Long> {
 
-    @Query(value = "SELECT * FROM localidad where estado is true and nombre ilike %:nombre% ;", nativeQuery = true)
+    @Query(value = "SELECT * FROM localidad where estado is true and nombre ilike %:nombre% order by nombre asc;", nativeQuery = true)
     Page<Localidad> listarLocalidad(Pageable pageable, @Param("nombre") String nombre);
 
 }

@@ -2,6 +2,7 @@ package com.app.bematdid.controller;
 
 import com.app.bematdid.dto.LocalidadDTO;
 import com.app.bematdid.dto.ProductoDTO;
+import com.app.bematdid.model.Funcionario;
 import com.app.bematdid.model.Localidad;
 import com.app.bematdid.service.LocalidadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,19 @@ public class LocalidadController {
     public Localidad guardar(@RequestBody Localidad localidad){
         localidadService.guardar(localidad);
         return localidad;
+    }
+
+    @PutMapping("localidad/actualizar/{id}")
+    public Localidad actualizar(@RequestBody Localidad funcionarioModi, @PathVariable Long id){
+
+        return localidadService.actualizar(funcionarioModi,id);
+
+    }
+
+    @DeleteMapping("localidad/borrar/{id}")
+    public void borrar(@PathVariable Long id){
+        localidadService.borrar(id);
+
     }
 
     @PostMapping("localidad/guardarlista")
