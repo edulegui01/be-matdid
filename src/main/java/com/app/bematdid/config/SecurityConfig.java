@@ -5,6 +5,7 @@ import com.app.bematdid.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,12 +30,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
-                .cors(Customizer.withDefaults())
                 .csrf(csrf ->
                         csrf.disable())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
+                                .requestMatchers(HttpMethod.OPTIONS).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/producto/imagen/**").permitAll()
                                 .anyRequest().authenticated()
                         )
                 .sessionManagement(sessionManager ->
@@ -44,14 +46,5 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http//localhost:4200"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**",configuration);
-        return source;
-    }
+
 }
