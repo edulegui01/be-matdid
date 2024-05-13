@@ -38,11 +38,6 @@ public class PersonaController {
 
     }
 
-    @GetMapping("persona/prueba_join")
-    public List<Persona> listarPrueba(){
-        return personaService.pruebaJoin();
-    }
-
 
     @PostMapping("persona/guardar")
     public Persona guardar(@RequestBody Persona persona){
@@ -52,17 +47,6 @@ public class PersonaController {
        return persona;
     }
 
-
-    public Page<PersonaDTO> buscarNombre(Pageable pageable, @RequestParam String filtro){
-
-        return personaService.searchByNombreApellido(pageable,filtro);
-    }
-
-    @GetMapping("persona/buscar-docu")
-    public Page<PersonaDTO> buscarDocu(Pageable pageable,@RequestParam String filtro){
-
-        return personaService.searchByCeduOrRuc(pageable,filtro);
-    }
 
     @GetMapping("persona/listar_select")
     public List<Persona> listarSelect(@RequestParam String search ){

@@ -1,14 +1,9 @@
 package com.app.bematdid.service;
 
-import com.app.bematdid.dto.PersonaDTO;
 import com.app.bematdid.dto.ProductoDTO;
-import com.app.bematdid.mapper.PersonaMapper;
 import com.app.bematdid.mapper.ProductoMapper;
-import com.app.bematdid.model.Persona;
 import com.app.bematdid.model.Producto;
-import com.app.bematdid.repository.PersonaRepository;
 import com.app.bematdid.repository.ProductoRepository;
-import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

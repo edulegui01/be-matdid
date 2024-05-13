@@ -27,6 +27,7 @@ public class Producto {
     @NotBlank
     private String nombre;
     @NotBlank
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
     @NotBlank
     private String autor;

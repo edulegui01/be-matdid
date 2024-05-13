@@ -4,16 +4,12 @@ package com.app.bematdid.service;
 import com.app.bematdid.dto.PersonaDTO;
 import com.app.bematdid.mapper.PersonaMapper;
 import com.app.bematdid.model.Persona;
-import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,26 +19,23 @@ public class PersonaService {
 
     @Autowired
     private PersonaRepository personaRepository;
-    private PersonaMapper personaMapper = new PersonaMapper();
+
+    @Autowired
+    private PersonaMapper personaMapper;
+
+
     public Page<PersonaDTO> listar(Pageable pageable,String cedulaFilter,String nombreFilter,boolean esCliente){
 
-        Page<Persona> resultPage = personaRepository.listarPersonas(pageable,cedulaFilter,nombreFilter,esCliente);
+        Page<Persona> lista = personaRepository.listarPersonas(pageable,cedulaFilter,nombreFilter,esCliente);
 
-        System.out.println(resultPage.getContent());
-
-        List<PersonaDTO> dtos = personaMapper.mapEntitiesIntoDTOs(resultPage.getContent());
+        List<PersonaDTO> dtos = personaMapper.personasAPersonasDTO(lista.getContent());
 
         //return personaMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
-        return new PageImpl<>(dtos, pageable, resultPage.getTotalElements());
+        return new PageImpl<>(dtos, pageable, lista.getTotalElements());
 
 
 
     }
-
-    public List<Persona> pruebaJoin(){
-        return personaRepository.listarPrueba();
-    }
-
 
     public void guardar(Persona persona){
 
@@ -53,24 +46,9 @@ public class PersonaService {
         //System.out.println(idPersona);
         Persona persona = personaRepository.findByIdPersona(idPersona);
 
-        return personaMapper.mapEntityIntoDto(persona);
+        return personaMapper.personaAPersonaDTO(persona);
 
     }
-
-    public Page<PersonaDTO> searchByNombreApellido(Pageable pageable,String filtro){
-        Page<Persona> resultPage = personaRepository.searchByNombreApellido(pageable,filtro);
-
-        return personaMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
-
-    }
-
-    public Page<PersonaDTO> searchByCeduOrRuc(Pageable pageable,String filtro){
-        Page<Persona> resultPage = personaRepository.searchByCeduOrRuc(pageable,filtro);
-
-        return personaMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
-    }
-
-
 
 
     public  Persona actualizar(Persona request,Long id){

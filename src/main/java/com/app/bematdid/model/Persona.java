@@ -26,11 +26,19 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_persona")
     private Long idPersona;
-    @NotNull
+
+    private String empresa;
+
+    private String nombre;
+
+    private String apellido;
+
     private int cedula;
+
     @Column(name = "nombre_encargado")
     @NotBlank
     private String nombreEncargado;
+
     @NotBlank
     private String direccion;
     @Email

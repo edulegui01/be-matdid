@@ -2,13 +2,9 @@ package com.app.bematdid.service;
 
 
 import com.app.bematdid.dto.FuncionarioDTO;
-import com.app.bematdid.dto.PersonaDTO;
 import com.app.bematdid.mapper.FuncionarioMapper;
-import com.app.bematdid.mapper.PersonaMapper;
 import com.app.bematdid.model.Funcionario;
-import com.app.bematdid.model.Persona;
 import com.app.bematdid.repository.FuncionarioRepository;
-import com.app.bematdid.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
