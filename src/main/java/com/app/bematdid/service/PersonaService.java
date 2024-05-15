@@ -49,29 +49,9 @@ public class PersonaService {
         return personaMapper.personaAPersonaDTO(persona);
 
     }
-
-
-    public  Persona actualizar(Persona request,Long id){
-        Optional<Persona> personas = personaRepository.findById(id);
-
-
-        Persona persona = personas.get();
-        persona.setCedula(request.getCedula());
-        persona.setRuc(request.getRuc());
-        persona.setTelefono(request.getTelefono());
-        persona.setDireccion(request.getDireccion());
-        persona.setEmail(request.getEmail());
-        persona.setEsCliente(request.getEsCliente());
-        persona.setLocalidad(request.getLocalidad());
-        persona.setRazonSocial(request.getRazonSocial());
-        persona.setSector(request.getSector());
-        persona.setNombreEncargado(request.getNombreEncargado());
-
+    public Persona actualizar(Persona persona){
 
         return personaRepository.save(persona);
-
-
-
     }
 
 
