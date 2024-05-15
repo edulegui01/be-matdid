@@ -19,7 +19,7 @@ public class PersonaDTO implements Serializable {
     private String empresa;
     private String nombre;
     private String apellido;
-    private Integer cedula;
+    private String cedula;
     private String nombreEncargado;
     private String direccion;
     private String email;

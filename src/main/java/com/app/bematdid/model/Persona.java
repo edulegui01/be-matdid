@@ -33,10 +33,9 @@ public class Persona {
 
     private String apellido;
 
-    private int cedula;
+    private String cedula;
 
     @Column(name = "nombre_encargado")
-    @NotBlank
     private String nombreEncargado;
 
     @NotBlank
@@ -45,7 +44,6 @@ public class Persona {
     private String email;
     @NotBlank
     private String telefono;
-    @NotBlank
     private String sector;
     @NotBlank
     private String ruc;
