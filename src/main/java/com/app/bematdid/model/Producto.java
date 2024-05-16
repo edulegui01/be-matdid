@@ -24,7 +24,6 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Long idProducto;
-    @NotBlank
 
     @Column(name = "id_ciclo")
     private Integer idCiclo;
