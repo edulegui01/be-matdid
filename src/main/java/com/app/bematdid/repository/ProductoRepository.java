@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Long> {
 
-    @Query(value = "SELECT * FROM producto where estado is true and nombre ilike %:nombre% order by nombre;", nativeQuery = true)
+    @Query(value = "SELECT * FROM producto where estado is true and nombre ilike %:nombre% order by idProducto desc;", nativeQuery = true)
     Page<Producto> listarProducto(Pageable pageable,@Param("nombre") String nombre);
 
     @Query(value = "SELECT * FROM producto where estado is true and nombre ilike %:nombre% ;", nativeQuery = true)

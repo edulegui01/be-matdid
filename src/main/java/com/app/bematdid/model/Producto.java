@@ -25,6 +25,10 @@ public class Producto {
     @Column(name = "id_producto")
     private Long idProducto;
     @NotBlank
+
+    @Column(name = "id_ciclo")
+    private Integer idCiclo;
+
     private String nombre;
     @NotBlank
     @Column(columnDefinition = "TEXT")
@@ -52,6 +56,10 @@ public class Producto {
     private Integer stockActual=0;
     private boolean estado=true;
     private String image;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_ciclo",insertable=false, updatable=false)
+    Ciclo ciclo;
 
 
 
