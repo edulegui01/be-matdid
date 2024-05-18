@@ -31,6 +31,7 @@ public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
     private ProductoMapper productoMapper = new ProductoMapper();
+
     public Page<ProductoDTO> listar(Pageable pageable, String nombre){
 
         Page<Producto> resultPage = productoRepository.listarProducto(pageable, nombre);
@@ -45,14 +46,12 @@ public class ProductoService {
 
     public List<Producto> listarSelect(String search){
 
-
-
-
-
         return productoRepository.listarSelect(search);
 
+    }
 
-
+    public Page<Producto> listarPorCiclo (Pageable pageable, int idCiclo){
+        return productoRepository.listarPorCiclo(pageable,idCiclo);
     }
 
     public void guardar(Producto producto){
