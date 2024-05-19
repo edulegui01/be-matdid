@@ -3,8 +3,6 @@ package com.app.bematdid.service;
 import com.app.bematdid.dto.CicloDTO;
 import com.app.bematdid.mapper.CicloMapper;
 import com.app.bematdid.model.Ciclo;
-import com.app.bematdid.model.Gasto;
-import com.app.bematdid.model.Localidad;
 import com.app.bematdid.repository.CicloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

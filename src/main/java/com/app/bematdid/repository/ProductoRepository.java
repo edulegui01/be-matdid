@@ -1,6 +1,5 @@
 package com.app.bematdid.repository;
 
-import com.app.bematdid.model.Persona;
 import com.app.bematdid.model.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -44,17 +44,17 @@ public class Producto {
     @NotBlank
     private String gradoCurso;
     @NotNull
-    private int costo;
+    private Integer costo;
     @Column(name = "precio")
     @NotNull
-    private int precio;
+    private Integer precio;
     @NotNull
     private Float iva;
     @Column(name = "stock_actual")
     @NotNull
     private Integer stockActual=0;
-    private boolean estado=true;
     private String image;
+    private Boolean estado=true;
 
     @ManyToOne()
     @JoinColumn(name = "id_ciclo",insertable=false, updatable=false)

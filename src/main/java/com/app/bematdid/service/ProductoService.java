@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,51 +31,36 @@ public class ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
-    private ProductoMapper productoMapper = new ProductoMapper();
+
+    @Autowired
+    private ProductoMapper productoMapper;
 
     public Page<ProductoDTO> listar(Pageable pageable, String nombre){
+        Page<Producto> productos = productoRepository.listarProducto(pageable, nombre);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+    }
 
-        Page<Producto> resultPage = productoRepository.listarProducto(pageable, nombre);
+    public List<ProductoDTO> listarSelect(String search){
 
-
-
-        return productoMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
-
-
+        return productoMapper.productosAProductosDTO(productoRepository.listarSelect(search));
 
     }
 
-    public List<Producto> listarSelect(String search){
-
-        return productoRepository.listarSelect(search);
-
+    public Page<ProductoDTO> listarPorCiclo (Pageable pageable, int idCiclo){
+        Page<Producto> productos = productoRepository.listarPorCiclo(pageable,idCiclo);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
     }
 
-    public Page<Producto> listarPorCiclo (Pageable pageable, int idCiclo){
-        return productoRepository.listarPorCiclo(pageable,idCiclo);
-    }
+    public ProductoDTO guardar(ProductoDTO productoDTO){
 
-    public void guardar(Producto producto){
-
-        productoRepository.save(producto);
+        Producto producto = productoMapper.productoDTOAProducto(productoDTO);
+        return productoMapper.productoAProductoDTO(productoRepository.save(producto));
     }
 
 
     public  Producto actualizar(Producto request,Long id){
-        Optional<Producto> productos = productoRepository.findById(id);
 
-        Producto producto = productos.get();
-        producto.setNombre(request.getNombre());
-        producto.setCosto(request.getCosto());
-        producto.setPrecio(request.getPrecio());
-        producto.setIva(request.getIva());
-        producto.setStockActual(request.getStockActual());
-
-
-
-        return productoRepository.save(producto);
-
-
+        return productoRepository.save(request);
 
     }
 
