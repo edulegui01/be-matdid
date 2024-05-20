@@ -25,8 +25,17 @@ public class Producto {
     @Column(name = "id_producto")
     private Long idProducto;
 
+    @Column(name = "id_editorial")
+    private Integer idEditorial;
+
+    @Column(name = "id_categoria")
+    private Integer idCategoria;
+
     @Column(name = "id_ciclo")
     private Integer idCiclo;
+
+    @Column(name = "id_materia")
+    private Integer idMateria;
 
     private String nombre;
     @NotBlank
@@ -35,31 +44,37 @@ public class Producto {
     @NotBlank
     private String autor;
     @NotBlank
-    private String editorial;
-    @NotBlank
+
     private String isbn;
-    @NotBlank
-    private String materia;
-    @Column(name = "grado_curso")
-    @NotBlank
-    private String gradoCurso;
+
     @NotNull
-    private int costo;
+    private Integer costo;
     @Column(name = "precio")
     @NotNull
-    private int precio;
+    private Integer precio;
     @NotNull
     private Float iva;
     @Column(name = "stock_actual")
     @NotNull
     private Integer stockActual=0;
-    private boolean estado=true;
     private String image;
+    private Boolean estado=true;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_editorial",insertable=false, updatable=false)
+    Editorial editorial;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_categoria",insertable=false, updatable=false)
+    Categoria categoria;
 
     @ManyToOne()
     @JoinColumn(name = "id_ciclo",insertable=false, updatable=false)
     Ciclo ciclo;
 
+    @ManyToOne()
+    @JoinColumn(name = "id_materia",insertable=false, updatable=false)
+    Materia materia;
 
 
     @JsonIgnore

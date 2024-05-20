@@ -43,21 +43,36 @@ public class ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+<<<<<<< HEAD
     private ProductoMapper productoMapper = new ProductoMapper();
 
     public ProductoService(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
+=======
+
+    @Autowired
+    private ProductoMapper productoMapper;
+>>>>>>> 89f2421fbc06e7cdfc19ee620df2e8be3e44962f
 
     public Page<ProductoDTO> listar(Pageable pageable, String nombre){
+        Page<Producto> productos = productoRepository.listarProducto(pageable, nombre);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+    }
 
+<<<<<<< HEAD
         Page<Producto> resultPage = productoRepository.listarProducto(pageable, nombre);
         return productoMapper.mapEntityPageIntoDTOPage(pageable,resultPage);
 
+=======
+    public List<ProductoDTO> listarSelect(String search){
+>>>>>>> 89f2421fbc06e7cdfc19ee620df2e8be3e44962f
 
+        return productoMapper.productosAProductosDTO(productoRepository.listarSelect(search));
 
     }
 
+<<<<<<< HEAD
     public Page<Producto> getListProduct(Pageable pageable, String nombreProducto, String idCiclo){
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Producto> query = criteriaBuilder.createQuery(Producto.class);
@@ -121,29 +136,38 @@ public class ProductoService {
 
 
 
+=======
+    public Page<ProductoDTO> listarPorEditorial (Pageable pageable, int idEditorial){
+        Page<Producto> productos = productoRepository.listarPorEditorial(pageable,idEditorial);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+>>>>>>> 89f2421fbc06e7cdfc19ee620df2e8be3e44962f
     }
 
-    public void guardar(Producto producto){
+    public Page<ProductoDTO> listarPorCategoria (Pageable pageable, int idCategoria){
+        Page<Producto> productos = productoRepository.listarPorCategoria(pageable,idCategoria);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+    }
 
-        productoRepository.save(producto);
+    public Page<ProductoDTO> listarPorCiclo (Pageable pageable, int idCiclo){
+        Page<Producto> productos = productoRepository.listarPorCiclo(pageable,idCiclo);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+    }
+
+    public Page<ProductoDTO> listarPorMateria (Pageable pageable, int idMateria){
+        Page<Producto> productos = productoRepository.listarPorMateria(pageable,idMateria);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+    }
+
+    public ProductoDTO guardar(ProductoDTO productoDTO){
+
+        Producto producto = productoMapper.productoDTOAProducto(productoDTO);
+        return productoMapper.productoAProductoDTO(productoRepository.save(producto));
     }
 
 
     public  Producto actualizar(Producto request,Long id){
-        Optional<Producto> productos = productoRepository.findById(id);
 
-        Producto producto = productos.get();
-        producto.setNombre(request.getNombre());
-        producto.setCosto(request.getCosto());
-        producto.setPrecio(request.getPrecio());
-        producto.setIva(request.getIva());
-        producto.setStockActual(request.getStockActual());
-
-
-
-        return productoRepository.save(producto);
-
-
+        return productoRepository.save(request);
 
     }
 

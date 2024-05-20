@@ -1,10 +1,7 @@
 package com.app.bematdid.controller;
 
-import com.app.bematdid.dto.PersonaDTO;
 import com.app.bematdid.dto.ProductoDTO;
-import com.app.bematdid.model.Persona;
 import com.app.bematdid.model.Producto;
-import com.app.bematdid.service.PersonaService;
 import com.app.bematdid.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -13,17 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +39,7 @@ public class ProductoController {
     }
 
     @GetMapping("producto/listar_select")
-    public List<Producto> listarSelect(@RequestParam String search ){
+    public List<ProductoDTO> listarSelect(@RequestParam String search ){
 
 
 
@@ -56,12 +47,30 @@ public class ProductoController {
 
     }
 
+    @GetMapping("producto/editorial/{idEditorial}")
+    public Page<ProductoDTO> listarPorEditorial (Pageable pageable,@PathVariable("idEditorial") int idEditorial) {
+        return productoService.listarPorEditorial(pageable,idEditorial);
+    }
+
+    @GetMapping("producto/categoria/{idCategoria}")
+    public Page<ProductoDTO> listarPorCategoria (Pageable pageable,@PathVariable("idCategoria") int idCategoria) {
+        return productoService.listarPorCategoria(pageable,idCategoria);
+    }
+
+    @GetMapping("producto/ciclo/{idCiclo}")
+    public Page<ProductoDTO> listarPorCiclo (Pageable pageable,@PathVariable("idCiclo") int idCilco) {
+        return productoService.listarPorCiclo(pageable,idCilco);
+    }
+
+    @GetMapping("producto/materia/{idMateria}")
+    public Page<ProductoDTO> listarPorMateria (Pageable pageable,@PathVariable("idMateria") int idMateria) {
+        return productoService.listarPorMateria(pageable,idMateria);
+    }
+
     @PostMapping("producto/guardar")
-    public Producto guardar(@RequestBody Producto producto) throws Exception{
-        productoService.guardar(producto);
+    public ProductoDTO guardar(@RequestBody ProductoDTO productoDTO) throws Exception{
+        return productoService.guardar(productoDTO);
 
-
-        return producto;
     }
 
 

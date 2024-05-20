@@ -1,6 +1,5 @@
 package com.app.bematdid.repository;
 
-import com.app.bematdid.model.Persona;
 import com.app.bematdid.model.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +19,18 @@ public interface ProductoRepository extends JpaRepository<Producto,Long> {
 
     @Query(value = "SELECT * FROM producto where estado is true and nombre ilike %:nombre% ;", nativeQuery = true)
     List<Producto> listarSelect(@Param("nombre") String nombre);
+
+    @Query(value = "SELECT * FROM producto where estado is true and id_editorial = :idEditorial order by nombre asc;", nativeQuery = true)
+    Page<Producto> listarPorEditorial(Pageable pageable,@Param("idEditorial")int  idEditorial);
+
+    @Query(value = "SELECT * FROM producto where estado is true and id_categoria = :idCategoria order by nombre asc;", nativeQuery = true)
+    Page<Producto> listarPorCategoria(Pageable pageable,@Param("idCategoria")int  idCategoria);
+
+    @Query(value = "SELECT * FROM producto where estado is true and id_ciclo = :idCiclo order by nombre asc;", nativeQuery = true)
+    Page<Producto> listarPorCiclo(Pageable pageable,@Param("idCiclo")int  idCiclo);
+
+    @Query(value = "SELECT * FROM producto where estado is true and id_materia = :idMateria order by nombre asc;", nativeQuery = true)
+    Page<Producto> listarPorMateria(Pageable pageable,@Param("idMateria")int  idMateria);
 
     Optional<Producto> findByImage(String nombreImagen);
 }
