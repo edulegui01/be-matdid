@@ -46,6 +46,11 @@ public class ProductoService {
 
     }
 
+    public Page<ProductoDTO> listarPorCategoria (Pageable pageable, int idCategoria){
+        Page<Producto> productos = productoRepository.listarPorCategoria(pageable,idCategoria);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+    }
+
     public Page<ProductoDTO> listarPorCiclo (Pageable pageable, int idCiclo){
         Page<Producto> productos = productoRepository.listarPorCiclo(pageable,idCiclo);
         return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());

@@ -25,6 +25,9 @@ public class Producto {
     @Column(name = "id_producto")
     private Long idProducto;
 
+    @Column(name = "id_categoria")
+    private Integer idCategoria;
+
     @Column(name = "id_ciclo")
     private Integer idCiclo;
 
@@ -55,6 +58,10 @@ public class Producto {
     private Integer stockActual=0;
     private String image;
     private Boolean estado=true;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_categoria",insertable=false, updatable=false)
+    Categoria categoria;
 
     @ManyToOne()
     @JoinColumn(name = "id_ciclo",insertable=false, updatable=false)

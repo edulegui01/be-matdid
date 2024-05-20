@@ -43,6 +43,11 @@ public class ProductoController {
 
     }
 
+    @GetMapping("producto/categoria/{idCategoria}")
+    public Page<ProductoDTO> listarPorCategoria (Pageable pageable,@PathVariable("idCategoria") int idCategoria) {
+        return productoService.listarPorCategoria(pageable,idCategoria);
+    }
+
     @GetMapping("producto/ciclo/{idCiclo}")
     public Page<ProductoDTO> listarPorCiclo (Pageable pageable,@PathVariable("idCiclo") int idCilco) {
         return productoService.listarPorCiclo(pageable,idCilco);

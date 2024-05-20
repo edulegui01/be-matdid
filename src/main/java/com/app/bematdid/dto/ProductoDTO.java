@@ -19,6 +19,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ProductoDTO implements Serializable {
     private Long idProducto;
+    private int idCategoria;
     private int idCiclo;
     private String nombre;
     private String descripcion;
@@ -34,5 +35,6 @@ public class ProductoDTO implements Serializable {
     private String image;
     private boolean estado;
 
+    private CategoriaDTO categoria;
     private CicloDTO ciclo;
 }
