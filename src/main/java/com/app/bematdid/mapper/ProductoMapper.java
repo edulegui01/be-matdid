@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {CategoriaMapper.class, CicloMapper.class, MateriaMapper.class})
+@Mapper(componentModel = "spring", uses = {EditorialMapper.class, CategoriaMapper.class, CicloMapper.class, MateriaMapper.class})
 public interface ProductoMapper {
 
     ProductoDTO productoAProductoDTO (Producto producto);

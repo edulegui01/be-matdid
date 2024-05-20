@@ -25,6 +25,9 @@ public class Producto {
     @Column(name = "id_producto")
     private Long idProducto;
 
+    @Column(name = "id_editorial")
+    private Integer idEditorial;
+
     @Column(name = "id_categoria")
     private Integer idCategoria;
 
@@ -41,13 +44,9 @@ public class Producto {
     @NotBlank
     private String autor;
     @NotBlank
-    private String editorial;
-    @NotBlank
+
     private String isbn;
 
-    @Column(name = "grado_curso")
-    @NotBlank
-    private String gradoCurso;
     @NotNull
     private Integer costo;
     @Column(name = "precio")
@@ -60,6 +59,10 @@ public class Producto {
     private Integer stockActual=0;
     private String image;
     private Boolean estado=true;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_editorial",insertable=false, updatable=false)
+    Editorial editorial;
 
     @ManyToOne()
     @JoinColumn(name = "id_categoria",insertable=false, updatable=false)
