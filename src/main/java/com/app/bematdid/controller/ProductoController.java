@@ -53,6 +53,11 @@ public class ProductoController {
         return productoService.listarPorCiclo(pageable,idCilco);
     }
 
+    @GetMapping("producto/materia/{idMateria}")
+    public Page<ProductoDTO> listarPorMateria (Pageable pageable,@PathVariable("idMateria") int idMateria) {
+        return productoService.listarPorMateria(pageable,idMateria);
+    }
+
     @PostMapping("producto/guardar")
     public ProductoDTO guardar(@RequestBody ProductoDTO productoDTO) throws Exception{
         return productoService.guardar(productoDTO);

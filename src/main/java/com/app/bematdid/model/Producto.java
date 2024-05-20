@@ -31,6 +31,9 @@ public class Producto {
     @Column(name = "id_ciclo")
     private Integer idCiclo;
 
+    @Column(name = "id_materia")
+    private Integer idMateria;
+
     private String nombre;
     @NotBlank
     @Column(columnDefinition = "TEXT")
@@ -41,8 +44,7 @@ public class Producto {
     private String editorial;
     @NotBlank
     private String isbn;
-    @NotBlank
-    private String materia;
+
     @Column(name = "grado_curso")
     @NotBlank
     private String gradoCurso;
@@ -67,6 +69,9 @@ public class Producto {
     @JoinColumn(name = "id_ciclo",insertable=false, updatable=false)
     Ciclo ciclo;
 
+    @ManyToOne()
+    @JoinColumn(name = "id_materia",insertable=false, updatable=false)
+    Materia materia;
 
 
     @JsonIgnore

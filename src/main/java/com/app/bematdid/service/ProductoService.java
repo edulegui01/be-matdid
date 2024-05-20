@@ -56,6 +56,11 @@ public class ProductoService {
         return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
     }
 
+    public Page<ProductoDTO> listarPorMateria (Pageable pageable, int idMateria){
+        Page<Producto> productos = productoRepository.listarPorMateria(pageable,idMateria);
+        return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+    }
+
     public ProductoDTO guardar(ProductoDTO productoDTO){
 
         Producto producto = productoMapper.productoDTOAProducto(productoDTO);

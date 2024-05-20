@@ -26,5 +26,8 @@ public interface ProductoRepository extends JpaRepository<Producto,Long> {
     @Query(value = "SELECT * FROM producto where estado is true and id_ciclo = :idCiclo order by nombre asc;", nativeQuery = true)
     Page<Producto> listarPorCiclo(Pageable pageable,@Param("idCiclo")int  idCiclo);
 
+    @Query(value = "SELECT * FROM producto where estado is true and id_materia = :idMateria order by nombre asc;", nativeQuery = true)
+    Page<Producto> listarPorMateria(Pageable pageable,@Param("idMateria")int  idMateria);
+
     Optional<Producto> findByImage(String nombreImagen);
 }

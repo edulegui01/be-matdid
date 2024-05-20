@@ -21,12 +21,12 @@ public class ProductoDTO implements Serializable {
     private Long idProducto;
     private int idCategoria;
     private int idCiclo;
+    private int idMateria;
     private String nombre;
     private String descripcion;
     private String autor;
     private String editorial;
     private String isbn;
-    private String materia;
     private String gradoCurso;
     private int costo;
     private int precio;
@@ -37,4 +37,5 @@ public class ProductoDTO implements Serializable {
 
     private CategoriaDTO categoria;
     private CicloDTO ciclo;
+    private MateriaDTO materia;
 }
