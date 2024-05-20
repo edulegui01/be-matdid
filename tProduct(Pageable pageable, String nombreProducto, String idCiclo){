@@ -1,0 +1,291 @@
+[33mcommit 41902cd19fae0d5f08c78f5b3bed85d234c8f0cb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32medu[m[33m)[m
+Merge: e805b81 89f2421
+Author: eduardo <edulegui01@gmail.com>
+Date:   Mon May 20 11:08:45 2024 -0400
+
+    actualizaciones para la entidad producto
+
+[33mcommit e805b81b88e84ebb3b377a16451e39a1b3bda2bf[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Mon May 20 11:04:07 2024 -0400
+
+    se agergo un nuevo tipo de listado producto en el controller y el service
+
+[33mcommit 89f2421fbc06e7cdfc19ee620df2e8be3e44962f[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Mon May 20 01:45:34 2024 -0400
+
+    se agrego la entidad editorial
+
+[33mcommit b9d382f05e0ff475b090abf23c2cfc74736a53fd[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Mon May 20 00:26:08 2024 -0400
+
+    se agrego materia de los productos-libros
+
+[33mcommit 8ba29c20dc14596b6c6a3636d8a3a1fd5ed8bf19[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Sun May 19 23:14:25 2024 -0400
+
+    se creo la tabla categoria de producto
+
+[33mcommit eabd88f2ee977cc8a608505d97b21a3509f9a2a2[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Sun May 19 15:58:45 2024 -0400
+
+    se actualizo producto con su nuevo mapper
+
+[33mcommit 3f632761c5cd5afb1da6421758413573f9dd0e9c[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Sat May 18 14:46:50 2024 -0400
+
+    se agrego listar por Ciclo en producto
+
+[33mcommit 2f79439bb2e7780736be11ed3dff4cc24ea12995[m[33m ([m[1;31morigin/edu[m[33m)[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Thu May 16 17:12:37 2024 -0400
+
+    correccion en el filtro del sql para listar producto
+
+[33mcommit 7029549749486845671ca95186c3cc2bf229f28c[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Thu May 16 16:40:45 2024 -0400
+
+    Se agrego la tabla ciclo para los produtos-libros
+
+[33mcommit be3bc6aeee31fbbc4b3579ecd02ba42dab4f76e2[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Wed May 15 19:10:19 2024 -0400
+
+    se modifico actualizar de persona
+
+[33mcommit 03d9d9c1282607a0a40525b528e0ba7f1a2f06fd[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Wed May 15 18:15:49 2024 -0400
+
+    cambios de cedula de int a string
+
+[33mcommit 4c8c47946bb356ea73be3e122067f7e0fb5c3e88[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Mon May 13 18:31:37 2024 -0400
+
+    Se actualizo persona para agregar empresa nombre y apellido
+
+[33mcommit b9f7951f08d339d39c18f527db2a793fa24b9a90[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Mon May 13 18:31:16 2024 -0400
+
+    Se actualizo persona para agregar empresa nombre y apellido
+
+[33mcommit cf137450ac83298076eec696f901704d9f157633[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Thu May 9 16:11:25 2024 -0400
+
+    se modifico el controller de localidad
+
+[33mcommit b6a8fa297b9b6a1ed015cadea5e2c3bbba1e2fab[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Wed May 8 20:11:05 2024 -0400
+
+    se agrego la configuracion de los cors
+
+[33mcommit 417d91ad5b63fdc6cf2b8c0321c0a08a7d4e7266[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Tue May 7 14:51:11 2024 -0400
+
+    se agrego una configuracion de cors en securityConfig
+
+[33mcommit 35b0e65291a8d7efe3a2dd7f3283d0424f217013[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Tue May 7 11:05:40 2024 -0400
+
+    modificaciones en el controller de funcionarios y el auth
+
+[33mcommit c6ee2c3679220a0c669cfa49693eb0284993785a[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Mon May 6 14:35:17 2024 -0400
+
+    se agrego el modulo de seguridad
+
+[33mcommit 132373b2575d2cb6525fe10f1a0fbd6e18fa6de0[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Sat May 4 19:06:41 2024 -0400
+
+    se modifico el producto controler para que el post imagen devuelva un json
+
+[33mcommit 04a926f3ac8f87bf388f6fe5a6ce4a1315149d15[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Fri May 3 22:48:43 2024 -0400
+
+    modificaciones en subir y cargar imangenes
+
+[33mcommit 083a1da1af38d36ea6d152e672787ae66bdb84de[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Thu Apr 25 14:23:50 2024 -0400
+
+    se agregaron modificaciones en producto y movimiento
+
+[33mcommit 30b70ff310b57f631116d64d04eaa8a4860d31ab[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Thu Apr 25 14:21:19 2024 -0400
+
+    se agrego las funcionalidades de imagenes en el componente producto y se agrego el componente movimiento
+
+[33mcommit 96709ca8ce4838aa6227e4c998497b202a2d56c8[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Wed Feb 21 18:28:13 2024 -0300
+
+    correcciones en compras y desarrollo de ventas
+
+[33mcommit 1905a0caa80fbcafb036856d66211ec45eac2d8d[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Thu Nov 9 18:43:11 2023 -0300
+
+    cambios en timbrado
+
+[33mcommit 5ae3df23aa6dd87674556ae3b971d812a19dd2d9[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Thu Nov 9 17:06:13 2023 -0300
+
+    modificaciones en producto y timbrado
+
+[33mcommit a05047a1da2b372760379dee405fb9d7eee73b4d[m
+Merge: 47e6593 72ac69c
+Author: eduardo <edulegui01@gmail.com>
+Date:   Wed Nov 8 18:18:42 2023 -0300
+
+    Merge branch 'mark' of https://github.com/edulegui01/be-matdid into edu
+
+[33mcommit 72ac69ca97391314a4fb4562d8dc7924679d28c0[m[33m ([m[1;31morigin/mark[m[33m)[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Wed Nov 8 13:00:56 2023 -0300
+
+    modulo de gastos terminado
+
+[33mcommit 47e659361732efc6f0bad4045d363a16c197ba07[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Tue Nov 7 18:43:10 2023 -0300
+
+    modificaciones en el producto
+
+[33mcommit a38176e1bd8639890354237fbb43fddebfa12376[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Tue Oct 31 22:43:47 2023 -0300
+
+    terminado el modulo de movimiento
+
+[33mcommit 96201be94a2179f4b40400d938b6baacaa82a40b[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Mon Oct 30 13:26:59 2023 -0300
+
+    terminado el modulo de factura
+
+[33mcommit 3db23be390e4abba85c5645760c5dd0783d8c469[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Tue Oct 24 11:14:18 2023 -0300
+
+    terminado el modulo de timbrado
+
+[33mcommit f8e7b790f91c74d29ec0626c3079f273ec1343f1[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Sun Oct 22 19:55:02 2023 -0300
+
+    terminado el modulo de compra
+
+[33mcommit c899fc97df1c64da7149a723004021d71503f779[m
+Merge: 1f505a3 519e15d
+Author: eduardo <edulegui01@gmail.com>
+Date:   Mon Oct 16 21:32:07 2023 -0300
+
+    Merge branch 'dev' of https://github.com/edulegui01/be-matdid into edu
+
+[33mcommit 1f505a312e8d6e421613af12e74c4f6c5f29575f[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Mon Oct 16 21:31:42 2023 -0300
+
+    modificaciones en localidad
+
+[33mcommit 519e15d15b90a136b9b4fbbc81e70c777a9523cc[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Mon Oct 16 21:30:20 2023 -0300
+
+    terminado guardar compra
+
+[33mcommit 6dd3e34249caf2e757ab982a1ec0a8d8da73c2a1[m
+Merge: 3acd592 6f629d8
+Author: mark <anderkennedy@hotmail.com>
+Date:   Mon Oct 16 18:33:30 2023 -0300
+
+    Merge branch 'mark' into dev
+
+[33mcommit 3acd592721d1384665ee951652d4de0e4aa465fb[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Mon Oct 16 18:15:32 2023 -0300
+
+    cambios en funcionario y producto
+
+[33mcommit 6f629d8b725f6f2e3fced2fdb0477045f1fa1677[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Mon Oct 16 18:02:07 2023 -0300
+
+    agregado logica de compra y el controlador
+
+[33mcommit 68e67e908f7c0dddbcc6bc6ccd56741476233cae[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Thu Oct 12 19:26:48 2023 -0300
+
+    modificaciones en persona y producto
+
+[33mcommit 168502bd0eb9584ba8a43de641ab1274acf6293a[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Sun Oct 1 22:13:22 2023 -0300
+
+    modificacion en el properties
+
+[33mcommit 867ae402da8f5e6c7fe5c33b4b6d385dd36d94ba[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Sun Oct 1 22:12:02 2023 -0300
+
+    modificacion de git ignore
+
+[33mcommit 0ba963fd7009ab986095c4a120f2aa59ed941543[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Sun Oct 1 22:10:01 2023 -0300
+
+    cambio en properties
+
+[33mcommit ba878a6da49d28547314e0bca234eed3664b3715[m
+Author: mark <anderkennedy@hotmail.com>
+Date:   Sun Oct 1 22:05:00 2023 -0300
+
+    modificacion de tablas con PK
+
+[33mcommit 0768f6d9b282866276101a6b21947ef306704f72[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Sun Oct 1 19:44:34 2023 -0300
+
+    se crearon todos los modelos
+
+[33mcommit f343b17d307b236851a02df780438aef753e91ad[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Fri Sep 29 21:23:40 2023 -0400
+
+    se modifico localidad
+
+[33mcommit f3a384679edbd1f009e85732afdc2847ebe2acfc[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Tue Sep 26 17:42:28 2023 -0400
+
+    se modifico la entidad localidad
+
+[33mcommit 438583911a43e8263cf84bac4c9a5aa862ad5e47[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Mon Sep 25 19:32:10 2023 -0400
+
+    se agregaron producto y funcionario
+
+[33mcommit 682598cdaf2d78895f512c110ea8a2bccabf003c[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: eduardo <edulegui01@gmail.com>
+Date:   Wed Sep 20 17:55:20 2023 -0400
+
+    se crearon las apis de clientes, proveedores, productos
