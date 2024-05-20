@@ -34,8 +34,10 @@ public class ProductoController {
 
     }
     @GetMapping("producto/listado")
-    public Page<Producto> listadoProducto(Pageable pageable,@RequestParam String nombre, @RequestParam String idCiclo){
-        return productoService.getListProduct(pageable,nombre,idCiclo);
+    public Page<Producto> listadoProducto(Pageable pageable,@RequestParam String nombre,
+                                          @RequestParam String idCiclo, @RequestParam String idCategoria,
+                                          @RequestParam String idMateria, @RequestParam String idEditorial){
+        return productoService.getListProduct(pageable,nombre,idCiclo,idCategoria,idMateria,idEditorial);
     }
 
 
