@@ -34,6 +34,12 @@ public class ProductoController {
 
     }
 
+    @GetMapping("producto/listado")
+    public Page<Producto> listado(Pageable pageable, @RequestParam String nombre, @RequestParam String idCiclo){
+
+        return productoService.getListProduct(pageable,nombre,idCiclo);
+    }
+
     @GetMapping("producto/listar_select")
     public List<ProductoDTO> listarSelect(@RequestParam String search ){
 

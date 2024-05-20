@@ -4,6 +4,12 @@ import com.app.bematdid.dto.ProductoDTO;
 import com.app.bematdid.mapper.ProductoMapper;
 import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.ProductoRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -18,6 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,6 +38,9 @@ public class ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    EntityManager entityManager;
 
     @Autowired
     private ProductoMapper productoMapper;
@@ -64,6 +74,59 @@ public class ProductoService {
     public Page<ProductoDTO> listarPorMateria (Pageable pageable, int idMateria){
         Page<Producto> productos = productoRepository.listarPorMateria(pageable,idMateria);
         return new PageImpl<>(productoMapper.productosAProductosDTO(productos.getContent()), pageable, productos.getTotalElements());
+    }
+
+    public Page<Producto> getListProduct(Pageable pageable, String nombreProducto, String idCiclo){
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Producto> query = criteriaBuilder.createQuery(Producto.class);
+        Root<Producto> productoRoot = query.from(Producto.class);
+
+        List<Predicate> searchCriteria = new ArrayList<>();
+
+        //se agrega el where estado = true
+        searchCriteria.add(criteriaBuilder.isTrue(productoRoot.get("estado")));
+
+        if(nombreProducto != null && !nombreProducto.isEmpty()){
+            searchCriteria.add(criteriaBuilder.like(criteriaBuilder.upper(productoRoot.get("nombre")),"%"+nombreProducto.toUpperCase()+"%"));
+        }
+        if(idCiclo != null && !idCiclo.isEmpty()){
+            searchCriteria.add(criteriaBuilder.equal(productoRoot.get("idCiclo"),idCiclo));
+        }
+
+        Predicate[] restriccions = searchCriteria.toArray(new Predicate[0]);
+        query.select(productoRoot).where(criteriaBuilder.and(restriccions)).orderBy(criteriaBuilder.
+                desc(productoRoot.get("idProducto")));
+
+        TypedQuery<Producto> queryResult = entityManager.createQuery(query);
+
+        int total =queryResult.getResultList().size();
+
+        List<Producto> pagedData = paginateQuery(entityManager.createQuery(query), pageable).getResultList();
+
+
+
+        //calcular cantidad de item en la consulta
+        /*CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
+        Root<Producto> productoCountRoot = countQuery.from(Producto.class);
+        countQuery
+                .select(criteriaBuilder.count(productoCountRoot))
+                .where(criteriaBuilder.
+                        and(restriccions));
+        var totalCount = entityManager.createQuery(countQuery).getSingleResult();*/
+
+        return new PageImpl<>(pagedData,pageable,total);
+
+
+
+
+    }
+
+    public static <T> TypedQuery<T> paginateQuery(TypedQuery<T> query, Pageable pageable) {
+        if (pageable.isPaged()) {
+            query.setFirstResult((int) pageable.getOffset());
+            query.setMaxResults(pageable.getPageSize());
+        }
+        return query;
     }
 
     public ProductoDTO guardar(ProductoDTO productoDTO){
