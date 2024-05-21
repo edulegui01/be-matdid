@@ -1,5 +1,6 @@
 package com.app.bematdid.dto;
 
+import com.app.bematdid.model.Motivo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,11 @@ public class MovimientoSaveDTO implements Serializable {
 
     private Long idMovimiento;
     private Long idFuncionario;
+    private int idMotivo;
     private String nombreFuncionario;
     private String apellidoFuncionario;
-    private String motivo;
     private Date fecha;
-    private Boolean esIngreso;
+
+    private Motivo motivo;
     private List<DetalleMovimientoDTO> detalleMovimientos;
 }

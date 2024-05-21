@@ -11,7 +11,7 @@ import org.mapstruct.Mappings;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {DetalleMovimientoMapper.class})
+@Mapper(componentModel = "spring", uses = {DetalleMovimientoMapper.class, MotivoMapper.class})
 public interface MovimientoMapper {
 
     @Mappings({

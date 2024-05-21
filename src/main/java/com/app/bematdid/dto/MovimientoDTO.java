@@ -19,10 +19,11 @@ public class MovimientoDTO implements Serializable {
 
     private Long idMovimiento;
     private Long idFuncionario;
+    private int idMotivo;
     private String nombreFuncionario;
     private String apellidoFuncionario;
-    private String motivo;
     private String fecha;
-    private Boolean esIngreso;
+
+    private MotivoDTO motivo;
     private List<DetalleMovimientoDTO> detalleMovimientos;
 }
