@@ -25,6 +25,9 @@ public class MovimientoService {
     private MovimientoRepository movimientoRepository;
 
     @Autowired
+    private MotivoRepository motivoRepository;
+
+    @Autowired
     private MovimientoMapper mapper;
 
     @Autowired
@@ -38,9 +41,9 @@ public class MovimientoService {
     }
 
 
-    public MovimientoDTO guardar(MovimientoSaveDTO movimientoDTO){
+    public MovimientoDTO guardar(MovimientoSaveDTO movimientoDTO) throws Exception{
         Movimiento movimiento = mapper.movimientoDTOAMovimiento(movimientoDTO);
-        movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
+        /*movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
             detalleMovimiento.setMovimiento(movimiento);
             if(movimiento.getEsIngreso()) {
                 Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
@@ -51,7 +54,34 @@ public class MovimientoService {
                 producto.get().setStockActual(producto.get().getStockActual() - detalleMovimiento.getCantidad());
                 productoRepository.save(producto.get());
             }
-        });
+        });*/
+
+        Motivo motivo = motivoRepository.findById(movimiento.getMotivo().getIdMotivo());
+
+        if(motivo.getEsIngreso){
+            movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
+            detalleMovimiento.setMovimiento(movimiento);
+                Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
+                producto.get().setStockActual(producto.get().getStockActual() + detalleMovimiento.getCantidad());
+                productoRepository.save(producto.get());
+            });
+        }else{
+            movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
+            detalleMovimiento.setMovimiento(movimiento);
+                Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
+                if(producto.get().getStockActual()<detalleMovimiento.getCantidad()){
+                    try {
+                        throw new Exception("Supera el stock actual");
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                producto.get().setStockActual(producto.get().getStockActual() - detalleMovimiento.getCantidad());
+                productoRepository.save(producto.get());
+
+            });
+        }
+
         movimientoRepository.save(movimiento);
         return mapper.movimientoAMovimientoDTO(movimiento);
     }
@@ -59,7 +89,7 @@ public class MovimientoService {
     public void borrar(Long idMovimiento){
         Optional<Movimiento> movimiento = movimientoRepository.findById(idMovimiento);
         movimiento.get().setEstado(false);
-        movimiento.get().getDetalleMovimientos().forEach(detalleMovimiento -> {
+        /*movimiento.get().getDetalleMovimientos().forEach(detalleMovimiento -> {
             if(movimiento.get().getEsIngreso()) {
                 Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
                 producto.get().setStockActual(producto.get().getStockActual() - detalleMovimiento.getCantidad());
@@ -69,7 +99,26 @@ public class MovimientoService {
                 producto.get().setStockActual(producto.get().getStockActual() + detalleMovimiento.getCantidad());
                 productoRepository.save(producto.get());
             }
-        });
+        });*/
+
+        Motivo motivo = motivoRepository.findById(movimiento.get().getMotivo().getIdMotivo());
+
+        if(motivo.getEsIngreso){
+            movimiento.get().getDetalleMovimientos().forEach(detalleMovimiento -> {
+                Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
+                producto.get().setStockActual(producto.get().getStockActual() - detalleMovimiento.getCantidad());
+                productoRepository.save(producto.get());
+            });
+        }else{
+            movimiento.get().getDetalleMovimientos().forEach(detalleMovimiento -> {
+                Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
+                producto.get().setStockActual(producto.get().getStockActual() + detalleMovimiento.getCantidad());
+                productoRepository.save(producto.get());
+
+            });
+        }
+
+
 
         movimientoRepository.save(movimiento.get());
     }
