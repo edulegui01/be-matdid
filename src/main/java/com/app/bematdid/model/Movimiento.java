@@ -30,20 +30,20 @@ public class Movimiento {
     @Column(name = "id_funcionario")
     private Long idFuncionario;
 
-    @NotBlank
-    private String motivo;
+    @Column(name = "id_motivo")
+    private Integer idMotivo;
 
     private Date fecha;
-
-    @NotNull
-    @Column(name = "es_ingreso")
-    private Boolean esIngreso;
 
     private Boolean estado= true;
 
     @ManyToOne()
     @JoinColumn(name = "id_funcionario",insertable=false, updatable=false)
     Funcionario funcionario;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_motivo",insertable=false, updatable=false)
+    Motivo motivo;
 
 
     @JsonIgnore
