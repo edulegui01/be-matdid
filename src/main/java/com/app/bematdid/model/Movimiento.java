@@ -35,6 +35,9 @@ public class Movimiento {
 
     private Date fecha;
 
+    @Column(columnDefinition = "TEXT")
+    private String comentario;
+
     private Boolean estado= true;
 
     @ManyToOne()
