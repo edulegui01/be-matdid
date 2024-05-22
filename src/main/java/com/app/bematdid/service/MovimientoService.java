@@ -5,8 +5,10 @@ import com.app.bematdid.dto.MovimientoDTO;
 import com.app.bematdid.dto.MovimientoSaveDTO;
 import com.app.bematdid.mapper.MovimientoMapper;
 import com.app.bematdid.model.Factura;
+import com.app.bematdid.model.Motivo;
 import com.app.bematdid.model.Movimiento;
 import com.app.bematdid.model.Producto;
+import com.app.bematdid.repository.MotivoRepository;
 import com.app.bematdid.repository.MovimientoRepository;
 import com.app.bematdid.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class MovimientoService {
     }
 
 
-    public MovimientoDTO guardar(MovimientoSaveDTO movimientoDTO) throws Exception{
+    public MovimientoDTO guardar(MovimientoSaveDTO movimientoDTO){
         Movimiento movimiento = mapper.movimientoDTOAMovimiento(movimientoDTO);
         /*movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
             detalleMovimiento.setMovimiento(movimiento);
@@ -56,9 +58,9 @@ public class MovimientoService {
             }
         });*/
 
-        Motivo motivo = motivoRepository.findById(movimiento.getMotivo().getIdMotivo());
+        Optional<Motivo> motivo = motivoRepository.findById(movimiento.getIdMotivo());
 
-        if(motivo.getEsIngreso){
+        if(motivo.get().getEsIngreso()){
             movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
             detalleMovimiento.setMovimiento(movimiento);
                 Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
@@ -69,13 +71,6 @@ public class MovimientoService {
             movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
             detalleMovimiento.setMovimiento(movimiento);
                 Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
-                if(producto.get().getStockActual()<detalleMovimiento.getCantidad()){
-                    try {
-                        throw new Exception("Supera el stock actual");
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
                 producto.get().setStockActual(producto.get().getStockActual() - detalleMovimiento.getCantidad());
                 productoRepository.save(producto.get());
 
@@ -101,9 +96,9 @@ public class MovimientoService {
             }
         });*/
 
-        Motivo motivo = motivoRepository.findById(movimiento.get().getMotivo().getIdMotivo());
+        Optional<Motivo> motivo = motivoRepository.findById(movimiento.get().getMotivo().getIdMotivo());
 
-        if(motivo.getEsIngreso){
+        if(motivo.get().getEsIngreso()){
             movimiento.get().getDetalleMovimientos().forEach(detalleMovimiento -> {
                 Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());
                 producto.get().setStockActual(producto.get().getStockActual() - detalleMovimiento.getCantidad());
