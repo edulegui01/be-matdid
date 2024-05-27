@@ -3,6 +3,7 @@ package com.app.bematdid.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -56,6 +57,7 @@ public class Producto {
     private Float iva;
     @Column(name = "stock_actual")
     @NotNull
+    @Min(value = 0,message = "El valor sobrepasa el stock actual")
     private Integer stockActual=0;
     private String image;
     private Boolean estado=true;
