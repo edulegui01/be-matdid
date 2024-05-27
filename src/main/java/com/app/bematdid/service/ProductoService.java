@@ -1,6 +1,7 @@
 package com.app.bematdid.service;
 
 import com.app.bematdid.dto.ProductoDTO;
+import com.app.bematdid.error.dto.DeleteProductWithStockException;
 import com.app.bematdid.mapper.ProductoMapper;
 import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.ProductoRepository;
@@ -199,10 +200,14 @@ public class ProductoService {
 
     }
 
-    public void borrar(Long id){
+    public void borrar(Long id) throws DeleteProductWithStockException {
         Optional<Producto> productos = productoRepository.findById(id);
 
         Producto producto = productos.get();
+
+        if(producto.getStockActual()>0){
+            throw new DeleteProductWithStockException("IMPOSIBLE ELIMINAR EL PRODUCTO, HAY UNIDADES EN EXISTENCIA");
+        }
 
         producto.setEstado(false);
 

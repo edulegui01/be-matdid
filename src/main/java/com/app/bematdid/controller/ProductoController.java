@@ -1,6 +1,7 @@
 package com.app.bematdid.controller;
 
 import com.app.bematdid.dto.ProductoDTO;
+import com.app.bematdid.error.dto.DeleteProductWithStockException;
 import com.app.bematdid.model.Producto;
 import com.app.bematdid.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,7 +138,7 @@ public class ProductoController {
 
     @CrossOrigin("origins = http://localhost:4200")
     @DeleteMapping("producto/borrar/{idPer}")
-    public void borrar(@PathVariable Long idPer){
+    public void borrar(@PathVariable Long idPer) throws DeleteProductWithStockException {
         productoService.borrar(idPer);
 
     }
