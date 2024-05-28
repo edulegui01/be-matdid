@@ -29,7 +29,7 @@ public class Compra {
     @Column(name="id_persona")
     private Long idPersona;
 
-    private Date fecha = new Date();
+    private Date fecha;
 
     private Date fechaVencimiento;
 
@@ -43,7 +43,9 @@ public class Compra {
     private String timbrado;
 
     @Column(name = "tipo_factura")
-    private String tipo_factura;
+    private String tipoFactura;
+
+    private Integer saldo;
 
 
     private Boolean estado= true;

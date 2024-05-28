@@ -28,7 +28,6 @@ public interface CompraMapper {
 
     @InheritInverseConfiguration
     @Mappings({
-            @Mapping(target = "fecha", ignore = true),
             @Mapping(target = "estado", ignore = true),
             @Mapping(target = "persona", ignore = true),
             @Mapping(target = "funcionario", ignore = true)
