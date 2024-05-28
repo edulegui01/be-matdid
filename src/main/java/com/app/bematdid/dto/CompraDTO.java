@@ -23,6 +23,7 @@ public class CompraDTO  implements Serializable {
     private String nombrePersona;
     private String apellidoPersona;
     private String nombreEmpresa;
+    private String razonSocial;
     private Date fecha;
     private Date fechaVencimiento;
     private Long montoTotal;

@@ -20,6 +20,7 @@ public interface CompraMapper {
             @Mapping(source = "persona.nombre", target = "nombrePersona"),
             @Mapping(source = "persona.apellido", target = "apellidoPersona"),
             @Mapping(source = "persona.empresa", target = "nombreEmpresa"),
+            @Mapping(source = "persona.razonSocial", target = "razonSocial")
 
     })
     CompraDTO compraACompraDTO (Compra compra);
