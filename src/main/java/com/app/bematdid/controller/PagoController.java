@@ -23,12 +23,12 @@ public class PagoController {
         return pagoService.listar(pageable, nombre);
     }*/
 
-    /*@GetMapping("pago_select/listar")
-    public List<PagoDTO> listarSelect(){
+    @GetMapping("pago/listarTodos")
+    public List<PagoDTO> listarTodos(){
 
         return pagoService.listarTodos();
 
-    }*/
+    }
 
     @GetMapping("pago/{id}")
     private Optional<PagoDTO> obtenerPorId (@PathVariable("id") Long id){

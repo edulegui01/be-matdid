@@ -35,11 +35,10 @@ public class PagoService {
         return new PageImpl<>(lista.get(),  pageable, lista.get().size());
     }*/
 
-    /*public List<PagoDTO> listarTodos(){
-
-        Optional<List<PagoDTO>> lista = pagoRepository.listarPagos("").map(pagos -> mapper.pagosAPagosDTO(pagos));
-        return lista.get();
-    }*/
+    public List<PagoDTO> listarTodos(){
+        List<Pago> lista = pagoRepository.findAll();
+        return mapper.pagosAPagosDTO(lista);
+    }
 
     public Optional<PagoDTO> obtenerPorId (Long id){
         return pagoRepository.findById(id).map(pago -> mapper.pagoAPagoDTO(pago));
@@ -59,10 +58,12 @@ public class PagoService {
 
     public void borrar(Long id){
         Optional<Pago> pago = pagoRepository.findById(id);
-
         Pago pago1 = pago.get();
-
         pago1.setEstado(false);
+
+        Optional<Compra> compra = compraRepository.findById(pago1.getIdCompra());
+        compra.get().setSaldo(compra.get().getSaldo() + pago1.getMonto());
+        compraRepository.save(compra.get());
 
         pagoRepository.save(pago1);
     }
