@@ -30,6 +30,7 @@ public class Compra {
     private Long idPersona;
 
     private Date fecha = new Date();
+
     private Date fechaVencimiento;
 
     @Column(name = "monto_total")
@@ -60,5 +61,9 @@ public class Compra {
     @JsonIgnore
     @OneToMany(mappedBy = "compra",cascade = {CascadeType.ALL})
     private List<DetalleCompra> detalleCompra;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "compra",cascade = {CascadeType.ALL})
+    private List<Pago> pagos;
 
 }

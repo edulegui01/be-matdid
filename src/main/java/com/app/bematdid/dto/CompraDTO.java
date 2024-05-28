@@ -31,5 +31,7 @@ public class CompraDTO  implements Serializable {
     private int cedula;
     private String ruc;
     private String timbrado;
+
     private List<DetalleCompraDTO> detalleCompra;
+    private List<PagoDTO> pagos;
 }

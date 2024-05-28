@@ -79,5 +79,9 @@ public class Funcionario {
     @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
     private List<User> users;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
+    private List<Pago> pagos;
+
 
 }
