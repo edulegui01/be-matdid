@@ -33,7 +33,7 @@ public class Pago {
     @Column(name = "tipo_pago")
     private String tipoPago;
 
-    private Double monto;
+    private Integer monto;
 
     private boolean estado=true;
 
