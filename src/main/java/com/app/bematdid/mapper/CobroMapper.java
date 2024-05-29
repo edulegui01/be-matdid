@@ -1,7 +1,7 @@
 package com.app.bematdid.mapper;
 
-import com.app.bematdid.dto.FacturaDTO;
-import com.app.bematdid.model.Factura;
+import com.app.bematdid.dto.CobroDTO;
+import com.app.bematdid.model.Cobro;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -9,26 +9,21 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {DetalleFacturaMapper.class, CobroMapper.class})
-public interface FacturaMapper {
+@Mapper(componentModel = "spring")
+public interface CobroMapper {
 
     @Mappings({
             @Mapping(source = "funcionario.nombre", target = "nombreFuncionario"),
             @Mapping(source = "funcionario.apellido", target = "apellidoFuncionario"),
-            @Mapping(source = "persona.razonSocial", target = "cliente"),
-
-
     })
-    FacturaDTO facturaAFacturaDTO (Factura factura);
-    List<FacturaDTO> facturasAFacturasDTO (List<Factura> factura);
+    CobroDTO cobroACobroDTO (Cobro cobro);
+    List<CobroDTO> cobrosACobrosDTO (List<Cobro> cobros);
 
     @InheritInverseConfiguration
     @Mappings({
-            @Mapping(target = "fecha", ignore = true),
             @Mapping(target = "estado", ignore = true),
-            @Mapping(target = "persona", ignore = true),
             @Mapping(target = "funcionario", ignore = true),
-
+            @Mapping(target = "factura", ignore = true)
     })
-    Factura facturaDTOAFactura (FacturaDTO facturaDTO);
+    Cobro cobroDTOACobro (CobroDTO cobroDTO);
 }

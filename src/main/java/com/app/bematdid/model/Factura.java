@@ -42,11 +42,12 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long numFactura;
 
-    private Boolean estado= true;
-
     @Column(name = "tipo_factura")
     private String tipoFactura;
 
+    private Integer saldo;
+
+    private Boolean estado= true;
 
     @ManyToOne()
     @JoinColumn(name = "nro_timbrado",insertable=false, updatable=false)
@@ -63,5 +64,9 @@ public class Factura {
     @JsonIgnore
     @OneToMany(mappedBy = "factura",cascade = {CascadeType.ALL})
     private List<DetalleFactura> detalleFacturas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "factura",cascade = {CascadeType.ALL})
+    private List<Cobro> cobros;
 
 }
