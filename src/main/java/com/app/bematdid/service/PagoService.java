@@ -44,6 +44,12 @@ public class PagoService {
         return pagoRepository.findById(id).map(pago -> mapper.pagoAPagoDTO(pago));
     }
 
+    public List<PagoDTO> listarPorIdCompra(Long idCompra){
+        List<Pago> lista = pagoRepository.listarPorIdCompra(idCompra);
+        return mapper.pagosAPagosDTO(lista);
+
+    }
+
     public PagoDTO guardar(PagoDTO pagoDTO) throws SaldoNegativeException{
         Pago pago = mapper.pagoDTOAPago(pagoDTO);
         Optional<Compra> compra = compraRepository.findById(pago.getIdCompra());

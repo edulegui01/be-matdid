@@ -30,6 +30,11 @@ public class PagoController {
 
     }
 
+    @GetMapping("pago/listar")
+    public List<PagoDTO> listar(@RequestParam Long idCompra){
+        return pagoService.listarPorIdCompra(idCompra);
+    }
+
     @GetMapping("pago/{id}")
     private Optional<PagoDTO> obtenerPorId (@PathVariable("id") Long id){
         return pagoService.obtenerPorId(id);
