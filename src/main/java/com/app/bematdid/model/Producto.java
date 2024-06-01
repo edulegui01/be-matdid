@@ -56,8 +56,6 @@ public class Producto {
     @NotNull
     private Float iva;
     @Column(name = "stock_actual")
-    @NotNull
-    @Min(value = 0,message = "El valor sobrepasa el stock actual")
     private Integer stockActual=0;
     private String image;
     private Boolean estado=true;

@@ -30,9 +30,9 @@ public class ProductoDTO implements Serializable {
     private int costo;
     private int precio;
     private Float iva;
-    private Integer stockActual;
+    private Integer stockActual = 0;
     private String image;
-    private boolean estado;
+    private Boolean estado = true;
 
     private EditorialDTO editorial;
     private CategoriaDTO categoria;

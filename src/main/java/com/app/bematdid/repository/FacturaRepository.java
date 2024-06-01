@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
-    @Query(value = "SELECT id_factura, fecha, id_funcionario, f.id_persona, nro_timbrado, monto_total, num_factura, f.estado, f.tipo_factura, p.razon_social   " +
+    @Query(value = "SELECT id_factura, fecha, id_funcionario, f.id_persona, nro_timbrado, monto_total, saldo,num_factura, f.estado, f.tipo_factura, p.razon_social   " +
             "FROM factura f JOIN persona p ON f.id_persona = p.id_persona " +
             "WHERE f.estado is true and p.nombre_encargado ilike %:nombrePersonaFilter% and cast(f.num_factura as varchar) ilike %:numFacturaFilter% " +
             "order by id_factura desc;", nativeQuery = true)
@@ -21,7 +21,7 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
 
 
-    @Query(value = "select id_factura, id_funcionario, id_persona, estado, fecha, monto_total, nro_timbrado, tipo_factura, num_factura+1 as num_factura\n" +
+    @Query(value = "select id_factura, id_funcionario, id_persona, estado, fecha, saldo,monto_total, nro_timbrado, tipo_factura, coalesce(num_factura+1,0) as num_factura\n" +
             "from factura\n" +
             "where num_factura = (select max(num_factura) from factura)",nativeQuery = true)
     Factura getNextFolio();

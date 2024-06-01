@@ -77,6 +77,10 @@ public class FacturaService {
     public   Map<String, String> getLastFolio(){
         Factura ultimoFolio = facturaRepository.getNextFolio();
 
+        if(ultimoFolio == null){
+            ultimoFolio.setNumFactura(1L);
+        }
+
         FolioDTO ultimoFolioDTO = mapperFolio.folioAfolioDTO(ultimoFolio);
 
         NumeracionFolio numeracionFolio = numeracionFolioRepository.getNumFolio();
