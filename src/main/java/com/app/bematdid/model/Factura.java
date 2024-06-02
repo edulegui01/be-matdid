@@ -47,6 +47,8 @@ public class Factura {
     private String tipoFactura;
 
     private Integer saldo;
+    @Column(name = "num_factura")
+    private String numFactura;
 
     private Boolean estado= true;
 

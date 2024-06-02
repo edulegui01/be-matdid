@@ -28,6 +28,7 @@ public class FacturaDTO implements Serializable {
     private Long montoTotal;
     private String tipoFactura;
     private Integer saldo;
+    private String numFactura;
 
     private List<DetalleFacturaDTO> detalleFacturas;
     private List<CobroDTO> cobros;
