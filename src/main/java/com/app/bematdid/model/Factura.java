@@ -26,21 +26,22 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_factura")
     private Long idFactura;
+
     @Column(name = "id_funcionario")
     private Long idFuncionario;
+
     @Column(name="id_persona")
     private Long idPersona;
 
-    @Column(name="nro_timbrado")
-    private Long nroTimbrado;
+    @Column(name="id_timbrado")
+    private Long idTimbrado;
+
+    @Column(name="id_folio")
+    private Long idFolio;
 
     private Date fecha = new Date();
     @Column(name = "monto_total")
     private Long montoTotal;
-
-    @Column(name = "num_factura")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long numFactura;
 
     @Column(name = "tipo_factura")
     private String tipoFactura;
@@ -50,8 +51,12 @@ public class Factura {
     private Boolean estado= true;
 
     @ManyToOne()
-    @JoinColumn(name = "nro_timbrado",insertable=false, updatable=false)
+    @JoinColumn(name = "id_timbrado",insertable=false, updatable=false)
     Timbrado timbrado;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_folio",insertable=false, updatable=false)
+    Folio folio;
 
     @ManyToOne()
     @JoinColumn(name = "id_funcionario",insertable=false, updatable=false)

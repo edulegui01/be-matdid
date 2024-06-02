@@ -1,6 +1,7 @@
 package com.app.bematdid.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,18 +10,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "numeracion_folio")
-public class NumeracionFolio {
+@Table(name = "folio")
+public class Folio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_num_folio")
-    private Long idNumFolio;
+    @Column(name = "id_folio")
+    private Long idFolio;
 
     @Column(name = "numeracion_folio")
     @NotBlank
@@ -28,6 +31,10 @@ public class NumeracionFolio {
 
     @NotNull
     private Boolean activo;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "folio",cascade = CascadeType.ALL)
+    private List<Factura> facturas;
 
 
 }

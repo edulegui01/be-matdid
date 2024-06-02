@@ -20,14 +20,18 @@ import java.util.List;
 @Table(name = "timbrado")
 public class Timbrado {
     @Id
-    @Column(name = "nro_timbrado")
-    private Long nroTimbrado;
+    @Column(name = "id_timbrado")
+    private Long idTimbrado;
+
+    private String numero;
 
     @Column(name = "fecha_inicio")
     private Date fechainicio;
 
     @Column(name = "fecha_vencimiento")
     private Date fechaVencimiento;
+
+    private Boolean activo = true;
 
 
 

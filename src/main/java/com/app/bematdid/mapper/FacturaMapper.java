@@ -16,6 +16,8 @@ public interface FacturaMapper {
             @Mapping(source = "funcionario.nombre", target = "nombreFuncionario"),
             @Mapping(source = "funcionario.apellido", target = "apellidoFuncionario"),
             @Mapping(source = "persona.razonSocial", target = "cliente"),
+            @Mapping(source = "timbrado.numero", target = "numeroTimbrado"),
+            @Mapping(source = "folio.numeracionFolio", target = "numeroFolio"),
 
 
     })
@@ -28,6 +30,8 @@ public interface FacturaMapper {
             @Mapping(target = "estado", ignore = true),
             @Mapping(target = "persona", ignore = true),
             @Mapping(target = "funcionario", ignore = true),
+            @Mapping(target = "timbrado", ignore = true),
+            @Mapping(target = "folio", ignore = true),
 
     })
     Factura facturaDTOAFactura (FacturaDTO facturaDTO);

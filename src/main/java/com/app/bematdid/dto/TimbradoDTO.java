@@ -13,7 +13,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TimbradoDTO implements Serializable {
-    private Long nroTimbrado;
+    private Long idTimbrado;
+    private String numero;
     private Date fechainicio;
     private Date fechaVencimiento;
+    private Boolean activo;
 }
