@@ -34,6 +34,11 @@ public class CategoriaService {
         return lista.get();
     }
 
+    public List<CategoriaDTO> listarByCiclo(Long idCiclo){
+        List<Categoria> categorias = categoriaRepository.listarCategoriaByCiclo(idCiclo);
+        return mapper.categoriasACategoriasDTO(categorias);
+    }
+
     public Optional<CategoriaDTO> obtenerPorId (Integer id){
         return categoriaRepository.findById(id).map(categoria -> mapper.categoriaACateogriaDTO(categoria));
     }

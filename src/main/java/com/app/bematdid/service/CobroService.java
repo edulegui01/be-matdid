@@ -1,10 +1,12 @@
 package com.app.bematdid.service;
 
 import com.app.bematdid.dto.CobroDTO;
+import com.app.bematdid.dto.PagoDTO;
 import com.app.bematdid.error.SaldoNegativeException;
 import com.app.bematdid.mapper.CobroMapper;
 import com.app.bematdid.model.Cobro;
 import com.app.bematdid.model.Factura;
+import com.app.bematdid.model.Pago;
 import com.app.bematdid.repository.CobroRepository;
 import com.app.bematdid.repository.FacturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,12 @@ public class CobroService {
 
     public Optional<CobroDTO> obtenerPorId (Long id){
         return cobroRepository.findById(id).map(cobro -> mapper.cobroACobroDTO(cobro));
+    }
+
+    public List<CobroDTO> listarPorIdVenta(Long idVenta){
+        List<Cobro> lista = cobroRepository.listarPorIdVenta(idVenta);
+        return mapper.cobrosACobrosDTO(lista);
+
     }
 
     public CobroDTO guardar(CobroDTO cobroDTO) throws SaldoNegativeException {
