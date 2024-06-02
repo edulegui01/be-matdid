@@ -13,4 +13,7 @@ import java.util.Optional;
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
     @Query(value = "SELECT * FROM categoria where estado is true and nombre ilike %:nombreFilter% order by nombre asc;", nativeQuery = true)
     Optional<List<Categoria>> listarCategorias(@Param("nombreFilter") String nombreFilter);
+
+    @Query(value = "SELECT * FROM categoria where estado is true and idCiclo = :idCiclo",nativeQuery = true)
+    List<Categoria> listarCategoriaByCiclo(@Param("idCiclo") Long idCiclo);
 }

@@ -29,6 +29,12 @@ public class CobroController {
 
     }
 
+    @GetMapping("cobro/listar")
+    public List<CobroDTO> listarCobroByIdVenta(@RequestParam Long idVenta){
+
+        return cobroService.listarPorIdVenta(idVenta);
+    }
+
     @GetMapping("cobro/{id}")
     private Optional<CobroDTO> obtenerPorId (@PathVariable("id") Long id){
         return cobroService.obtenerPorId(id);

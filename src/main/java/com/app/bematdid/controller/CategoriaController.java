@@ -28,6 +28,11 @@ public class CategoriaController {
 
     }
 
+    @GetMapping("categoria/listar/ciclo")
+    public List<CategoriaDTO> listarByCiclo(@RequestParam Long idCiclo){
+        return categoriaService.listarByCiclo(idCiclo);
+    }
+
     @GetMapping("categoria/{id}")
     private Optional<CategoriaDTO> obtenerPorId (@PathVariable("id") Integer id){
         return categoriaService.obtenerPorId(id);
