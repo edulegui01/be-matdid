@@ -12,14 +12,15 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GastoDTO implements Serializable {
+public class MovimientoCajaDTO implements Serializable {
 
-    private Long idGasto;
+    private Long idMovimientoCaja;
     private Long idFuncionario;
     private String nombreFuncionario;
     private String apellidoFuncionario;
+    private Long idConcepto;
     private Date fecha;
-    private String categoria;
+    private String comprobante;
     private String beneficiario;
     private String comentario;
     private Integer cantidad;

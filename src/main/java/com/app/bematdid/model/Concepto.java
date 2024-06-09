@@ -2,7 +2,6 @@ package com.app.bematdid.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,22 +14,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "motivo")
-public class Motivo {
+@Table(name = "concepto")
+public class Concepto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_motivo")
-    private Integer idMotivo;
+    @Column(name = "id_concepto")
+    private Long idConcepto;
 
-    @NotNull
     private String nombre;
 
     @Column(name = "es_ingreso")
-    private Boolean esIngreso;
+    private Character esIngreso;
 
-    private Boolean estado=true;
+    private Boolean estado = true;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "motivo",cascade = CascadeType.ALL)
-    private List<Movimiento> movimientos;
+    @OneToMany(mappedBy = "concepto",cascade = CascadeType.ALL)
+    private List<MovimientoCaja> movimientosCaja;
 }
