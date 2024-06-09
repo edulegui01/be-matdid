@@ -4,9 +4,11 @@ import com.app.bematdid.dto.FacturaDTO;
 import com.app.bematdid.error.StockNegativeException;
 import com.app.bematdid.mapper.FacturaMapper;
 import com.app.bematdid.model.Factura;
+import com.app.bematdid.model.Folio;
 import com.app.bematdid.model.Movimiento;
 import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.FacturaRepository;
+import com.app.bematdid.repository.FolioRepository;
 import com.app.bematdid.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +28,8 @@ public class FacturaService {
     @Autowired
     private FacturaMapper mapper;
 
+    @Autowired
+    private FolioRepository folioRepository;
 
     @Autowired
     private ProductoRepository productoRepository;
@@ -39,6 +43,7 @@ public class FacturaService {
 
     public FacturaDTO guardar (FacturaDTO facturaDTO) throws StockNegativeException{
         Factura factura = mapper.facturaDTOAFactura(facturaDTO);
+        Folio folio = folioRepository.getNumFolio();
 
         validationStock(factura);
         factura.getDetalleFacturas().forEach(detalleFactura -> {
@@ -48,8 +53,13 @@ public class FacturaService {
             producto.get().setStockActual(producto.get().getStockActual()-detalleFactura.getCantidad());
             productoRepository.save(producto.get());
         });
-        facturaRepository.save(factura);
-        return mapper.facturaAFacturaDTO(factura);
+        Factura factura1 =  facturaRepository.save(factura);
+
+        factura1.setNumFactura(folio.getNumeracionFolio()+"-"+factura1.getIdFactura());
+
+        facturaRepository.save(factura1);
+
+        return mapper.facturaAFacturaDTO(factura1);
     }
 
 

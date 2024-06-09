@@ -18,6 +18,8 @@ public class PagoController {
     @Autowired
     private PagoService pagoService;
 
+
+
     /*@GetMapping("pago/listar")
     public Page<PagoDTO> listar (Pageable pageable, @RequestParam String nombre) {
         return pagoService.listar(pageable, nombre);
@@ -45,6 +47,11 @@ public class PagoController {
     @PostMapping("pago/guardar")
     public PagoDTO guardar(@RequestBody PagoDTO pagoDTO) throws SaldoNegativeException {
         return pagoService.guardar(pagoDTO);
+    }
+
+    @GetMapping("pago/caja")
+    public Object listarPagoCaja(){
+        return pagoService.listarPagosCobros();
     }
 
     @CrossOrigin("origins = http://localhost:4200")

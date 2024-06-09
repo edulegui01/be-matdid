@@ -8,6 +8,8 @@ import com.app.bematdid.model.Pago;
 import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.CompraRepository;
 import com.app.bematdid.repository.PagoRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -29,6 +31,9 @@ public class PagoService {
     @Autowired
     private PagoMapper mapper;
 
+    @Autowired
+    private EntityManager em;
+
     /*public Page<PagoDTO> listar (Pageable pageable, String nombre) {
         Optional<List<PagoDTO>> lista = pagoRepository.listarPagos(nombre).map(pagos -> mapper.pagosAPagosDTO(pagos));
 
@@ -47,6 +52,18 @@ public class PagoService {
     public List<PagoDTO> listarPorIdCompra(Long idCompra){
         List<Pago> lista = pagoRepository.listarPorIdCompra(idCompra);
         return mapper.pagosAPagosDTO(lista);
+
+    }
+
+    public List<Object> listarPagosCobros(){
+        Query nativeQuery = em.createNativeQuery("select fecha, monto, 'PAGO' from pago\n" +
+                "UNION\n" +
+                "SELEct fecha, monto, 'COBRO' from cobro\n" +
+                "order by fecha");
+
+        List<Object> resulsts = nativeQuery.getResultList();
+
+        return resulsts;
 
     }
 
