@@ -15,9 +15,15 @@ public interface FacturaMapper {
     @Mappings({
             @Mapping(source = "funcionario.nombre", target = "nombreFuncionario"),
             @Mapping(source = "funcionario.apellido", target = "apellidoFuncionario"),
-            @Mapping(source = "persona.razonSocial", target = "cliente"),
             @Mapping(source = "timbrado.numero", target = "numeroTimbrado"),
             @Mapping(source = "folio.numeracionFolio", target = "numeroFolio"),
+            @Mapping(source = "persona.cedula", target = "cedula"),
+            @Mapping(source = "persona.ruc", target = "ruc"),
+            @Mapping(source = "persona.nombre", target = "nombrePersona"),
+            @Mapping(source = "persona.apellido", target = "apellidoPersona"),
+            @Mapping(source = "persona.empresa", target = "nombreEmpresa"),
+            @Mapping(source = "persona.razonSocial", target = "razonSocial")
+
 
 
     })
@@ -26,7 +32,6 @@ public interface FacturaMapper {
 
     @InheritInverseConfiguration
     @Mappings({
-            @Mapping(target = "fecha", ignore = true),
             @Mapping(target = "estado", ignore = true),
             @Mapping(target = "persona", ignore = true),
             @Mapping(target = "funcionario", ignore = true),

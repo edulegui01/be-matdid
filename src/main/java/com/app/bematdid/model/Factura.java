@@ -39,7 +39,9 @@ public class Factura {
     @Column(name="id_folio")
     private Long idFolio;
 
-    private Date fecha = new Date();
+    private Date fecha;
+
+    private Date fechaVencimiento;
     @Column(name = "monto_total")
     private Long montoTotal;
 

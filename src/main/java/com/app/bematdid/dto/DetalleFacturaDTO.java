@@ -11,7 +11,8 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DetalleFacturaDTO implements Serializable {
+public class
+DetalleFacturaDTO implements Serializable {
     private long idProducto;
     private int cantidad;
     private int precio;

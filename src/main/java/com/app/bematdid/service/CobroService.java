@@ -44,8 +44,8 @@ public class CobroService {
         return cobroRepository.findById(id).map(cobro -> mapper.cobroACobroDTO(cobro));
     }
 
-    public List<CobroDTO> listarPorIdVenta(Long idVenta){
-        List<Cobro> lista = cobroRepository.listarPorIdVenta(idVenta);
+    public List<CobroDTO> listarPorIdVenta(Long idFactura){
+        List<Cobro> lista = cobroRepository.listarPorIdVenta(idFactura);
         return mapper.cobrosACobrosDTO(lista);
 
     }

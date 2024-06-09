@@ -123,7 +123,8 @@ public class MovimientoService {
             }
         });*/
 
-        validationStock(movimiento);
+
+
 
         Optional<Motivo> motivo = motivoRepository.findById(movimiento.getIdMotivo());
 
@@ -135,6 +136,7 @@ public class MovimientoService {
                 productoRepository.save(producto.get());
             });
         }else{
+            validationStock(movimiento);
             movimiento.getDetalleMovimientos().forEach(detalleMovimiento -> {
             detalleMovimiento.setMovimiento(movimiento);
                 Optional<Producto> producto = productoRepository.findById(detalleMovimiento.getId().getIdProducto());

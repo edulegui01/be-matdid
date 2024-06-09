@@ -30,9 +30,9 @@ public class CobroController {
     }
 
     @GetMapping("cobro/listar")
-    public List<CobroDTO> listarCobroByIdVenta(@RequestParam Long idVenta){
+    public List<CobroDTO> listarCobroByIdVenta(@RequestParam Long idFactura){
 
-        return cobroService.listarPorIdVenta(idVenta);
+        return cobroService.listarPorIdVenta(idFactura);
     }
 
     @GetMapping("cobro/{id}")

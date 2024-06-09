@@ -24,7 +24,7 @@ public class DetalleFactura {
     @NotNull
     private int cantidad;
     @NotNull
-    private int precioVenta;
+    private int precio;
     @NotNull
     private Float descuento;
 

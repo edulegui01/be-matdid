@@ -1,6 +1,7 @@
 package com.app.bematdid.controller;
 
 import com.app.bematdid.dto.FacturaDTO;
+import com.app.bematdid.error.StockNegativeException;
 import com.app.bematdid.service.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +24,7 @@ public class FacturaController {
 
 
     @PostMapping("factura/guardar")
-    public FacturaDTO guardar (@RequestBody FacturaDTO facturaDTO) {
+    public FacturaDTO guardar (@RequestBody FacturaDTO facturaDTO) throws StockNegativeException {
 
         return facturaService.guardar(facturaDTO);
     }

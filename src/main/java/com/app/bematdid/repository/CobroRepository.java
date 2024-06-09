@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface CobroRepository extends JpaRepository<Cobro, Long> {
 
-    @Query(value = "SELECT * FROM cobro where estado is true and id_venta = :idVenta order by fecha desc;", nativeQuery = true)
-    List<Cobro> listarPorIdVenta(@Param("idVenta") Long idVenta);
+    @Query(value = "SELECT * FROM cobro where estado is true and id_factura = :idFactura order by fecha desc;", nativeQuery = true)
+    List<Cobro> listarPorIdVenta(@Param("idFactura") Long idFactura);
 }

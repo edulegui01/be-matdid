@@ -18,17 +18,24 @@ public class FacturaDTO implements Serializable {
     private Long idFuncionario;
     private String nombreFuncionario;
     private String apellidoFuncionario;
+    private String nombrePersona;
+    private String apellidoPersona;
+    private String nombreEmpresa;
     private Long idPersona;
     private Long idTimbrado;
     private String numeroTimbrado;
     private Long idFolio;
+    private String razonSocial;
+    private String cedula;
     private String numeroFolio;
     private String cliente;
     private Date fecha;
+    private Date fechaVencimiento;
     private Long montoTotal;
     private String tipoFactura;
     private Integer saldo;
     private String numFactura;
+    private String ruc;
 
     private List<DetalleFacturaDTO> detalleFacturas;
     private List<CobroDTO> cobros;

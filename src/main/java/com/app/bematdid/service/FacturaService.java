@@ -1,8 +1,10 @@
 package com.app.bematdid.service;
 
 import com.app.bematdid.dto.FacturaDTO;
+import com.app.bematdid.error.StockNegativeException;
 import com.app.bematdid.mapper.FacturaMapper;
 import com.app.bematdid.model.Factura;
+import com.app.bematdid.model.Movimiento;
 import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.FacturaRepository;
 import com.app.bematdid.repository.ProductoRepository;
@@ -35,10 +37,11 @@ public class FacturaService {
 
     }
 
-    public FacturaDTO guardar (FacturaDTO facturaDTO) {
+    public FacturaDTO guardar (FacturaDTO facturaDTO) throws StockNegativeException{
         Factura factura = mapper.facturaDTOAFactura(facturaDTO);
+
+        validationStock(factura);
         factura.getDetalleFacturas().forEach(detalleFactura -> {
-            System.out.println(detalleFactura.getCantidad());
             detalleFactura.setFactura(factura);
 
             Optional<Producto> producto = productoRepository.findById(detalleFactura.getId().getIdProducto());
@@ -47,6 +50,22 @@ public class FacturaService {
         });
         facturaRepository.save(factura);
         return mapper.facturaAFacturaDTO(factura);
+    }
+
+
+    public void validationStock(Factura factura) throws StockNegativeException {
+        factura.getDetalleFacturas().forEach(detalleFactura -> {
+            detalleFactura.setFactura(factura);
+            Optional<Producto> producto = productoRepository.findById(detalleFactura.getId().getIdProducto());
+            if(producto.get().getStockActual() - detalleFactura.getCantidad()<0){
+                try {
+                    throw new StockNegativeException(String.format("QUEDAN %s UNIDADES DE %s",producto.get().getStockActual(),producto.get().getNombre()));
+                } catch (StockNegativeException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        });
     }
 
 
