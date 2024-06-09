@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class Funcionario {
 
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
-    private List<Gasto> gastos;
+    private List<MovimientoCaja> movimientoCajas;
 
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario",cascade = CascadeType.ALL)
