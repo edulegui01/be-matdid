@@ -55,7 +55,7 @@ public class FacturaService {
         });
         Factura factura1 =  facturaRepository.save(factura);
 
-        factura1.setNumFactura(folio.getNumeracionFolio()+"-"+factura1.getIdFactura());
+        factura1.setNumFactura(folio.getNumeracionFolio()+"-"+String.format("%07d",factura1.getIdFactura()));
 
         facturaRepository.save(factura1);
 
