@@ -1,9 +1,12 @@
 package com.app.bematdid.service;
 
+import com.app.bematdid.dto.CajaDTO;
 import com.app.bematdid.dto.MovimientoCajaDTO;
 import com.app.bematdid.mapper.MovimientoCajaMapper;
 import com.app.bematdid.model.MovimientoCaja;
 import com.app.bematdid.repository.MovimientoCajaRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,10 +24,33 @@ public class MovimientoCajaService {
     @Autowired
     private MovimientoCajaMapper mapper;
 
+    @Autowired
+    private EntityManager em;
+
     public Page<MovimientoCajaDTO> listar (Pageable pageable, String beneficiario, String comentario) {
         Optional<List<MovimientoCajaDTO>> lista = movimientoCajaRepository.listarMovimientosCaja( beneficiario, comentario).map(movimientoCajas -> mapper.movimientosCajaAMovimientosCajaDTO(movimientoCajas));
 
         return new PageImpl<>(lista.get(),  pageable, lista.get().size());
+
+    }
+
+    public List<Object> listarTodosLosMovimientosCaja(){
+        Query nativeQuery = em.createNativeQuery("select p.fecha, p.monto, 'PAGO DE MERCADERIA' as concepto,'E' as esIngreso, c.num_folio as comprobante \n" +
+                "from pago p\n" +
+                "join compra c on p.id_compra = c.id_compra\n" +
+                "UNION\n" +
+                "SELEct c.fecha, c.monto, 'COBRO DE VENTA' as concepto,'I' as esIngreso, f.num_factura as comprobante from cobro c\n" +
+                "join factura f on c.id_factura = f.id_factura\n" +
+                "UNION\n" +
+                "SELECT mc.fecha, mc.cantidad, c.nombre as concepto, c.es_ingreso as esIngreso, mc.comprobante as comprobante FROM movimiento_caja mc\n" +
+                "join concepto c on mc.id_concepto = c.id_concepto\n" +
+                "order by fecha");
+
+        List<Object> resulsts = nativeQuery.getResultList();
+
+        System.out.println(resulsts);
+
+        return resulsts;
 
     }
 
