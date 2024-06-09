@@ -17,13 +17,13 @@ public class MovimientoCajaController {
     @Autowired
     private MovimientoCajaService movimientoCajaService;
 
-    @GetMapping("MovimientoCaja/listar")
+    @GetMapping("movimiento-caja/listar")
     public Page<MovimientoCajaDTO> listar (Pageable pageable, @RequestParam String beneficiario, @RequestParam String comentario) {
         return movimientoCajaService.listar(pageable, beneficiario, comentario);
     }
 
 
-    @GetMapping("MovimientoCaja/{id}")
+    @GetMapping("movimiento-caja/{id}")
     private Optional<MovimientoCajaDTO> obtenerPorId (@PathVariable("id") Long id){
         return movimientoCajaService.obtenerPorId(id);
     }
@@ -35,13 +35,13 @@ public class MovimientoCajaController {
 
 
     @CrossOrigin("origins = http://localhost:4200")
-    @PostMapping("MovimientoCaja/guardar")
+    @PostMapping("movimiento-caja/guardar")
     public MovimientoCajaDTO guardar(@RequestBody MovimientoCajaDTO movimientoCajaDTO) {
         return movimientoCajaService.guardar(movimientoCajaDTO);
     }
 
     @CrossOrigin("origins = http://localhost:4200")
-    @DeleteMapping("MovimientoCaja/borrar/{id}")
+    @DeleteMapping("movimiento-caja/borrar/{id}")
     public void borrar (@PathVariable("id") Long id) {
         movimientoCajaService.borrar(id);
     }
