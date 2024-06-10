@@ -2,7 +2,9 @@ package com.app.bematdid.controller;
 
 import com.app.bematdid.dto.CajaDTO;
 import com.app.bematdid.dto.MovimientoCajaDTO;
+import com.app.bematdid.model.Localidad;
 import com.app.bematdid.service.MovimientoCajaService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +31,7 @@ public class MovimientoCajaController {
     }
 
     @GetMapping("movimiento-caja/listar-total")
-    public List<Object> listarMovimientoCajaTotal(){
+    public List<ObjectNode> listarMovimientoCajaTotal(){
         return movimientoCajaService.listarTodosLosMovimientosCaja();
     }
 

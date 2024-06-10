@@ -1,18 +1,25 @@
 package com.app.bematdid.service;
 
 import com.app.bematdid.dto.CajaDTO;
+import com.app.bematdid.dto.LocalidadDTO;
 import com.app.bematdid.dto.MovimientoCajaDTO;
 import com.app.bematdid.mapper.MovimientoCajaMapper;
+import com.app.bematdid.model.Localidad;
 import com.app.bematdid.model.MovimientoCaja;
 import com.app.bematdid.repository.MovimientoCajaRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import jakarta.persistence.Tuple;
+import jakarta.persistence.TupleElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +41,7 @@ public class MovimientoCajaService {
 
     }
 
-    public List<Object> listarTodosLosMovimientosCaja(){
+    public List<ObjectNode> listarTodosLosMovimientosCaja(){
         Query nativeQuery = em.createNativeQuery("select p.fecha, p.monto, 'PAGO DE MERCADERIA' as concepto,'E' as esIngreso, c.num_folio as comprobante \n" +
                 "from pago p\n" +
                 "join compra c on p.id_compra = c.id_compra\n" +
@@ -44,14 +51,38 @@ public class MovimientoCajaService {
                 "UNION\n" +
                 "SELECT mc.fecha, mc.cantidad, c.nombre as concepto, c.es_ingreso as esIngreso, mc.comprobante as comprobante FROM movimiento_caja mc\n" +
                 "join concepto c on mc.id_concepto = c.id_concepto\n" +
-                "order by fecha");
+                "order by fecha", Tuple.class);
 
-        List<Object> resulsts = nativeQuery.getResultList();
+        List<Tuple> resulsts = nativeQuery.getResultList();
 
-        System.out.println(resulsts);
+        List<ObjectNode> json = _toJson(resulsts);
 
-        return resulsts;
+        return json;
 
+    }
+
+
+    private List<ObjectNode> _toJson(List<Tuple> results) {
+
+        List<ObjectNode> json = new ArrayList<ObjectNode>();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (Tuple t : results)
+        {
+            List<TupleElement<?>> cols = t.getElements();
+
+            ObjectNode one = mapper.createObjectNode();
+
+            for (TupleElement col : cols)
+            {
+                one.put(col.getAlias(), t.get(col.getAlias()).toString());
+            }
+
+            json.add(one);
+        }
+
+        return json;
     }
 
     public Optional<MovimientoCajaDTO> obtenerPorId (Long id){

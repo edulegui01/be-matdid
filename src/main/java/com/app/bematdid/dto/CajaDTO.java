@@ -1,6 +1,9 @@
 package com.app.bematdid.dto;
 
+
+
 import java.util.Date;
+
 
 public class CajaDTO {
     private Date fecha;
