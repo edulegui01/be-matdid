@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -35,7 +36,7 @@ public class MovimientoCajaController {
         return movimientoCajaService.listarTodosLosMovimientosCaja();
     }
     @GetMapping("movimiento-caja/monto-total")
-    public Integer montoTotal() {
+    public Map<String, Integer> montoTotal() {
         return movimientoCajaService.montoTotal();
     }
 

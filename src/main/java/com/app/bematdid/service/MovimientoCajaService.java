@@ -20,9 +20,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MovimientoCajaService {
@@ -68,8 +66,10 @@ public class MovimientoCajaService {
 
     }
 
-    public Integer montoTotal() {
-        return pagoRepository.montoTotal();
+    public Map<String,Integer> montoTotal() {
+        Map<String, Integer> montosTotales = new HashMap<String,Integer>();
+        montosTotales.put("totalPagos",pagoRepository.montoTotal());
+        return montosTotales;
     }
 
 
