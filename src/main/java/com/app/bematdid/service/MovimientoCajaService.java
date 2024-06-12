@@ -6,6 +6,7 @@ import com.app.bematdid.dto.MovimientoCajaDTO;
 import com.app.bematdid.mapper.MovimientoCajaMapper;
 import com.app.bematdid.model.Localidad;
 import com.app.bematdid.model.MovimientoCaja;
+import com.app.bematdid.repository.CobroRepository;
 import com.app.bematdid.repository.MovimientoCajaRepository;
 import com.app.bematdid.repository.PagoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +31,10 @@ public class MovimientoCajaService {
 
     @Autowired
     private PagoRepository pagoRepository;
+
+    @Autowired
+    private CobroRepository cobroRepository;
+
     @Autowired
     private MovimientoCajaMapper mapper;
 
@@ -68,7 +73,7 @@ public class MovimientoCajaService {
 
     public Map<String,Integer> saldoDisponible() {
         Map<String, Integer> montosTotales = new HashMap<String,Integer>();
-        montosTotales.put("totalPagos",pagoRepository.montoTotal()+ movimientoCajaRepository.ingresoTotal());
+        montosTotales.put("totalPagos",cobroRepository.montoTotal() + movimientoCajaRepository.ingresoTotal() - pagoRepository.montoTotal() - movimientoCajaRepository.egresoTotal());
         return montosTotales;
     }
 

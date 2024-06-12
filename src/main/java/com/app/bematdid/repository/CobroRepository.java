@@ -13,4 +13,7 @@ public interface CobroRepository extends JpaRepository<Cobro, Long> {
 
     @Query(value = "SELECT * FROM cobro where estado is true and id_factura = :idFactura order by fecha desc;", nativeQuery = true)
     List<Cobro> listarPorIdVenta(@Param("idFactura") Long idFactura);
+
+    @Query(value ="SELECT sum(monto) FROM cobro WHERE estado is true", nativeQuery = true)
+    Integer montoTotal();
 }
