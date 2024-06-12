@@ -34,6 +34,11 @@ public class MovimientoCajaController {
     public List<ObjectNode> listarMovimientoCajaTotal(){
         return movimientoCajaService.listarTodosLosMovimientosCaja();
     }
+    @GetMapping("movimiento-caja/monto-total")
+    public Integer montoTotal() {
+        return movimientoCajaService.montoTotal();
+    }
+
 
 
     @CrossOrigin("origins = http://localhost:4200")

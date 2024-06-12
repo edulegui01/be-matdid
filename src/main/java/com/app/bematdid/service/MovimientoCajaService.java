@@ -7,6 +7,7 @@ import com.app.bematdid.mapper.MovimientoCajaMapper;
 import com.app.bematdid.model.Localidad;
 import com.app.bematdid.model.MovimientoCaja;
 import com.app.bematdid.repository.MovimientoCajaRepository;
+import com.app.bematdid.repository.PagoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.persistence.EntityManager;
@@ -28,6 +29,9 @@ public class MovimientoCajaService {
 
     @Autowired
     private MovimientoCajaRepository movimientoCajaRepository;
+
+    @Autowired
+    private PagoRepository pagoRepository;
     @Autowired
     private MovimientoCajaMapper mapper;
 
@@ -63,6 +67,11 @@ public class MovimientoCajaService {
         return json;
 
     }
+
+    public Integer montoTotal() {
+        return pagoRepository.montoTotal();
+    }
+
 
 
     private List<ObjectNode> _toJson(List<Tuple> results) {
