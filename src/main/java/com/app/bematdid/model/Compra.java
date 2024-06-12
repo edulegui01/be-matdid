@@ -48,7 +48,7 @@ public class Compra {
     private Integer saldo;
 
 
-    private Boolean estado= true;
+    private String estado= "SP";
 
 
 

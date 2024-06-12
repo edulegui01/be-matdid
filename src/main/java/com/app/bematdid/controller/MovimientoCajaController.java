@@ -39,6 +39,7 @@ public class MovimientoCajaController {
     @CrossOrigin("origins = http://localhost:4200")
     @PostMapping("movimiento-caja/guardar")
     public MovimientoCajaDTO guardar(@RequestBody MovimientoCajaDTO movimientoCajaDTO) {
+        System.out.println(movimientoCajaDTO.getFecha());
         return movimientoCajaService.guardar(movimientoCajaDTO);
     }
 

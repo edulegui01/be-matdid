@@ -33,6 +33,7 @@ public class CompraDTO  implements Serializable {
     private String timbrado;
     private Integer saldo;
     private String tipoFactura;
+    private String estado;
 
     private List<DetalleCompraDTO> detalleCompra;
     private List<PagoDTO> pagos;

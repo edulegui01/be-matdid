@@ -66,7 +66,7 @@ public class CompraService {
 
     public void borrar(Long idCompra){
         Optional<Compra> compra = compraRepository.findById(idCompra);
-        compra.get().setEstado(false);
+        compra.get().setEstado("A");
         compra.get().getDetalleCompra().forEach(detalleCompra -> {
             Optional<Producto> producto = productoRepository.findById(detalleCompra.getId().getIdProducto());
             producto.get().setStockActual(producto.get().getStockActual()-detalleCompra.getCantidad());

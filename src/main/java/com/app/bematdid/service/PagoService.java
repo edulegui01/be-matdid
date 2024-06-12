@@ -75,6 +75,12 @@ public class PagoService {
             throw new SaldoNegativeException("EL MONTO QUE DESEA PAGAR ES MAYOR AL SALDO DE LA FACTURA");
         }
 
+        if(compra.get().getSaldo()>0){
+            compra.get().setEstado("PP");
+        }else{
+            compra.get().setEstado("PA");
+        }
+
         compraRepository.save(compra.get());
         return mapper.pagoAPagoDTO(pagoRepository.save(pago));
     }
