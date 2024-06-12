@@ -17,6 +17,6 @@ public interface PagoRepository extends JpaRepository<Pago, Long> {
     @Query(value = "SELECT * FROM pago where estado is true and id_compra = :idCompra order by fecha desc;", nativeQuery = true)
     List<Pago> listarPorIdCompra(@Param("idCompra") Long idCompra);
 
-    @Query(value ="SELECT sum(monto) FROM pago", nativeQuery = true)
+    @Query(value ="SELECT sum(monto) FROM pago WHERE estado is true", nativeQuery = true)
     Integer montoTotal();
 }

@@ -35,9 +35,9 @@ public class MovimientoCajaController {
     public List<ObjectNode> listarMovimientoCajaTotal(){
         return movimientoCajaService.listarTodosLosMovimientosCaja();
     }
-    @GetMapping("movimiento-caja/monto-total")
-    public Map<String, Integer> montoTotal() {
-        return movimientoCajaService.montoTotal();
+    @GetMapping("movimiento-caja/saldo-disponible")
+    public Map<String, Integer> saldoDisponible() {
+        return movimientoCajaService.saldoDisponible();
     }
 
 

@@ -66,9 +66,9 @@ public class MovimientoCajaService {
 
     }
 
-    public Map<String,Integer> montoTotal() {
+    public Map<String,Integer> saldoDisponible() {
         Map<String, Integer> montosTotales = new HashMap<String,Integer>();
-        montosTotales.put("totalPagos",pagoRepository.montoTotal());
+        montosTotales.put("totalPagos",pagoRepository.montoTotal()+ movimientoCajaRepository.ingresoTotal());
         return montosTotales;
     }
 
