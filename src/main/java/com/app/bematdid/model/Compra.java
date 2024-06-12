@@ -34,7 +34,7 @@ public class Compra {
     private Date fechaVencimiento;
 
     @Column(name = "monto_total")
-    private Long montoTotal;
+    private Integer montoTotal;
 
     @Column(name = "num_folio")
     private String numFolio;

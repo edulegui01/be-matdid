@@ -26,7 +26,7 @@ public class CompraDTO  implements Serializable {
     private String razonSocial;
     private Date fecha;
     private Date fechaVencimiento;
-    private Long montoTotal;
+    private Integer montoTotal;
     private String numFolio;
     private String cedula;
     private String ruc;

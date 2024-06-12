@@ -92,6 +92,11 @@ public class PagoService {
 
         Optional<Compra> compra = compraRepository.findById(pago1.getIdCompra());
         compra.get().setSaldo(compra.get().getSaldo() + pago1.getMonto());
+        if(compra.get().getSaldo().equals(compra.get().getMontoTotal())){
+            compra.get().setEstado("SP");
+        } else {
+            compra.get().setEstado("PP");
+        }
         compraRepository.save(compra.get());
 
         pagoRepository.save(pago1);
