@@ -3,6 +3,7 @@ package com.app.bematdid.controller;
 import com.app.bematdid.dto.CajaDTO;
 import com.app.bematdid.dto.MovimientoCajaDTO;
 import com.app.bematdid.model.Localidad;
+import com.app.bematdid.model.Movimiento;
 import com.app.bematdid.service.MovimientoCajaService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,13 @@ public class MovimientoCajaController {
     public Map<String, Integer> saldoDisponible() {
         return movimientoCajaService.saldoDisponible();
     }
+
+    @PostMapping("movimiento-caja/cerrar-caja")
+    public MovimientoCajaDTO cerrarCaja(MovimientoCajaDTO movimientoCajaDTO){
+
+        return movimientoCajaService.guardar(movimientoCajaDTO);
+    }
+
 
 
 
