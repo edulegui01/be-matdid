@@ -43,7 +43,7 @@ public class MovimientoCajaController {
 
     @PostMapping("movimiento-caja/cerrar-caja")
     public MovimientoCajaDTO cerrarCaja(MovimientoCajaDTO movimientoCajaDTO){
-
+        movimientoCajaService.cerrarCaja();
         return movimientoCajaService.guardar(movimientoCajaDTO);
     }
 

@@ -2,7 +2,9 @@ package com.app.bematdid.service;
 
 import com.app.bematdid.dto.MovimientoCajaDTO;
 import com.app.bematdid.mapper.MovimientoCajaMapper;
+import com.app.bematdid.model.Cobro;
 import com.app.bematdid.model.MovimientoCaja;
+import com.app.bematdid.model.Pago;
 import com.app.bematdid.repository.CobroRepository;
 import com.app.bematdid.repository.MovimientoCajaRepository;
 import com.app.bematdid.repository.PagoRepository;
@@ -55,7 +57,7 @@ public class MovimientoCajaService {
                 "join factura f on c.id_factura = f.id_factura\n" +
                 "where c.estado = 'ABIERTO' OR c.estado = 'CERRADO'\n" +
                 "UNION\n" +
-                "SELECT mc.id_movimiento_caja as id,mc.fecha, mc.cantidad, c.nombre as concepto, c.es_ingreso as esIngreso, mc.comprobante as comprobante, mc.estadoat FROM movimiento_caja mc\n" +
+                "SELECT mc.id_movimiento_caja as id,mc.fecha, mc.cantidad, c.nombre as concepto, c.es_ingreso as esIngreso, mc.comprobante as comprobante, mc.estado FROM movimiento_caja mc\n" +
                 "join concepto c on mc.id_concepto = c.id_concepto\n" +
                 "where mc.estado = 'ABIERTO' OR mc.estado = 'CERRADO'\n" +
                 "order by fecha desc, id desc", Tuple.class);
@@ -100,6 +102,24 @@ public class MovimientoCajaService {
     }
 
     public void cerrarCaja() {
+        List<MovimientoCaja> movAbiertos = movimientoCajaRepository.listarAbiertos();
+        List<Pago> pagosAbiertos = pagoRepository.listarAbiertos();
+        List<Cobro> cobrosAbiertos = cobroRepository.listarAbiertos();
+        for(MovimientoCaja item : movAbiertos)
+        {
+            item.setEstado("CERRADO");
+            movimientoCajaRepository.save(item);
+        }
+        for(Pago item : pagosAbiertos)
+        {
+            item.setEstado("CERRADO");
+            pagoRepository.save(item);
+        }
+        for(Cobro item : cobrosAbiertos)
+        {
+            item.setEstado("CERRADO");
+            cobroRepository.save(item);
+        }
 
     }
 

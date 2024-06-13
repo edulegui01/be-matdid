@@ -12,12 +12,14 @@ import java.util.Optional;
 @Repository
 public interface MovimientoCajaRepository extends JpaRepository<MovimientoCaja, Long> {
 
-    @Query(value = "SELECT * FROM gasto " +
+    @Query(value = "SELECT * FROM movimiento_caja" +
             "where (estado = 'ABIERTO' OR estado = 'CERRADO') and beneficiario ilike %:beneficiarioFilter% and comentario ilike %:comentarioFilter% " +
             "order by id_gasto desc",nativeQuery = true)
     Optional<List<MovimientoCaja>> listarMovimientosCaja(
                                                 @Param("beneficiarioFilter") String beneficiarioFilter,
                                                 @Param("comentarioFilter") String comentarioFilter);
+    @Query(value = "SELECT * FROM movimiento_caja where estado = 'ABIERTO'",nativeQuery = true)
+    List<MovimientoCaja> listarAbiertos();
 
     @Query(value ="SELECT coalesce(sum(m.cantidad),0)\n" +
             "FROM movimiento_caja m JOIN concepto c ON m.id_concepto = c.id_concepto\n" +
