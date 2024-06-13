@@ -71,7 +71,7 @@ public class CobroService {
     public void borrar(Long id){
         Optional<Cobro> cobro = cobroRepository.findById(id);
         Cobro cobro1 = cobro.get();
-        cobro1.setEstado(false);
+        cobro1.setEstado("ANULADO");
 
         Optional<Factura> factura = facturaRepository.findById(cobro1.getIdFactura());
         factura.get().setSaldo(factura.get().getSaldo() + cobro1.getMonto());

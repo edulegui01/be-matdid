@@ -88,7 +88,7 @@ public class PagoService {
     public void borrar(Long id){
         Optional<Pago> pago = pagoRepository.findById(id);
         Pago pago1 = pago.get();
-        pago1.setEstado(false);
+        pago1.setEstado("ANULADO");
 
         Optional<Compra> compra = compraRepository.findById(pago1.getIdCompra());
         compra.get().setSaldo(compra.get().getSaldo() + pago1.getMonto());

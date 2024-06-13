@@ -25,4 +25,5 @@ public class PagoDTO implements Serializable {
     private String comentario;
     private String tipoPago;
     private Integer monto;
+    private String estado;
 }

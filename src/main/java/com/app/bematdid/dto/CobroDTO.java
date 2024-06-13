@@ -23,4 +23,5 @@ public class CobroDTO implements Serializable {
     private String comentario;
     private String tipoCobro;
     private Integer monto;
+    private String estado;
 }

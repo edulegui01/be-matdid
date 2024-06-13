@@ -14,9 +14,9 @@ import java.util.List;
 @Repository
 public interface PagoRepository extends JpaRepository<Pago, Long> {
 
-    @Query(value = "SELECT * FROM pago where estado is true and id_compra = :idCompra order by fecha desc;", nativeQuery = true)
+    @Query(value = "SELECT * FROM pago where (estado = 'ABIERTO' OR estado = 'CERRADO') and id_compra = :idCompra order by fecha desc;", nativeQuery = true)
     List<Pago> listarPorIdCompra(@Param("idCompra") Long idCompra);
 
-    @Query(value ="SELECT coalesce(sum(monto),0) FROM pago WHERE estado is true", nativeQuery = true)
+    @Query(value ="SELECT coalesce(sum(monto),0) FROM pago WHERE estado = 'ABIERTO'", nativeQuery = true)
     Integer montoTotal();
 }

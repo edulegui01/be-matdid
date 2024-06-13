@@ -35,7 +35,7 @@ public class Pago {
 
     private Integer monto;
 
-    private boolean estado=true;
+    private String estado= "ABIERTO";
 
     @ManyToOne()
     @JoinColumn(name = "id_funcionario",insertable=false, updatable=false)

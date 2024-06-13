@@ -21,7 +21,6 @@ public interface CobroMapper {
 
     @InheritInverseConfiguration
     @Mappings({
-            @Mapping(target = "estado", ignore = true),
             @Mapping(target = "funcionario", ignore = true),
             @Mapping(target = "factura", ignore = true)
     })

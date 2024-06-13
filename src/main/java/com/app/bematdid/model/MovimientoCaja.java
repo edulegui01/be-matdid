@@ -32,10 +32,12 @@ public class MovimientoCaja {
     private String comprobante;
     private String beneficiario;
     private String comentario;
+    @Column(name = "tipo_pago")
+    private String tipoPago;
     @NotNull
     private Integer cantidad;
 
-    private Boolean estado = true;
+    private String estado = "ABIERTO";
 
     @ManyToOne()
     @JoinColumn(name = "id_funcionario", insertable=false, updatable=false)
