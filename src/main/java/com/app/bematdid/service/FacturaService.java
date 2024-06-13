@@ -81,7 +81,7 @@ public class FacturaService {
 
     public void borrar(Long idFactura){
         Optional<Factura> factura = facturaRepository.findById(idFactura);
-        factura.get().setEstado(false);
+        factura.get().setEstado("A");
         factura.get().getDetalleFacturas().forEach(detalleFactura -> {
             Optional<Producto> producto = productoRepository.findById(detalleFactura.getId().getIdProducto());
             producto.get().setStockActual(producto.get().getStockActual()+detalleFactura.getCantidad());

@@ -36,6 +36,7 @@ public class FacturaDTO implements Serializable {
     private Integer saldo;
     private String numFactura;
     private String ruc;
+    private String estado;
 
     private List<DetalleFacturaDTO> detalleFacturas;
     private List<CobroDTO> cobros;

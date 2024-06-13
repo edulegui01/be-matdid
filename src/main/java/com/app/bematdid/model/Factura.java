@@ -52,7 +52,7 @@ public class Factura {
     @Column(name = "num_factura")
     private String numFactura;
 
-    private Boolean estado= true;
+    private String estado= "SC";
 
     @ManyToOne()
     @JoinColumn(name = "id_timbrado",insertable=false, updatable=false)

@@ -19,12 +19,12 @@ public interface MovimientoCajaRepository extends JpaRepository<MovimientoCaja, 
                                                 @Param("beneficiarioFilter") String beneficiarioFilter,
                                                 @Param("comentarioFilter") String comentarioFilter);
 
-    @Query(value ="SELECT sum(m.cantidad)\n" +
+    @Query(value ="SELECT coalesce(sum(m.cantidad),0)\n" +
             "FROM movimiento_caja m JOIN concepto c ON m.id_concepto = c.id_concepto\n" +
             "WHERE m.estado is true AND c.es_ingreso = 'E'",nativeQuery = true)
     Integer egresoTotal();
 
-    @Query(value ="SELECT sum(m.cantidad)\n" +
+    @Query(value ="SELECT coalesce(sum(m.cantidad),0)\n" +
             "FROM movimiento_caja m JOIN concepto c ON m.id_concepto = c.id_concepto\n" +
             "WHERE m.estado is true AND c.es_ingreso = 'I'",nativeQuery = true)
     Integer ingresoTotal();

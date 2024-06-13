@@ -58,6 +58,12 @@ public class CobroService {
             throw new SaldoNegativeException("EL MONTO QUE DESEA COBRAR ES MAYOR AL SALDO DE LA FACTURA");
         }
 
+        if(factura.get().getSaldo()>0){
+            factura.get().setEstado("CP");
+        }else{
+            factura.get().setEstado("CO");
+        }
+
         facturaRepository.save(factura.get());
         return mapper.cobroACobroDTO(cobroRepository.save(cobro));
     }
