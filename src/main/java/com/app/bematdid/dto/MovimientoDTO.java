@@ -23,6 +23,7 @@ public class MovimientoDTO implements Serializable {
     private String nombreFuncionario;
     private String apellidoFuncionario;
     private String fecha;
+    private String documento;
     private String comentario;
 
     private MotivoDTO motivo;

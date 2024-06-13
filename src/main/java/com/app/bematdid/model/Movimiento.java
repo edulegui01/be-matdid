@@ -35,6 +35,8 @@ public class Movimiento {
 
     private Date fecha;
 
+    private String documento;
+
     @Column(columnDefinition = "TEXT")
     private String comentario;
 
