@@ -21,12 +21,12 @@ public interface MovimientoCajaRepository extends JpaRepository<MovimientoCaja, 
     @Query(value = "SELECT * FROM movimiento_caja where estado = 'ABIERTO'",nativeQuery = true)
     List<MovimientoCaja> listarAbiertos();
 
-    @Query(value ="SELECT coalesce(sum(m.cantidad),0)\n" +
+    @Query(value ="SELECT coalesce(sum(m.monto),0)\n" +
             "FROM movimiento_caja m JOIN concepto c ON m.id_concepto = c.id_concepto\n" +
             "WHERE m.estado = 'ABIERTO' AND c.es_ingreso = 'E'",nativeQuery = true)
     Integer egresoTotal();
 
-    @Query(value ="SELECT coalesce(sum(m.cantidad),0)\n" +
+    @Query(value ="SELECT coalesce(sum(m.monto),0)\n" +
             "FROM movimiento_caja m JOIN concepto c ON m.id_concepto = c.id_concepto\n" +
             "WHERE m.estado = 'ABIERTO' AND c.es_ingreso = 'I'",nativeQuery = true)
     Integer ingresoTotal();

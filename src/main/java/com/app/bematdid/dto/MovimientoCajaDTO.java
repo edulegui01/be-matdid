@@ -27,7 +27,7 @@ public class MovimientoCajaDTO implements Serializable {
     private String beneficiario;
     private String comentario;
     private String tipoPago;
-    private Integer cantidad;
+    private Integer monto;
     private String estado;
 
 }
