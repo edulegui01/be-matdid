@@ -21,7 +21,8 @@ public interface PagoMapper {
     @InheritInverseConfiguration
     @Mappings({
             @Mapping(target = "funcionario", ignore = true),
-            @Mapping(target = "compra", ignore = true)
+            @Mapping(target = "compra", ignore = true),
+            @Mapping(target = "estado", ignore = true)
     })
     Pago pagoDTOAPago (PagoDTO pagoDTO);
 
