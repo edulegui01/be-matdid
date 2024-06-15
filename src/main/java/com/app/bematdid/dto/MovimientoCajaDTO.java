@@ -28,6 +28,6 @@ public class MovimientoCajaDTO implements Serializable {
     private String comentario;
     private String tipoPago;
     private Integer cantidad;
-    private String estado;
+    private String estado = "ABIERTO";
 
 }

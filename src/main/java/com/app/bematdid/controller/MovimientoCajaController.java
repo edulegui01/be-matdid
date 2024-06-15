@@ -41,8 +41,9 @@ public class MovimientoCajaController {
         return movimientoCajaService.saldoDisponible();
     }
 
+    @CrossOrigin("origins = http://localhost:4200")
     @PostMapping("movimiento-caja/cerrar-caja")
-    public MovimientoCajaDTO cerrarCaja(MovimientoCajaDTO movimientoCajaDTO){
+    public MovimientoCajaDTO cerrarCaja(@RequestBody MovimientoCajaDTO movimientoCajaDTO){
         movimientoCajaService.cerrarCaja();
         return movimientoCajaService.guardar(movimientoCajaDTO);
     }
