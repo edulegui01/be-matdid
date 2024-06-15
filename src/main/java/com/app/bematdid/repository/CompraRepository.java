@@ -19,4 +19,10 @@ public interface CompraRepository extends JpaRepository<Compra, Long> {
             "WHERE  p.razon_social ilike %:nombrePersonaFilter% and c.num_folio ilike %:numFolioFilter% " +
             "order by id_compra desc;", nativeQuery = true)
     Page<Compra> listarCompras (Pageable pageable, @Param("nombrePersonaFilter") String nombrePersona, @Param("numFolioFilter") String numFolio);
+
+    @Query(value ="SELECT coalesce(sum(monto_total),0) FROM compra WHERE estado != 'AN'", nativeQuery = true)
+    Integer totalComprado();
+
+    @Query(value ="SELECT coalesce(sum(saldo),0) FROM compra WHERE estado != 'AN'", nativeQuery = true)
+    Integer porPagar();
 }

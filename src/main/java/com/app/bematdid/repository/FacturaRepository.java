@@ -18,6 +18,11 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
             "order by id_factura desc;", nativeQuery = true)
     Optional<List<Factura>> listarFacturas (@Param("nombrePersonaFilter") String nombrePersona, @Param("numFacturaFilter") String numFactura);
 
+    @Query(value ="SELECT coalesce(sum(monto_total),0) FROM factura WHERE estado != 'AN'", nativeQuery = true)
+    Integer totalVendido();
+
+    @Query(value ="SELECT coalesce(sum(saldo),0) FROM factura WHERE estado != 'AN'", nativeQuery = true)
+    Integer porCobrar();
 
 
 
