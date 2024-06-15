@@ -24,6 +24,14 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
     @Query(value ="SELECT coalesce(sum(saldo),0) FROM factura WHERE estado != 'AN'", nativeQuery = true)
     Integer porCobrar();
 
+    @Query(value ="SELECT COALESCE(SUM(d.cantidad), 0)\n" +
+            "FROM factura f\n" +
+            "JOIN detalle_factura d\n" +
+            "ON d.id_factura = f.id_factura\n" +
+            "WHERE f.estado != 'AN' AND (f.fecha BETWEEN ':fechaInicio' AND ':fechaFin')", nativeQuery = true)
+    Integer vendidosPorFecha(@Param("fechaInicio") String fechaInico, @Param("fechaFin") String fechafin);
+
+
 
 
 }
