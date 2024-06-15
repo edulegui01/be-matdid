@@ -22,7 +22,7 @@ public interface CobroMapper {
     @InheritInverseConfiguration
     @Mappings({
             @Mapping(target = "funcionario", ignore = true),
-            @Mapping(target = "factura", ignore = true)
+            @Mapping(target = "factura", ignore = true),
             @Mapping(target = "estado", ignore = true)
     })
     Cobro cobroDTOACobro (CobroDTO cobroDTO);
