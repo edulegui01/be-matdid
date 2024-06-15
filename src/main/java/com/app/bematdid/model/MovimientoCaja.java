@@ -35,7 +35,7 @@ public class MovimientoCaja {
     @Column(name = "tipo_pago")
     private String tipoPago;
     @NotNull
-    private Integer cantidad;
+    private Integer monto;
 
     private String estado = "ABIERTO";
 

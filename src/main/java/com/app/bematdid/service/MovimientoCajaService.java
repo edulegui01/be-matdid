@@ -57,7 +57,7 @@ public class MovimientoCajaService {
                 "join factura f on c.id_factura = f.id_factura\n" +
                 "where c.estado = 'ABIERTO' OR c.estado = 'CERRADO'\n" +
                 "UNION\n" +
-                "SELECT mc.id_movimiento_caja as id,mc.fecha, mc.cantidad, c.nombre as concepto, c.es_ingreso as esIngreso, mc.comprobante as comprobante, mc.estado FROM movimiento_caja mc\n" +
+                "SELECT mc.id_movimiento_caja as id,mc.fecha, mc.monto, c.nombre as concepto, c.es_ingreso as esIngreso, mc.comprobante as comprobante, mc.estado FROM movimiento_caja mc\n" +
                 "join concepto c on mc.id_concepto = c.id_concepto\n" +
                 "where mc.estado = 'ABIERTO' OR mc.estado = 'CERRADO'\n" +
                 "order by fecha desc, id desc", Tuple.class);
