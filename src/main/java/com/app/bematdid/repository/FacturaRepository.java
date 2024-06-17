@@ -34,4 +34,14 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
 
 
+    @Query(value ="SELECT COALESCE(SUM(d.cantidad), 0)\n" +
+            "FROM factura f\n" +
+            "JOIN detalle_factura d\n" +
+            "ON d.id_factura = f.id_factura\n" +
+            "WHERE f.estado != 'AN' AND (extract(month from f.fecha) = :mes and extract(year from f.fecha) = :anho)", nativeQuery = true)
+    Integer vendidosPorMes(@Param("mes") Integer mes,@Param("anho") Integer anho);
+
+
+
+
 }

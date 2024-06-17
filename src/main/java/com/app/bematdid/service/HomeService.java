@@ -4,7 +4,9 @@ import com.app.bematdid.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -76,6 +78,15 @@ public class HomeService {
         datos.put("octubre", facturaRepository.vendidosPorFecha(anho + "-10-01T00:00:00",anho + "-10-31T23:59:59"));
         datos.put("noviembre", facturaRepository.vendidosPorFecha(anho + "-11-01T00:00:00",anho + "-11-30T23:59:59"));
         datos.put("diciembre", facturaRepository.vendidosPorFecha(anho + "-12-01T00:00:00",anho + "-12-31T23:59:59"));
+        return datos;
+    }
+
+    public  List<Integer> cantidadPorMes(Integer anho){
+        List<Integer> datos = new ArrayList<>();
+        for(int i = 1; i <= 12;i++){
+            datos.add(facturaRepository.vendidosPorMes(i,anho));
+
+        }
         return datos;
     }
 
