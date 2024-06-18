@@ -11,24 +11,33 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class ProductoService {
@@ -228,6 +237,39 @@ public class ProductoService {
 
     public Path getPath(String filename) {
         return Paths.get(UPLOADS_FOLDER).resolve(filename).toAbsolutePath();
+    }
+
+    public ResponseEntity<Resource> exportInventarioReport() throws FileNotFoundException, JRException {
+        List<Producto> productos = productoRepository.listadoDeProducto();
+
+        if(!productos.isEmpty()){
+            final File file = ResourceUtils.getFile("classpath:reportes/ReportLibros.jasper");
+            final File imgLogo = ResourceUtils.getFile("classpath:images/semillas.png");
+            final JasperReport report = (JasperReport) JRLoader.loadObject(file);
+
+            final Map<String,Object> parameters = new HashMap<>();
+            parameters.put("imgLogo",new FileInputStream(imgLogo));
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,new JRBeanCollectionDataSource(productos));
+            byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
+            String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
+            StringBuilder stringBuilder = new StringBuilder().append("invetarioPDF");
+            ContentDisposition contentDisposition = ContentDisposition.builder("attachment")
+                    .filename(stringBuilder.append("inventario")
+                            .append("generateDay:")
+                            .append(sdf)
+                            .append(".pdf").toString()).build();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentDisposition(contentDisposition);
+            return ResponseEntity.ok().contentLength((long) reporte.length)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .headers(headers).body(new ByteArrayResource(reporte));
+
+        }else{
+            return ResponseEntity.noContent().build();
+        }
+
+
     }
 
 }

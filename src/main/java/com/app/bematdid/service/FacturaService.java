@@ -10,14 +10,24 @@ import com.app.bematdid.model.Producto;
 import com.app.bematdid.repository.FacturaRepository;
 import com.app.bematdid.repository.FolioRepository;
 import com.app.bematdid.repository.ProductoRepository;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
-import java.util.List;
-import java.util.Optional;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class FacturaService {
@@ -89,6 +99,44 @@ public class FacturaService {
         });
 
         facturaRepository.save(factura.get());
+    }
+
+    public ResponseEntity<Resource> imprimirFactura (long idFactura) {
+        //Optional<Factura> otpFactura = facturaRepository.findById(idFactura);
+        if (true) {
+            try {
+                //final Factura factura = otpFactura.get();
+                final File file = ResourceUtils.getFile("classpath:reportes/ReportFactura.jasper");
+                final JasperReport report = (JasperReport) JRLoader.loadObject(file);
+                final HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("monto_total",4500000L);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
+                byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
+                String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
+                StringBuilder stringBuilder = new StringBuilder().append("InvoicePDF:");
+                ContentDisposition contentDisposition = ContentDisposition.builder("attachment")
+                        .filename(stringBuilder.append("NOMBRE")
+                                .append("generateDate:")
+                                .append(sdf)
+                                .append(".pdf")
+                                .toString())
+                        .build();
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentDisposition(contentDisposition);
+                return ResponseEntity.ok().contentLength((long) reporte.length)
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .headers(headers).body(new ByteArrayResource(reporte));
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+        return null;
     }
 
 
