@@ -4,6 +4,7 @@ import com.app.bematdid.dto.ProductoDTO;
 import com.app.bematdid.error.dto.DeleteProductWithStockException;
 import com.app.bematdid.model.Producto;
 import com.app.bematdid.service.ProductoService;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
@@ -114,8 +116,8 @@ public class ProductoController {
 
 
     @GetMapping("inventario/report")
-    public ResponseEntity<Resource> exportInventarioReport(){
-        return null;
+    public ResponseEntity<Resource> exportInventarioReport() throws JRException, FileNotFoundException {
+        return productoService.exportInventarioReport();
     }
 
 

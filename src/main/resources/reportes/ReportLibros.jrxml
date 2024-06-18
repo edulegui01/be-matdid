@@ -4,13 +4,13 @@
 	<property name="ireport.zoom" value="1.2100000000000033"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="imgLogo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="codigo" class="java.lang.String"/>
+	<field name="idProducto" class="java.lang.Long"/>
 	<field name="nombre" class="java.lang.String"/>
-	<field name="cantidad" class="java.lang.String"/>
-	<field name="stock" class="java.lang.String"/>
+	<field name="stockActual" class="java.lang.Integer"/>
 	<title>
 		<band height="60" splitType="Stretch">
 			<rectangle>
@@ -25,7 +25,7 @@
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="156" height="51" uuid="39e66a7b-07e2-42dd-9540-164b16466395"/>
-				<imageExpression><![CDATA["C:\\Users\\edu_c\\OneDrive\\Documents\\proyectos-github\\inventario-java\\src\\icons\\semillas.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{imgLogo}]]></imageExpression>
 			</image>
 			<rectangle>
 				<reportElement x="276" y="51" width="279" height="8" forecolor="#FFFFFF" backcolor="#F4F3F3" uuid="8c3842fa-d0c9-46a6-9627-684228168f1a"/>
@@ -61,7 +61,7 @@
 				<text><![CDATA[PRODUCTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="241" y="0" width="115" height="20" uuid="75be446a-f540-4b2b-bc5f-045a27011b81"/>
+				<reportElement x="260" y="1" width="115" height="20" uuid="75be446a-f540-4b2b-bc5f-045a27011b81"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
@@ -76,21 +76,21 @@
 				<textElement textAlignment="Center">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="92" y="0" width="116" height="13" uuid="d7fa8c08-274f-447e-91e2-0a43e391658c"/>
+				<reportElement x="92" y="0" width="168" height="13" uuid="d7fa8c08-274f-447e-91e2-0a43e391658c"/>
 				<textElement textAlignment="Center">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="240" y="0" width="115" height="13" uuid="e41e4d80-7fb1-438d-bd3a-678d29ba85c1"/>
+				<reportElement x="260" y="0" width="115" height="13" uuid="e41e4d80-7fb1-438d-bd3a-678d29ba85c1"/>
 				<textElement textAlignment="Center">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{stockActual}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

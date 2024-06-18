@@ -35,6 +35,6 @@ public interface ProductoRepository extends JpaRepository<Producto,Long> {
     Optional<Producto> findByImage(String nombreImagen);
 
 
-    @Query(value = "SELECT id_producto, nombre, stock_actual from producto where estado is true", nativeQuery = true)
-    Optional<Producto> listadoDeProducto();
+    @Query(value = "SELECT * from producto where estado is true order by id_producto", nativeQuery = true)
+    List<Producto> listadoDeProducto();
 }
