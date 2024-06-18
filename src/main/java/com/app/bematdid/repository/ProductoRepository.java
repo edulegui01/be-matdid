@@ -33,4 +33,8 @@ public interface ProductoRepository extends JpaRepository<Producto,Long> {
     Page<Producto> listarPorMateria(Pageable pageable,@Param("idMateria")int  idMateria);
 
     Optional<Producto> findByImage(String nombreImagen);
+
+
+    @Query(value = "SELECT id_producto, nombre, stock_actual from producto where estado is true", nativeQuery = true)
+    Optional<Producto> listadoDeProducto();
 }

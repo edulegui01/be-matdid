@@ -11,24 +11,27 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ProductoService {
@@ -228,6 +231,20 @@ public class ProductoService {
 
     public Path getPath(String filename) {
         return Paths.get(UPLOADS_FOLDER).resolve(filename).toAbsolutePath();
+    }
+
+    public ResponseEntity<Resource> exportInventarioReport() throws FileNotFoundException, JRException {
+        Optional<Producto> opProductos = productoRepository.listadoDeProducto();
+
+        if(opProductos.isPresent()){
+            final Producto productos = opProductos.get();
+            final File file = ResourceUtils.getFile("classpath:reportes/ReportLibros.jasper");
+            final File imgLogo = ResourceUtils.getFile("classpath:images/semillas.png");
+            final JasperReport report = (JasperReport) JRLoader.loadObject(file);
+
+            final Map<String,Object> parameters = new HashMap<>();
+
+        }
     }
 
 }

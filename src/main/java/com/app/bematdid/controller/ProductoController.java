@@ -113,6 +113,12 @@ public class ProductoController {
     }
 
 
+    @GetMapping("inventario/report")
+    public ResponseEntity<Resource> exportInventarioReport(){
+        return null;
+    }
+
+
 
 
     /*@PostMapping("im/save")
