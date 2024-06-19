@@ -1,7 +1,9 @@
 package com.app.bematdid.service;
 
+import com.app.bematdid.dto.DetalleFacturaIvaDTO;
 import com.app.bematdid.dto.FacturaDTO;
 import com.app.bematdid.error.StockNegativeException;
+import com.app.bematdid.mapper.DetalleFacturaIvaMapper;
 import com.app.bematdid.mapper.FacturaMapper;
 import com.app.bematdid.model.*;
 import com.app.bematdid.repository.FacturaRepository;
@@ -41,6 +43,8 @@ public class FacturaService {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    private DetalleFacturaIvaMapper detalleFacturaIvaMapper = new DetalleFacturaIvaMapper();
 
     public Page<FacturaDTO> listar (Pageable pageable, String nombrePersona, String numFactura) {
         Optional<List<FacturaDTO>> lista = facturaRepository.listarFacturas(nombrePersona, numFactura).map(facturas -> mapper.facturasAFacturasDTO(facturas));
@@ -99,6 +103,7 @@ public class FacturaService {
         facturaRepository.save(factura.get());
     }
 
+
     public ResponseEntity<Resource> imprimirFactura (long idFactura) {
         Optional<Factura> otpFactura = facturaRepository.findById(idFactura);
 
@@ -106,10 +111,12 @@ public class FacturaService {
             try {
                 final Factura factura = otpFactura.get();
                 final List<DetalleFactura> detalleFactura = factura.getDetalleFacturas();
+                final List<DetalleFacturaIvaDTO> detalleFacturaIvaDTOS = detalleFacturaIvaMapper.aDetalleFacturaIvaDTOS(detalleFactura);
                 final File file = ResourceUtils.getFile("classpath:reportes/ReportFactura.jasper");
                 final JasperReport report = (JasperReport) JRLoader.loadObject(file);
                 final HashMap<String, Object> parameters = new HashMap<>();
                 parameters.put("monto_total",4500000L);
+                parameters.put("detalle_factura", factura.getDetalleFacturas());
                 JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JRBeanCollectionDataSource(detalleFactura));
                 byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
                 String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
