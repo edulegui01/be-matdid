@@ -21,7 +21,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16"/>
 				</textElement>
-				<text><![CDATA[REPORTE DE PRODUCTOS]]></text>
+				<text><![CDATA[REPORTE DE INVENTARIO]]></text>
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="156" height="51" uuid="39e66a7b-07e2-42dd-9540-164b16466395"/>
@@ -54,7 +54,7 @@
 				<text><![CDATA[CÓDIGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="94" y="0" width="116" height="20" uuid="aed3568d-a381-47b4-97ca-e437617be59d"/>
+				<reportElement x="113" y="0" width="116" height="20" uuid="aed3568d-a381-47b4-97ca-e437617be59d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
