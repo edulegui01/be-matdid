@@ -3,14 +3,12 @@ package com.app.bematdid.service;
 import com.app.bematdid.dto.FacturaDTO;
 import com.app.bematdid.error.StockNegativeException;
 import com.app.bematdid.mapper.FacturaMapper;
-import com.app.bematdid.model.Factura;
-import com.app.bematdid.model.Folio;
-import com.app.bematdid.model.Movimiento;
-import com.app.bematdid.model.Producto;
+import com.app.bematdid.model.*;
 import com.app.bematdid.repository.FacturaRepository;
 import com.app.bematdid.repository.FolioRepository;
 import com.app.bematdid.repository.ProductoRepository;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -102,15 +100,17 @@ public class FacturaService {
     }
 
     public ResponseEntity<Resource> imprimirFactura (long idFactura) {
-        //Optional<Factura> otpFactura = facturaRepository.findById(idFactura);
+        Optional<Factura> otpFactura = facturaRepository.findById(idFactura);
+
         if (true) {
             try {
-                //final Factura factura = otpFactura.get();
+                final Factura factura = otpFactura.get();
+                final List<DetalleFactura> detalleFactura = factura.getDetalleFacturas();
                 final File file = ResourceUtils.getFile("classpath:reportes/ReportFactura.jasper");
                 final JasperReport report = (JasperReport) JRLoader.loadObject(file);
                 final HashMap<String, Object> parameters = new HashMap<>();
                 parameters.put("monto_total",4500000L);
-                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
+                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JRBeanCollectionDataSource(detalleFactura));
                 byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
                 String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
                 StringBuilder stringBuilder = new StringBuilder().append("InvoicePDF:");
