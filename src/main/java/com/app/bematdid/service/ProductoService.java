@@ -244,7 +244,7 @@ public class ProductoService {
 
         if(!productos.isEmpty()){
             final File file = ResourceUtils.getFile("classpath:reportes/ReportLibros.jasper");
-            final File imgLogo = ResourceUtils.getFile("classpath:images/semillas.png");
+            final File imgLogo = ResourceUtils.getFile("classpath:images/logo.png");
             final JasperReport report = (JasperReport) JRLoader.loadObject(file);
 
             final Map<String,Object> parameters = new HashMap<>();
