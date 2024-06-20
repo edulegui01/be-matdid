@@ -24,6 +24,7 @@ public class MovimientoSaveDTO implements Serializable {
     private String apellidoFuncionario;
     private Date fecha;
     private String comentario;
+    private String documento;
 
     private Motivo motivo;
     private List<DetalleMovimientoDTO> detalleMovimientos;

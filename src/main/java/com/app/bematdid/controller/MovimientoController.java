@@ -29,6 +29,7 @@ public class MovimientoController {
 
     @PostMapping("movimiento/guardar")
     public MovimientoDTO guardar (@RequestBody MovimientoSaveDTO movimientoDTO) throws StockNegativeException {
+
         return movimientoService.guardar(movimientoDTO);
     }
 
