@@ -76,7 +76,34 @@ public class FacturaService {
 
 
     public void validationStock(Factura factura) throws StockNegativeException {
-        factura.getDetalleFacturas().forEach(detalleFactura -> {
+        /*factura.getDetalleFacturas().forEach(detalleFactura -> {
+            detalleFactura.setFactura(factura);
+            Optional<Producto> producto = productoRepository.findById(detalleFactura.getId().getIdProducto());
+            if(producto.get().getStockActual() - detalleFactura.getCantidad()<0){
+                try {
+                    throw new StockNegativeException(String.format("QUEDAN %s UNIDADES DE %s",producto.get().getStockActual(),producto.get().getNombre()));
+                } catch (StockNegativeException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        });*/
+        List<DetalleFactura> lista = new ArrayList<>();
+        for (DetalleFactura detalleFactura : factura.getDetalleFacturas()) {
+            boolean encontrado = false;
+            for (DetalleFactura e : lista) {
+                if (e.getId().getIdProducto() == detalleFactura.getId().getIdProducto()) {
+                    e.setCantidad(e.getCantidad()+detalleFactura.getCantidad());
+
+                    encontrado = true;
+                }
+            }
+            if(!encontrado) {
+                lista.add(detalleFactura);
+            }
+        };
+
+        lista.forEach(detalleFactura -> {
             detalleFactura.setFactura(factura);
             Optional<Producto> producto = productoRepository.findById(detalleFactura.getId().getIdProducto());
             if(producto.get().getStockActual() - detalleFactura.getCantidad()<0){
@@ -88,6 +115,8 @@ public class FacturaService {
             }
 
         });
+
+
     }
 
 
