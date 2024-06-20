@@ -26,7 +26,7 @@ public class DetalleFactura {
     @NotNull
     private int precio;
     @NotNull
-    private Integer descuento;
+    private Float descuento;
 
 
     @ManyToOne()

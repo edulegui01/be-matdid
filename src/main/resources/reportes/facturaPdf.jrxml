@@ -349,35 +349,35 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="17" splitType="Stretch">
+		<band height="179" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="-1" width="64" height="17" uuid="b430d78d-5637-4d62-8c9d-10908d0192f6">
+				<reportElement x="0" y="-1" width="64" height="180" uuid="b430d78d-5637-4d62-8c9d-10908d0192f6">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="64" y="-1" width="188" height="17" uuid="00ecd8e4-636e-4815-81db-ae52a8f30488">
+				<reportElement x="64" y="-1" width="188" height="180" uuid="00ecd8e4-636e-4815-81db-ae52a8f30488">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="252" y="-1" width="68" height="16" uuid="3a87d4a7-ae17-4db4-89f1-c0212e7c13db">
+				<reportElement x="252" y="-1" width="68" height="180" uuid="3a87d4a7-ae17-4db4-89f1-c0212e7c13db">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="320" y="-1" width="85" height="16" uuid="ce521657-283d-4926-b9be-a0d7c2a172e4">
+				<reportElement x="320" y="-1" width="85" height="180" uuid="ce521657-283d-4926-b9be-a0d7c2a172e4">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="404" y="-1" width="72" height="17" uuid="b3024b95-5022-4a1f-8e0f-bea8fa572b2c">
+				<reportElement x="404" y="-1" width="72" height="180" uuid="b3024b95-5022-4a1f-8e0f-bea8fa572b2c">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="476" y="-1" width="84" height="17" uuid="c28ab751-31d0-4ab5-a168-7dcf7f1f704d">
+				<reportElement x="476" y="-1" width="84" height="180" uuid="c28ab751-31d0-4ab5-a168-7dcf7f1f704d">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 			</rectangle>

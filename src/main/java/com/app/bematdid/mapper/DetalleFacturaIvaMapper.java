@@ -18,20 +18,19 @@ public class DetalleFacturaIvaMapper {
         detalleFacturaIvaDTO.setNombre(detalleFactura.getProducto().getNombre());
         detalleFacturaIvaDTO.setPrecio(detalleFactura.getPrecio());
         detalleFacturaIvaDTO.setDescuento(detalleFactura.getDescuento());
-        detalleFacturaIvaDTO.setPrecioDescuento(detalleFactura.getPrecio()-detalleFactura.getDescuento());
         detalleFacturaIvaDTO.setIva(detalleFactura.getProducto().getIva());
         if(detalleFactura.getProducto().getIva() == 0 ){
-            detalleFacturaIvaDTO.setExenta(Integer.toString(detalleFactura.getCantidad()*(detalleFactura.getPrecio()-detalleFactura.getDescuento())));
+            detalleFacturaIvaDTO.setExenta(Float.toString(detalleFactura.getCantidad()*(detalleFactura.getPrecio())));
             detalleFacturaIvaDTO.setCinco("");
             detalleFacturaIvaDTO.setDiez("");
         } else if(detalleFactura.getProducto().getIva() == 0.05) {
             detalleFacturaIvaDTO.setExenta("");
-            detalleFacturaIvaDTO.setCinco(Integer.toString(detalleFactura.getCantidad()*(detalleFactura.getPrecio()-detalleFactura.getDescuento())));
+            detalleFacturaIvaDTO.setCinco(Float.toString(detalleFactura.getCantidad()*(detalleFactura.getPrecio())));
             detalleFacturaIvaDTO.setDiez("");
         } else {
             detalleFacturaIvaDTO.setExenta("");
             detalleFacturaIvaDTO.setCinco("");
-            detalleFacturaIvaDTO.setDiez(Integer.toString(detalleFactura.getCantidad()*(detalleFactura.getPrecio()-detalleFactura.getDescuento())));
+            detalleFacturaIvaDTO.setDiez(Float.toString(detalleFactura.getCantidad()*(detalleFactura.getPrecio())));
         }
         return detalleFacturaIvaDTO;
     }

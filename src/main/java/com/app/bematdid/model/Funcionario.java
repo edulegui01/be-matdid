@@ -35,7 +35,7 @@ public class Funcionario {
     private Date fechaNac;
     @NotBlank
     private String direccion;
-    @Email
+    @Email(message = "Email invalido")
     private String email;
     @NotBlank
     private String telefono;

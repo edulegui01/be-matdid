@@ -1,5 +1,6 @@
 package com.app.bematdid.service;
 
+import com.app.bematdid.dto.CompraDTO;
 import com.app.bematdid.dto.DetalleFacturaIvaDTO;
 import com.app.bematdid.dto.FacturaDTO;
 import com.app.bematdid.error.StockNegativeException;
@@ -48,9 +49,9 @@ public class FacturaService {
     private DetalleFacturaIvaMapper detalleFacturaIvaMapper = new DetalleFacturaIvaMapper();
 
     public Page<FacturaDTO> listar (Pageable pageable, String nombrePersona, String numFactura) {
-        Optional<List<FacturaDTO>> lista = facturaRepository.listarFacturas(nombrePersona, numFactura).map(facturas -> mapper.facturasAFacturasDTO(facturas));
-
-        return new PageImpl<>(lista.get(),  pageable, lista.get().size());
+        Page<Factura> lista = facturaRepository.listarFacturas(pageable, nombrePersona, numFactura);
+        List<FacturaDTO> dtos = mapper.facturasAFacturasDTO(lista.getContent());
+        return new PageImpl<>(dtos, pageable, lista.getTotalElements());
 
     }
 

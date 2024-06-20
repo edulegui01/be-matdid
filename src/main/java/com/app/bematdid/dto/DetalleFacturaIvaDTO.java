@@ -18,8 +18,7 @@ public class DetalleFacturaIvaDTO {
     private int cantidad;
     private String nombre;
     private int precio;
-    private int descuento;
-    private int precioDescuento;
+    private Float descuento;
     private float iva;
     private String exenta;
     private String cinco;
