@@ -1,5 +1,6 @@
 package com.app.bematdid.service;
 
+import com.app.bematdid.dto.CompraDTO;
 import com.app.bematdid.dto.DetalleFacturaIvaDTO;
 import com.app.bematdid.dto.FacturaDTO;
 import com.app.bematdid.error.StockNegativeException;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -47,9 +49,9 @@ public class FacturaService {
     private DetalleFacturaIvaMapper detalleFacturaIvaMapper = new DetalleFacturaIvaMapper();
 
     public Page<FacturaDTO> listar (Pageable pageable, String nombrePersona, String numFactura) {
-        Optional<List<FacturaDTO>> lista = facturaRepository.listarFacturas(nombrePersona, numFactura).map(facturas -> mapper.facturasAFacturasDTO(facturas));
-
-        return new PageImpl<>(lista.get(),  pageable, lista.get().size());
+        Page<Factura> lista = facturaRepository.listarFacturas(pageable, nombrePersona, numFactura);
+        List<FacturaDTO> dtos = mapper.facturasAFacturasDTO(lista.getContent());
+        return new PageImpl<>(dtos, pageable, lista.getTotalElements());
 
     }
 
@@ -76,7 +78,34 @@ public class FacturaService {
 
 
     public void validationStock(Factura factura) throws StockNegativeException {
-        factura.getDetalleFacturas().forEach(detalleFactura -> {
+        /*factura.getDetalleFacturas().forEach(detalleFactura -> {
+            detalleFactura.setFactura(factura);
+            Optional<Producto> producto = productoRepository.findById(detalleFactura.getId().getIdProducto());
+            if(producto.get().getStockActual() - detalleFactura.getCantidad()<0){
+                try {
+                    throw new StockNegativeException(String.format("QUEDAN %s UNIDADES DE %s",producto.get().getStockActual(),producto.get().getNombre()));
+                } catch (StockNegativeException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        });*/
+        List<DetalleFactura> lista = new ArrayList<>();
+        for (DetalleFactura detalleFactura : factura.getDetalleFacturas()) {
+            boolean encontrado = false;
+            for (DetalleFactura e : lista) {
+                if (e.getId().getIdProducto() == detalleFactura.getId().getIdProducto()) {
+                    e.setCantidad(e.getCantidad()+detalleFactura.getCantidad());
+
+                    encontrado = true;
+                }
+            }
+            if(!encontrado) {
+                lista.add(detalleFactura);
+            }
+        };
+
+        lista.forEach(detalleFactura -> {
             detalleFactura.setFactura(factura);
             Optional<Producto> producto = productoRepository.findById(detalleFactura.getId().getIdProducto());
             if(producto.get().getStockActual() - detalleFactura.getCantidad()<0){
@@ -88,6 +117,8 @@ public class FacturaService {
             }
 
         });
+
+
     }
 
 
@@ -107,17 +138,19 @@ public class FacturaService {
     public ResponseEntity<Resource> imprimirFactura (long idFactura) {
         Optional<Factura> otpFactura = facturaRepository.findById(idFactura);
 
-        if (true) {
+        if (otpFactura.isPresent()) {
             try {
                 final Factura factura = otpFactura.get();
                 final List<DetalleFactura> detalleFactura = factura.getDetalleFacturas();
                 final List<DetalleFacturaIvaDTO> detalleFacturaIvaDTOS = detalleFacturaIvaMapper.aDetalleFacturaIvaDTOS(detalleFactura);
-                final File file = ResourceUtils.getFile("classpath:reportes/ReportFactura.jasper");
+                final File file = ResourceUtils.getFile("classpath:reportes/facturaPdf.jasper");
+                final File imgLogo = ResourceUtils.getFile("classpath:images/logo.png");
                 final JasperReport report = (JasperReport) JRLoader.loadObject(file);
                 final HashMap<String, Object> parameters = new HashMap<>();
-                parameters.put("monto_total",4500000L);
-                parameters.put("detalle_factura", factura.getDetalleFacturas());
-                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JRBeanCollectionDataSource(detalleFactura));
+                parameters.put("total",factura.getMontoTotal());
+                parameters.put("imgLogo",new FileInputStream(imgLogo));
+                //parameters.put("detalle_factura", factura.getDetalleFacturas());
+                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JRBeanCollectionDataSource(detalleFacturaIvaDTOS));
                 byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
                 String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
                 StringBuilder stringBuilder = new StringBuilder().append("InvoicePDF:");

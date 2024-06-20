@@ -16,7 +16,7 @@ DetalleFacturaDTO implements Serializable {
     private long idProducto;
     private int cantidad;
     private int precio;
-    private int descuento;
+    private Float descuento;
     private String nombre;
     private float iva;
 }
