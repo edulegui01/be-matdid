@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -107,17 +108,19 @@ public class FacturaService {
     public ResponseEntity<Resource> imprimirFactura (long idFactura) {
         Optional<Factura> otpFactura = facturaRepository.findById(idFactura);
 
-        if (true) {
+        if (otpFactura.isPresent()) {
             try {
                 final Factura factura = otpFactura.get();
                 final List<DetalleFactura> detalleFactura = factura.getDetalleFacturas();
                 final List<DetalleFacturaIvaDTO> detalleFacturaIvaDTOS = detalleFacturaIvaMapper.aDetalleFacturaIvaDTOS(detalleFactura);
-                final File file = ResourceUtils.getFile("classpath:reportes/ReportFactura.jasper");
+                final File file = ResourceUtils.getFile("classpath:reportes/facturaPdf.jasper");
+                final File imgLogo = ResourceUtils.getFile("classpath:images/logo.png");
                 final JasperReport report = (JasperReport) JRLoader.loadObject(file);
                 final HashMap<String, Object> parameters = new HashMap<>();
-                parameters.put("monto_total",4500000L);
-                parameters.put("detalle_factura", factura.getDetalleFacturas());
-                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JRBeanCollectionDataSource(detalleFactura));
+                parameters.put("total",factura.getMontoTotal());
+                parameters.put("imgLogo",new FileInputStream(imgLogo));
+                //parameters.put("detalle_factura", factura.getDetalleFacturas());
+                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JRBeanCollectionDataSource(detalleFacturaIvaDTOS));
                 byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
                 String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
                 StringBuilder stringBuilder = new StringBuilder().append("InvoicePDF:");
