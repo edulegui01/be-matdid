@@ -1,9 +1,6 @@
 package com.app.bematdid.dto;
 
 
-
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +22,6 @@ public class ProductoDTO implements Serializable {
     private int idMateria;
     private String nombre;
     private String descripcion;
-    private String autor;
     private String isbn;
     private int costo;
     private int precio;
@@ -38,4 +34,5 @@ public class ProductoDTO implements Serializable {
     private CategoriaDTO categoria;
     private CicloDTO ciclo;
     private MateriaDTO materia;
+    private AutorDTO autor;
 }
