@@ -67,7 +67,7 @@ public class ProductoService {
     }
 
     public Page<Producto> getListProduct(Pageable pageable, String nombreProducto, String idCiclo,
-                                         String idCategoria, String idMateria, String idEditorial){
+                                         String idCategoria, String idMateria, String idEditorial, String idAutor){
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Producto> query = criteriaBuilder.createQuery(Producto.class);
         Root<Producto> productoRoot = query.from(Producto.class);
@@ -94,6 +94,10 @@ public class ProductoService {
 
         if(idEditorial != null && !idEditorial.isEmpty()){
             searchCriteria.add(criteriaBuilder.equal(productoRoot.get("idEditorial"),idEditorial));
+        }
+
+        if(idAutor != null && !idAutor.isEmpty()){
+            searchCriteria.add(criteriaBuilder.equal(productoRoot.get("idAutor"),idAutor));
         }
 
         Predicate[] restriccions = searchCriteria.toArray(new Predicate[0]);

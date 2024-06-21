@@ -38,12 +38,14 @@ public class Producto {
     @Column(name = "id_materia")
     private Integer idMateria;
 
+    @Column(name = "id_autor")
+    private Long idAutor;
+
     private String nombre;
     @NotBlank
     @Column(columnDefinition = "TEXT")
     private String descripcion;
-    @NotBlank
-    private String autor;
+
     @NotBlank
 
     private String isbn;
@@ -75,6 +77,10 @@ public class Producto {
     @ManyToOne()
     @JoinColumn(name = "id_materia",insertable=false, updatable=false)
     Materia materia;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_autor",insertable = false,updatable = false)
+    Autor autor;
 
 
     @JsonIgnore
