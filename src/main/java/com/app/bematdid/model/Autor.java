@@ -22,6 +22,11 @@ public class Autor {
     private Long idAutor;
     @NotNull
     private String nombre;
+    @Column(columnDefinition = "TEXT")
+    private String biografia;
+
+    private String image;
+
     private boolean estado = true;
 
     @JsonIgnore()

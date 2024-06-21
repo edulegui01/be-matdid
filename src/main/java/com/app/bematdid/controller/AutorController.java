@@ -1,7 +1,6 @@
 package com.app.bematdid.controller;
 
 import com.app.bematdid.dto.AutorDTO;
-import com.app.bematdid.dto.CategoriaDTO;
 import com.app.bematdid.service.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

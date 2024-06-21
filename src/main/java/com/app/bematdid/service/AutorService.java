@@ -2,10 +2,8 @@ package com.app.bematdid.service;
 
 
 import com.app.bematdid.dto.AutorDTO;
-import com.app.bematdid.dto.CategoriaDTO;
 import com.app.bematdid.mapper.AutorMapper;
 import com.app.bematdid.model.Autor;
-import com.app.bematdid.model.Categoria;
 import com.app.bematdid.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,9 +50,9 @@ public class AutorService {
     }
 
     public void borrar(Integer id){
-        Optional<Autor> categoria = autorRepository.findById(id);
+        Optional<Autor> autor = autorRepository.findById(id);
 
-        Autor autor1 = categoria.get();
+        Autor autor1 = autor.get();
 
         autor1.setEstado(false);
 
