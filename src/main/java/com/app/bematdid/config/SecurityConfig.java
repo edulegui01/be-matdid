@@ -37,6 +37,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/producto/imagen/**").permitAll()
+                                .requestMatchers("/autor/imagen/**").permitAll()
                                 .anyRequest().authenticated()
                         )
                 .sessionManagement(sessionManager ->
