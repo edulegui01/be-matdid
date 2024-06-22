@@ -3,7 +3,6 @@ package com.app.bematdid.repository;
 
 
 import com.app.bematdid.model.Autor;
-import com.app.bematdid.model.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

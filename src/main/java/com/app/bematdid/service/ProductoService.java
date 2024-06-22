@@ -44,8 +44,6 @@ public class ProductoService {
 
     private final static String UPLOADS_FOLDER = "uploads";
 
-    private final static String URL_GET_IMAGE = "http://localhost:8090/producto/imagen?searchImagen=";
-
     @Autowired
     private ProductoRepository productoRepository;
 

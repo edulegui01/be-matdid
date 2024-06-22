@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class AutorDTO {
     private Long idAutor;
     private String nombre;
+    private String biografia;
+    private String image;
 }
