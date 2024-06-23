@@ -20,6 +20,7 @@ public class ProductoDTO implements Serializable {
     private int idCategoria;
     private int idCiclo;
     private int idMateria;
+    private int idAutor;
     private String nombre;
     private String descripcion;
     private String isbn;
