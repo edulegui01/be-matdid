@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,4 +26,6 @@ public interface CompraRepository extends JpaRepository<Compra, Long> {
 
     @Query(value ="SELECT coalesce(sum(saldo),0) FROM compra WHERE estado != 'AN'", nativeQuery = true)
     Integer porPagar();
+
+    List<Compra> findByFechaBetween(Date des, Date has);
 }
