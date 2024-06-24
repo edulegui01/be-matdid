@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @RestController
 public class ReporteController {
@@ -18,7 +20,7 @@ public class ReporteController {
     private ReporteService reporteService;
 
     @GetMapping("reporte/vendidos")
-    public ResponseEntity<Resource> exportVendidosReport(Date des, Date has) throws JRException, FileNotFoundException {
+    public ResponseEntity<Resource> exportVendidosReport(@RequestParam LocalDate des, @RequestParam LocalDate has) throws JRException, FileNotFoundException {
         return reporteService.exportVendidosReport(des, has);
     }
 }

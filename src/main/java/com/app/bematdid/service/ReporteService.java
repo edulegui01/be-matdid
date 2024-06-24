@@ -40,14 +40,14 @@ public class ReporteService {
 
 
 
-    public ResponseEntity<Resource> exportVendidosReport(java.sql.Date des, java.sql.Date has) throws FileNotFoundException, JRException {
+    public ResponseEntity<Resource> exportVendidosReport(LocalDate des, LocalDate has) throws FileNotFoundException, JRException {
         List<Producto> productos = productoRepository.listadoDeProducto();
         productos.forEach(producto -> producto.setStockActual(0));
 
         LocalDate desde = LocalDate.of(2023,01,30);
-        java.sql.Date sqlDesde = java.sql.Date.valueOf(desde);
+        java.sql.Date sqlDesde = java.sql.Date.valueOf(des);
         LocalDate hasta = LocalDate.of(2025,01,30);
-        java.sql.Date sqlHasta = java.sql.Date.valueOf(hasta);
+        java.sql.Date sqlHasta = java.sql.Date.valueOf(has.plusDays(1));
 
         //List<Factura> facturas = facturaRepository.findByFechaBetween(sqlDesde, sqlHasta);
         List<Factura> facturas = facturaRepository.facturasPorFecha(sqlDesde,sqlHasta);
