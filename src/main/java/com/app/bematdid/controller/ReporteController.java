@@ -28,4 +28,14 @@ public class ReporteController {
     public ResponseEntity<Resource> exportCompradosReport(@RequestParam LocalDate des, @RequestParam LocalDate has) throws JRException, FileNotFoundException {
         return reporteService.exportCompradosReport(des, has);
     }
+
+    @GetMapping("reporte/pagos")
+    public ResponseEntity<Resource> exportPagosReport(@RequestParam LocalDate des, @RequestParam LocalDate has) throws JRException, FileNotFoundException {
+        return reporteService.exportPagosReport(des, has);
+    }
+
+    @GetMapping("reporte/cobros")
+    public ResponseEntity<Resource> exportCobrosReport(@RequestParam LocalDate des, @RequestParam LocalDate has) throws JRException, FileNotFoundException {
+        return reporteService.exportCobrosReport(des, has);
+    }
 }
