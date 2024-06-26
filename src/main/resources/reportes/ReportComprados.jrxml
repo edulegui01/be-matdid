@@ -23,7 +23,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[TOTAL VENDIDOS POR LIBRO]]></text>
+				<text><![CDATA[TOTAL COMPRADOS POR LIBRO]]></text>
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="156" height="51" uuid="39e66a7b-07e2-42dd-9540-164b16466395"/>
@@ -83,7 +83,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[TOTAL VENDIDO]]></text>
+				<text><![CDATA[TOTAL COMPRADOS]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

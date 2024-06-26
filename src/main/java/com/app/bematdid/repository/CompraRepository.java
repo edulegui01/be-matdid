@@ -28,4 +28,11 @@ public interface CompraRepository extends JpaRepository<Compra, Long> {
     Integer porPagar();
 
     List<Compra> findByFechaBetween(Date des, Date has);
+
+    @Query(value ="SELECT c.id_compra, estado, fecha, fecha_vencimiento, id_funcionario, id_persona, monto_total, num_folio, timbrado, tipo_factura, saldo\n" +
+            "FROM compra c\n" +
+            "JOIN detalle_compra d\n" +
+            "ON d.id_compra = c.id_compra\n" +
+            "WHERE c.estado != 'AN' AND (c.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
+    List<Compra> comprasPorFecha(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin);
 }
