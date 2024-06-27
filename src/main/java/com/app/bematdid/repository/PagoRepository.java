@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -20,6 +21,9 @@ public interface PagoRepository extends JpaRepository<Pago, Long> {
 
     @Query(value = "SELECT * FROM pago where estado = 'ABIERTO'",nativeQuery = true)
     List<Pago> listarAbiertos();
+
+    @Query(value = "SELECT * FROM pago where (estado = 'ABIERTO' OR estado = 'CERRADO') and (fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
+    List<Pago> listarPorFecha(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin);
 
     @Query(value ="SELECT coalesce(sum(monto),0) FROM pago WHERE estado = 'ABIERTO'", nativeQuery = true)
     Integer montoTotal();

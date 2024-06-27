@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,5 +46,12 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
 
 
+    List<Factura> findByFechaBetween(Date des, Date has);
 
+    @Query(value ="SELECT f.id_factura, estado, id_folio, id_funcionario, id_persona, id_timbrado, monto_total, saldo, tipo_factura, num_factura, fecha, fecha_vencimiento\n" +
+            "FROM factura f\n" +
+            "JOIN detalle_factura d\n" +
+            "ON d.id_factura = f.id_factura\n" +
+            "WHERE f.estado != 'AN' AND (f.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
+    List<Factura> facturasPorFecha(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin);
 }
