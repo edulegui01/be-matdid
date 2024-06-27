@@ -1,6 +1,7 @@
 package com.app.bematdid.controller;
 
 
+import com.app.bematdid.model.Factura;
 import com.app.bematdid.service.EstadisticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +23,12 @@ public class EstadisticaController {
     public Map<String,List> cantidadProducto(@RequestParam LocalDate fechaDesde, @RequestParam LocalDate fechaHasta){
 
          return estadisticaService.cantidadProductos(fechaDesde,fechaHasta);
+    }
+
+    @GetMapping("estadistica/cantidad/ventas")
+    public Map<String,List> cantidadVentas(@RequestParam LocalDate fechaDesde, @RequestParam LocalDate fechaHasta){
+
+
+        return estadisticaService.clientesCantidad(fechaDesde,fechaHasta);
     }
 }
