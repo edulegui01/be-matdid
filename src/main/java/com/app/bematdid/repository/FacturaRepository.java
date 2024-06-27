@@ -54,4 +54,6 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
             "ON d.id_factura = f.id_factura\n" +
             "WHERE f.estado != 'AN' AND (f.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
     List<Factura> facturasPorFecha(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin);
+
+
 }
