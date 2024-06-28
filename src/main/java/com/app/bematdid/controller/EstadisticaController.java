@@ -31,4 +31,18 @@ public class EstadisticaController {
 
         return estadisticaService.clientesCantidad(fechaDesde,fechaHasta);
     }
+
+    @GetMapping("estadistica/cobrado/mes")
+    public Map<String,List> cobradoMes(@RequestParam Integer anho){
+
+
+        return estadisticaService.cobradoPorMes(anho);
+    }
+
+    @GetMapping("estadistica/pagado/mes")
+    public Map<String,List> pagadoMes(@RequestParam Integer anho){
+
+
+        return estadisticaService.pagadoPorMes(anho);
+    }
 }

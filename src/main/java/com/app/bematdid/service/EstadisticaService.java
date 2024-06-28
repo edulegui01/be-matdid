@@ -44,7 +44,7 @@ public class EstadisticaService {
                         "\ton df.id_producto = p.id_producto\n" +
                         "join factura f\n" +
                         "\ton df.id_factura = f.id_factura\n" +
-                        "where f.fecha between :fechaDesde and :fechaHasta\n" +
+                        "where f.fecha between :fechaDesde and :fechaHasta and f.estado !='A'\n" +
                         "group by p.id_producto order by cantidad desc"
         ).setParameter("fechaDesde",sqlDesde).setParameter("fechaHasta",sqlHasta);
          List<Object[]> result = nativeQuery.getResultList();
@@ -93,7 +93,7 @@ public class EstadisticaService {
                         "from factura f\n" +
                         "join persona p\n" +
                         "\ton f.id_persona = p.id_persona\n" +
-                        "where f.fecha between :fechaDesde and :fechaHasta\n" +
+                        "where f.fecha between :fechaDesde and :fechaHasta and f.estado !='A'\n" +
                         "group by f.id_persona, p.razon_social\n" +
                         "order by cantidad desc"
         ).setParameter("fechaDesde",sqlDesde).setParameter("fechaHasta",sqlHasta);
@@ -126,6 +126,61 @@ public class EstadisticaService {
         return map;
 
     }
+
+    public Map<String,List> cobradoPorMes(Integer anho){
+        Query nativeQuery = em.createNativeQuery(
+                "select sum(monto) monto, extract(month from fecha) as mes\n" +
+                        "from cobro\n" +
+                        "where estado != 'A' and extract(YEAR from fecha) = :anho\n" +
+                        "group by extract(month from fecha) order by mes"
+        ).setParameter("anho",anho);
+
+        List<Object[]> result = nativeQuery.getResultList();
+
+        Map<String,List> map = new HashMap<>();
+
+        List<Long> monto = new ArrayList<>();
+        List<BigDecimal> mes = new ArrayList<>();
+
+        result.stream().forEach(item ->{
+            monto.add((Long) item[0]);
+            mes.add((BigDecimal) item[1]);
+        });
+
+        map.put("monto",monto);
+        map.put("mes",mes);
+
+        return map;
+    }
+
+
+    public Map<String,List> pagadoPorMes(Integer anho){
+        Query nativeQuery = em.createNativeQuery(
+                "select sum(monto) monto, extract(month from fecha) as mes\n" +
+                        "from pago\n" +
+                        "where estado != 'A' and extract(YEAR from fecha) = :anho\n" +
+                        "group by extract(month from fecha) order by mes"
+        ).setParameter("anho",anho);
+
+        List<Object[]> result = nativeQuery.getResultList();
+
+        Map<String,List> map = new HashMap<>();
+
+        List<Long> monto = new ArrayList<>();
+        List<BigDecimal> mes = new ArrayList<>();
+
+        result.stream().forEach(item ->{
+            monto.add((Long) item[0]);
+            mes.add((BigDecimal) item[1]);
+        });
+
+        map.put("monto",monto);
+        map.put("mes",mes);
+
+        return map;
+    }
+
+
 
 
 }
