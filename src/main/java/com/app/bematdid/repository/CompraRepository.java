@@ -21,10 +21,10 @@ public interface CompraRepository extends JpaRepository<Compra, Long> {
             "order by id_compra desc;", nativeQuery = true)
     Page<Compra> listarCompras (Pageable pageable, @Param("nombrePersonaFilter") String nombrePersona, @Param("numFolioFilter") String numFolio);
 
-    @Query(value ="SELECT coalesce(sum(monto_total),0) FROM compra WHERE estado != 'AN'", nativeQuery = true)
+    @Query(value ="SELECT coalesce(sum(monto_total),0) FROM compra WHERE estado != 'A'", nativeQuery = true)
     Integer totalComprado();
 
-    @Query(value ="SELECT coalesce(sum(saldo),0) FROM compra WHERE estado != 'AN'", nativeQuery = true)
+    @Query(value ="SELECT coalesce(sum(saldo),0) FROM compra WHERE estado != 'A'", nativeQuery = true)
     Integer porPagar();
 
     List<Compra> findByFechaBetween(Date des, Date has);
@@ -33,6 +33,6 @@ public interface CompraRepository extends JpaRepository<Compra, Long> {
             "FROM compra c\n" +
             "JOIN detalle_compra d\n" +
             "ON d.id_compra = c.id_compra\n" +
-            "WHERE c.estado != 'AN' AND (c.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
+            "WHERE c.estado != 'A' AND (c.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
     List<Compra> comprasPorFecha(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin);
 }
