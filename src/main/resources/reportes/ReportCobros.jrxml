@@ -77,7 +77,7 @@
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="150" y="1" width="116" height="20" uuid="aed3568d-a381-47b4-97ca-e437617be59d"/>
+				<reportElement x="120" y="1" width="116" height="20" uuid="aed3568d-a381-47b4-97ca-e437617be59d"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
@@ -91,7 +91,7 @@
 				<text><![CDATA[MONTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="274" y="1" width="116" height="20" uuid="684a8a4a-740a-42da-991d-d82f893e7438"/>
+				<reportElement x="240" y="1" width="116" height="20" uuid="684a8a4a-740a-42da-991d-d82f893e7438"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
@@ -110,7 +110,7 @@
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="0" width="116" height="13" uuid="d7fa8c08-274f-447e-91e2-0a43e391658c"/>
+				<reportElement x="120" y="0" width="116" height="13" uuid="d7fa8c08-274f-447e-91e2-0a43e391658c"/>
 				<textElement textAlignment="Left">
 					<font size="8"/>
 				</textElement>
@@ -124,7 +124,7 @@
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,###").format($F{monto})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="274" y="0" width="156" height="13" uuid="19eb8121-318a-42b8-8506-03f7f78a6c22">
+				<reportElement x="240" y="0" width="156" height="13" uuid="19eb8121-318a-42b8-8506-03f7f78a6c22">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8eeb04e-852c-4c28-9f04-3f3d57948c71"/>
 				</reportElement>
 				<textElement>
