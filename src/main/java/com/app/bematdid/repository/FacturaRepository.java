@@ -21,17 +21,17 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
             "order by id_factura desc;", nativeQuery = true)
     Page<Factura> listarFacturas (Pageable pageable, @Param("nombrePersonaFilter") String nombrePersona, @Param("numFacturaFilter") String numFactura);
 
-    @Query(value ="SELECT coalesce(sum(monto_total),0) FROM factura WHERE estado != 'AN'", nativeQuery = true)
+    @Query(value ="SELECT coalesce(sum(monto_total),0) FROM factura WHERE estado != 'A'", nativeQuery = true)
     Integer totalVendido();
 
-    @Query(value ="SELECT coalesce(sum(saldo),0) FROM factura WHERE estado != 'AN'", nativeQuery = true)
+    @Query(value ="SELECT coalesce(sum(saldo),0) FROM factura WHERE estado != 'A'", nativeQuery = true)
     Integer porCobrar();
 
     @Query(value ="SELECT COALESCE(SUM(d.cantidad), 0)\n" +
             "FROM factura f\n" +
             "JOIN detalle_factura d\n" +
             "ON d.id_factura = f.id_factura\n" +
-            "WHERE f.estado != 'AN' AND (f.fecha BETWEEN ':fechaInicio' AND ':fechaFin')", nativeQuery = true)
+            "WHERE f.estado != 'A' AND (f.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
     Integer vendidosPorFecha(@Param("fechaInicio") String fechaInico, @Param("fechaFin") String fechafin);
 
 
@@ -41,7 +41,7 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
             "FROM factura f\n" +
             "JOIN detalle_factura d\n" +
             "ON d.id_factura = f.id_factura\n" +
-            "WHERE f.estado != 'AN' AND (extract(month from f.fecha) = :mes and extract(year from f.fecha) = :anho)", nativeQuery = true)
+            "WHERE f.estado != 'A' AND (extract(month from f.fecha) = :mes and extract(year from f.fecha) = :anho)", nativeQuery = true)
     Integer vendidosPorMes(@Param("mes") Integer mes,@Param("anho") Integer anho);
 
 
@@ -52,7 +52,7 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
             "FROM factura f\n" +
             "JOIN detalle_factura d\n" +
             "ON d.id_factura = f.id_factura\n" +
-            "WHERE f.estado != 'AN' AND (f.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
+            "WHERE f.estado != 'A' AND (f.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
     List<Factura> facturasPorFecha(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin);
 
 
