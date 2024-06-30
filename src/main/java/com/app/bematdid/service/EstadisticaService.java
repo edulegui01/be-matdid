@@ -137,15 +137,33 @@ public class EstadisticaService {
 
         List<Object[]> result = nativeQuery.getResultList();
 
+        Long[] array = {0L, 0L, 0L, 0L, 0L, 0L,0L, 0L, 0L, 0L, 0L, 0L};
+
         Map<String,List> map = new HashMap<>();
 
-        List<Long> monto = new ArrayList<>();
+        List<Long> monto = new ArrayList<>(Arrays.asList(array));
+        List<Long> montoCopy = new ArrayList<>();
         List<BigDecimal> mes = new ArrayList<>();
 
         result.stream().forEach(item ->{
-            monto.add((Long) item[0]);
+            montoCopy.add((Long) item[0]);
             mes.add((BigDecimal) item[1]);
         });
+
+        for (int i =0; i < mes.size(); i++){
+
+            monto.set(mes.get(i).intValue() -1,montoCopy.get(i));
+        };
+
+
+
+        /*for (Integer i = 0; i <= 13; i++) {
+            if( i == mes.get(i)){
+                monto.add(i, monto.get(i));
+            }else{
+                monto.add(i, 0L);
+            }
+        }*/
 
         map.put("monto",monto);
         map.put("mes",mes);
@@ -163,16 +181,22 @@ public class EstadisticaService {
         ).setParameter("anho",anho);
 
         List<Object[]> result = nativeQuery.getResultList();
-
+        Long[] array = {0L, 0L, 0L, 0L, 0L, 0L,0L, 0L, 0L, 0L, 0L, 0L};
         Map<String,List> map = new HashMap<>();
 
-        List<Long> monto = new ArrayList<>();
+        List<Long> monto = new ArrayList<>(Arrays.asList(array));
+        List<Long> montoCopy = new ArrayList<>();
         List<BigDecimal> mes = new ArrayList<>();
 
         result.stream().forEach(item ->{
-            monto.add((Long) item[0]);
+            montoCopy.add((Long) item[0]);
             mes.add((BigDecimal) item[1]);
         });
+
+        for (int i =0; i < mes.size(); i++){
+
+            monto.set(mes.get(i).intValue() -1,montoCopy.get(i));
+        };
 
         map.put("monto",monto);
         map.put("mes",mes);

@@ -227,4 +227,101 @@ public class ReporteService {
             return ResponseEntity.noContent().build();
         }
     }
+
+    public ResponseEntity<Resource> exportFacturasReport(LocalDate des, LocalDate has) throws FileNotFoundException, JRException {
+
+        java.sql.Date sqlDesde = java.sql.Date.valueOf(des);
+        java.sql.Date sqlHasta = java.sql.Date.valueOf(has.plusDays(1));
+
+        List<Factura> facturas = facturaRepository.facturasPorFecha(sqlDesde, sqlHasta);
+        facturas.forEach(factura -> {
+            factura.setTipoFactura(factura.getPersona().getRazonSocial());
+            if(factura.getEstado().equals("SC")) {
+                factura.setEstado("PENDIENTE DE COBRO");
+            } else if(factura.getEstado().equals("CO")) {
+                factura.setEstado("COBRADO");
+            } else if(factura.getEstado().equals("CP")) {
+                factura.setEstado("COBRO PARCIAL");
+            }
+        });
+
+
+        if(!facturas.isEmpty()){
+            final File file = ResourceUtils.getFile("classpath:reportes/ReportFacturas.jasper");
+            final File imgLogo = ResourceUtils.getFile("classpath:images/logo.png");
+            final JasperReport report = (JasperReport) JRLoader.loadObject(file);
+
+            final Map<String,Object> parameters = new HashMap<>();
+            parameters.put("imgLogo",new FileInputStream(imgLogo));
+            parameters.put("desde",new SimpleDateFormat("dd-MM-yyyy").format(sqlDesde));
+            parameters.put("hasta",new SimpleDateFormat("dd-MM-yyyy").format(sqlHasta));
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,new JRBeanCollectionDataSource(facturas));
+            byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
+            String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new java.util.Date());
+            StringBuilder stringBuilder = new StringBuilder().append("facturasPDF");
+            ContentDisposition contentDisposition = ContentDisposition.builder("attachment")
+                    .filename(stringBuilder.append("facturas")
+                            .append("generateDay:")
+                            .append(sdf)
+                            .append(".pdf").toString()).build();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentDisposition(contentDisposition);
+            return ResponseEntity.ok().contentLength((long) reporte.length)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .headers(headers).body(new ByteArrayResource(reporte));
+
+        }else{
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    public ResponseEntity<Resource> exportComprasReport(LocalDate des, LocalDate has) throws FileNotFoundException, JRException {
+
+        java.sql.Date sqlDesde = java.sql.Date.valueOf(des);
+        java.sql.Date sqlHasta = java.sql.Date.valueOf(has.plusDays(1));
+
+        List<Compra> compras = compraRepository.comprasPorFecha(sqlDesde, sqlHasta);
+        compras.forEach(compra -> {
+            compra.setTipoFactura(compra.getPersona().getRazonSocial());
+            if(compra.getEstado().equals("SP")) {
+                compra.setEstado("PENDIENTE DE PAGO");
+            } else if(compra.getEstado().equals("PA")) {
+                compra.setEstado("PAGADO");
+            } else if(compra.getEstado().equals("PP")) {
+                compra.setEstado("PAGO PARCIAL");
+            }
+        });
+
+
+
+        if(!compras.isEmpty()){
+            final File file = ResourceUtils.getFile("classpath:reportes/ReportCompras.jasper");
+            final File imgLogo = ResourceUtils.getFile("classpath:images/logo.png");
+            final JasperReport report = (JasperReport) JRLoader.loadObject(file);
+
+            final Map<String,Object> parameters = new HashMap<>();
+            parameters.put("imgLogo",new FileInputStream(imgLogo));
+            parameters.put("desde",new SimpleDateFormat("dd-MM-yyyy").format(sqlDesde));
+            parameters.put("hasta",new SimpleDateFormat("dd-MM-yyyy").format(sqlHasta));
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,new JRBeanCollectionDataSource(compras));
+            byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
+            String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new java.util.Date());
+            StringBuilder stringBuilder = new StringBuilder().append("comprasPDF");
+            ContentDisposition contentDisposition = ContentDisposition.builder("attachment")
+                    .filename(stringBuilder.append("compras")
+                            .append("generateDay:")
+                            .append(sdf)
+                            .append(".pdf").toString()).build();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentDisposition(contentDisposition);
+            return ResponseEntity.ok().contentLength((long) reporte.length)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .headers(headers).body(new ByteArrayResource(reporte));
+
+        }else{
+            return ResponseEntity.noContent().build();
+        }
+    }
 }
