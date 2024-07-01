@@ -46,7 +46,7 @@ public class AuthService {
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .funcionario(request.getFuncionario())
-                .role(Role.USER)
+                .role(request.getRole())
                 .build();
 
 

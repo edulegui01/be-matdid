@@ -2,6 +2,7 @@ package com.app.bematdid.auth;
 
 
 import com.app.bematdid.model.Funcionario;
+import com.app.bematdid.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,5 @@ public class RegisterRequest {
     String username;
     String password;
     Funcionario funcionario;
+    Role role;
 }
