@@ -243,8 +243,10 @@ public class ReporteService {
             } else if(factura.getEstado().equals("CP")) {
                 factura.setEstado("COBRO PARCIAL");
             }
+            String fac = factura.getNumFactura();
+            fac = fac.substring(0,3).concat("-").concat(fac.substring(3,6)).concat("-").concat(fac.substring(6,13));
+            factura.setNumFactura(fac);
         });
-
 
         if(!facturas.isEmpty()){
             final File file = ResourceUtils.getFile("classpath:reportes/ReportFacturas.jasper");
@@ -281,7 +283,7 @@ public class ReporteService {
         java.sql.Date sqlDesde = java.sql.Date.valueOf(des);
         java.sql.Date sqlHasta = java.sql.Date.valueOf(has.plusDays(1));
 
-        List<Compra> compras = compraRepository.comprasPorFecha(sqlDesde, sqlHasta);
+        List<Compra> compras = compraRepository.comprasPorFechaProveedor(sqlDesde, sqlHasta, (long)10);
         compras.forEach(compra -> {
             compra.setTipoFactura(compra.getPersona().getRazonSocial());
             if(compra.getEstado().equals("SP")) {
@@ -291,6 +293,9 @@ public class ReporteService {
             } else if(compra.getEstado().equals("PP")) {
                 compra.setEstado("PAGO PARCIAL");
             }
+            String fac = compra.getNumFolio();
+            fac = fac.substring(0,3).concat("-").concat(fac.substring(3,6)).concat("-").concat(fac.substring(6,13));
+            compra.setNumFolio(fac);
         });
 
 

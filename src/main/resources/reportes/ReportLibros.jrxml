@@ -11,10 +11,13 @@
 	<field name="idProducto" class="java.lang.Long"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="stockActual" class="java.lang.Integer"/>
+	<variable name="V_total_prod" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{stockActual}]]></variableExpression>
+	</variable>
 	<title>
 		<band height="60" splitType="Stretch">
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="51" width="286" height="8" forecolor="#FFFFFF" backcolor="#CCFFCC" uuid="9cfb6ba1-6f5f-4800-a1bc-69d52a2a4682"/>
+				<reportElement mode="Opaque" x="0" y="51" width="286" height="8" forecolor="#FFFFFF" backcolor="#FCC1B3" uuid="9cfb6ba1-6f5f-4800-a1bc-69d52a2a4682"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="186" y="0" width="369" height="51" uuid="9a94c8f8-f26a-44c6-942c-deba6341b4f2"/>
@@ -54,18 +57,32 @@
 				<text><![CDATA[CÓDIGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="113" y="0" width="116" height="20" uuid="aed3568d-a381-47b4-97ca-e437617be59d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="92" y="0" width="137" height="20" uuid="aed3568d-a381-47b4-97ca-e437617be59d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRODUCTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="260" y="1" width="115" height="20" uuid="75be446a-f540-4b2b-bc5f-045a27011b81"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="260" y="1" width="70" height="20" uuid="75be446a-f540-4b2b-bc5f-045a27011b81"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[STOCK]]></text>
+				<text><![CDATA[STOCK VIRTUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="0" width="70" height="20" uuid="e3103880-391c-44ba-8a70-4e5c14ed01fd"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STOCK FÍSICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="0" width="70" height="20" uuid="59ab0e70-7fdc-4f5d-b215-180fd5adc5e2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIFERENCIA]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -80,22 +97,28 @@
 			</textField>
 			<textField>
 				<reportElement x="92" y="0" width="168" height="13" uuid="d7fa8c08-274f-447e-91e2-0a43e391658c"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Left">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="0" width="115" height="13" uuid="e41e4d80-7fb1-438d-bd3a-678d29ba85c1"/>
-				<textElement textAlignment="Center">
+				<reportElement x="260" y="0" width="70" height="13" uuid="e41e4d80-7fb1-438d-bd3a-678d29ba85c1"/>
+				<textElement textAlignment="Right">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{stockActual}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="11" width="555" height="1" forecolor="#949494" uuid="0790effe-dcec-4e4f-98c3-f4d9e1622de6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</line>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="20">
+		<band height="21">
 			<textField>
 				<reportElement x="4" y="0" width="80" height="20" uuid="c1b8a874-e234-4458-b55c-d3e388330b10"/>
 				<textElement textAlignment="Right"/>
@@ -107,4 +130,28 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="28">
+			<textField>
+				<reportElement x="258" y="0" width="72" height="18" uuid="04255047-4122-4bc0-b2cf-dedfdf8a1a2f"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,###").format((long)$V{V_total_prod})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="218" y="0" width="40" height="18" uuid="83198e1f-807e-4893-aa2c-58e29015cd6d"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="218" y="13" width="337" height="1" forecolor="#949494" uuid="306855f2-697e-4b13-9f8a-78d97c4667a9">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</summary>
 </jasperReport>

@@ -141,7 +141,7 @@
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,###").format($V{V_monto_sum}) ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,###").format($V{V_monto_sum})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="440" y="2" width="40" height="18" uuid="e6a1dc0e-6d41-4c51-b8e8-79dcf528e251"/>
@@ -165,4 +165,22 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="20">
+			<staticText>
+				<reportElement x="440" y="2" width="40" height="18" uuid="8993f34d-3174-4b4e-8f58-a53ba0de2d4c"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="2" width="72" height="18" uuid="6b705223-1af7-45cf-88ba-dcc39d85941d"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,###").format($V{V_monto_sum})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 </jasperReport>

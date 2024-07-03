@@ -25,6 +25,13 @@ public interface PagoRepository extends JpaRepository<Pago, Long> {
     @Query(value = "SELECT * FROM pago where (estado = 'ABIERTO' OR estado = 'CERRADO') and (fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
     List<Pago> listarPorFecha(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin);
 
+    @Query(value = "SELECT id_pago, comentario, p.estado, p.fecha, p.id_compra, p.id_funcionario, monto, tipo_pago\n" +
+            "FROM pago p\n" +
+            "JOIN compra c\n" +
+            "ON p.id_compra = c.id_compra\n" +
+            "where (p.estado = 'ABIERTO' OR p.estado = 'CERRADO') and (p.fecha BETWEEN :fechaInicio AND :fechaFin) AND c.id_persona = :id", nativeQuery = true)
+    List<Pago> listarPorFechaProveedor(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin, Long id);
+
     @Query(value ="SELECT coalesce(sum(monto),0) FROM pago WHERE estado = 'ABIERTO'", nativeQuery = true)
     Integer montoTotal();
 }
