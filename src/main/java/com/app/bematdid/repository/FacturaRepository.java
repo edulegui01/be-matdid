@@ -50,10 +50,13 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
     @Query(value ="SELECT f.id_factura, estado, id_folio, id_funcionario, id_persona, id_timbrado, monto_total, saldo, tipo_factura, num_factura, fecha, fecha_vencimiento\n" +
             "FROM factura f\n" +
-            "JOIN detalle_factura d\n" +
-            "ON d.id_factura = f.id_factura\n" +
             "WHERE f.estado != 'A' AND (f.fecha BETWEEN :fechaInicio AND :fechaFin)", nativeQuery = true)
     List<Factura> facturasPorFecha(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin);
+
+    @Query(value ="SELECT f.id_factura, estado, id_folio, id_funcionario, id_persona, id_timbrado, monto_total, saldo, tipo_factura, num_factura, fecha, fecha_vencimiento\n" +
+            "FROM factura f\n" +
+            "WHERE f.estado != 'A' AND (f.fecha BETWEEN :fechaInicio AND :fechaFin) AND f.id_persona = :id", nativeQuery = true)
+    List<Factura> facturasPorFechaCliente(@Param("fechaInicio") Date fechaInico, @Param("fechaFin") Date fechafin, @Param("id") Long id);
 
 
 }

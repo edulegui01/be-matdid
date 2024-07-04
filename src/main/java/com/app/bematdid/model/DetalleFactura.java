@@ -37,4 +37,9 @@ public class DetalleFactura {
     @ManyToOne()
     @JoinColumn(name = "id_producto",insertable = false, updatable = false)
     Producto producto;
+
+
+    public String getNombreProducto(){
+        return this.getProducto().getNombre();
+    }
 }
