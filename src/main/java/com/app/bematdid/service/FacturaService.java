@@ -149,7 +149,6 @@ public class FacturaService {
                 final File subReportDir = ResourceUtils.getFile("classpath:reportes/FacturaDetalleReport.jrxml");
                 final JasperReport report = (JasperReport) JRLoader.loadObject(file);
                 final JasperReport subReport = JasperCompileManager.compileReport(subReportDir.toString());
-                System.out.println(subReportDir.toString());
                 final HashMap<String, Object> parameters = new HashMap<>();
                 parameters.put("imgLogo",new FileInputStream(imgLogo));
                 parameters.put("timbrado", factura.getTimbrado().getNumero());
@@ -195,6 +194,7 @@ public class FacturaService {
                 JRBeanCollectionDataSource detalleCollection = new JRBeanCollectionDataSource(detalleFacturaIvaDTOS);
                 Map<String, Object> mapDetalle = new HashMap<>();
                 mapDetalle.put("detalleDatos", detalleCollection);
+
                 parameters.put("detalle", mapDetalle);
 
                 JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());

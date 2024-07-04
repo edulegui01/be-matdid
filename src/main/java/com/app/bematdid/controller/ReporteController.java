@@ -48,4 +48,10 @@ public class ReporteController {
     public ResponseEntity<Resource> exportComprasReport(@RequestParam LocalDate des, @RequestParam LocalDate has) throws JRException, FileNotFoundException {
         return reporteService.exportComprasReport(des, has);
     }
+
+    @GetMapping("reporte/facturas-detallado")
+    public ResponseEntity<Resource> exportFacturasDetalladoReport(@RequestParam LocalDate des, @RequestParam LocalDate has) throws JRException, FileNotFoundException {
+        return reporteService.exportFacturasDetalladoReport(des, has);
+    }
+
 }
