@@ -9,10 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -77,5 +76,12 @@ public class Factura {
     @JsonIgnore
     @OneToMany(mappedBy = "factura",cascade = {CascadeType.ALL})
     private List<Cobro> cobros;
+
+    public Map<String, Object> getMapDetalle (){
+        JRBeanCollectionDataSource detalleCollection = new JRBeanCollectionDataSource(this.detalleFacturas);
+        Map<String, Object> mapDetalle = new HashMap<>();
+        mapDetalle.put("detalleDatos", detalleCollection);
+        return mapDetalle;
+    }
 
 }

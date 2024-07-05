@@ -126,6 +126,7 @@ public class FacturaService {
     public void borrar(Long idFactura){
         Optional<Factura> factura = facturaRepository.findById(idFactura);
         factura.get().setEstado("A");
+        factura.get().setSaldo(0);
         factura.get().getDetalleFacturas().forEach(detalleFactura -> {
             Optional<Producto> producto = productoRepository.findById(detalleFactura.getId().getIdProducto());
             producto.get().setStockActual(producto.get().getStockActual()+detalleFactura.getCantidad());
@@ -146,7 +147,9 @@ public class FacturaService {
                 final List<DetalleFacturaIvaDTO> detalleFacturaIvaDTOS = detalleFacturaIvaMapper.aDetalleFacturaIvaDTOS(detalleFactura);
                 final File file = ResourceUtils.getFile("classpath:reportes/facturaPdf.jasper");
                 final File imgLogo = ResourceUtils.getFile("classpath:images/logo.png");
+                final File subReportDir = ResourceUtils.getFile("classpath:reportes/FacturaDetalleReport.jrxml");
                 final JasperReport report = (JasperReport) JRLoader.loadObject(file);
+                final JasperReport subReport = JasperCompileManager.compileReport(subReportDir.toString());
                 final HashMap<String, Object> parameters = new HashMap<>();
                 parameters.put("imgLogo",new FileInputStream(imgLogo));
                 parameters.put("timbrado", factura.getTimbrado().getNumero());
@@ -184,13 +187,18 @@ public class FacturaService {
                 parameters.put("iva10",(int)(sub10 * 0.1));
                 parameters.put("totaliva", (int)(sub5 * 0.05 + sub10 * 0.1));
                 parameters.put("letras", convertirALetras(Long.toString(factura.getMontoTotal()), true));
-
-
-
-
                 parameters.put("total",factura.getMontoTotal());
 
-                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JRBeanCollectionDataSource(detalleFacturaIvaDTOS));
+
+                parameters.put("subReport",subReport);
+
+                JRBeanCollectionDataSource detalleCollection = new JRBeanCollectionDataSource(detalleFacturaIvaDTOS);
+                Map<String, Object> mapDetalle = new HashMap<>();
+                mapDetalle.put("detalleDatos", detalleCollection);
+
+                parameters.put("detalle", mapDetalle);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
                 byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
                 String sdf = (new SimpleDateFormat("dd/MMMM/yyyy")).format(new Date());
                 StringBuilder stringBuilder = new StringBuilder().append("InvoicePDF:");
@@ -219,13 +227,15 @@ public class FacturaService {
         return null;
     }
 
+
+
+
     private final String[] UNIDADES = {"", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ", "ocho ", "nueve "};
     private final String[] DECENAS = {"diez ", "once ", "doce ", "trece ", "catorce ", "quince ", "dieciseis ",
             "diecisiete ", "dieciocho ", "diecinueve", "veinte ", "treinta ", "cuarenta ",
             "cincuenta ", "sesenta ", "setenta ", "ochenta ", "noventa "};
     private final String[] CENTENAS = {"", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ", "quinientos ", "seiscientos ",
             "setecientos ", "ochocientos ", "novecientos "};
-
 
 
     public String convertirALetras(String numero, boolean mayusculas) {
@@ -235,11 +245,6 @@ public class FacturaService {
                 "cincuenta ", "sesenta ", "setenta ", "ochenta ", "noventa "};
          final String[] CENTENAS = {"", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ", "quinientos ", "seiscientos ",
                 "setecientos ", "ochocientos ", "novecientos "};
-
-
-
-
-
 
 
 
