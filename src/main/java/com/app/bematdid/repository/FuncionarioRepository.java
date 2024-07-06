@@ -21,7 +21,7 @@ public interface FuncionarioRepository  extends JpaRepository<Funcionario,Long> 
 
 
 
-    @Query(value = "select * from funcionario where concat(nombre,' ',apellido) ilike %:search%",nativeQuery = true)
+    @Query(value = "select * from funcionario where concat(nombre,' ',apellido) ilike %:search% and estado is true",nativeQuery = true)
     List<Funcionario> listarFuncionariosSelect(@Param("search") String search);
 
 
