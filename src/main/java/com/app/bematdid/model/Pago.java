@@ -44,4 +44,10 @@ public class Pago {
     @ManyToOne()
     @JoinColumn(name = "id_compra",insertable=false, updatable=false)
     Compra compra;
+
+    public String getNumFolio () {
+        String fac = compra.getNumFolio();
+        fac = fac.substring(0,3).concat("-").concat(fac.substring(3,6)).concat("-").concat(fac.substring(6,13));
+        return fac;
+    }
 }

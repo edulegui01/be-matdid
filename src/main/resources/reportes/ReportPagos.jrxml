@@ -14,6 +14,7 @@
 	<field name="idCompra" class="java.lang.Long"/>
 	<field name="monto" class="java.lang.Integer"/>
 	<field name="comentario" class="java.lang.String"/>
+	<field name="numFolio" class="java.lang.String"/>
 	<variable name="V_monto_sum" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{monto}]]></variableExpression>
 	</variable>
@@ -113,7 +114,7 @@
 				<textElement textAlignment="Left">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{idCompra}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{numFolio}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="440" y="0" width="112" height="13" uuid="e41e4d80-7fb1-438d-bd3a-678d29ba85c1"/>
