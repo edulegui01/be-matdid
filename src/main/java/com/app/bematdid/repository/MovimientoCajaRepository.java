@@ -30,4 +30,14 @@ public interface MovimientoCajaRepository extends JpaRepository<MovimientoCaja, 
             "FROM movimiento_caja m JOIN concepto c ON m.id_concepto = c.id_concepto\n" +
             "WHERE m.estado = 'ABIERTO' AND c.es_ingreso = 'I'",nativeQuery = true)
     Integer ingresoTotal();
+
+    @Query(value ="SELECT coalesce(sum(m.monto),0)\n" +
+            "FROM movimiento_caja m JOIN concepto c ON m.id_concepto = c.id_concepto\n" +
+            "WHERE m.estado = 'ABIERTO' AND c.es_ingreso = 'E' AND m.tipo_pago =':tipo'",nativeQuery = true)
+    Integer egresoTotalTipo(@Param("tipo") String tipo);
+
+    @Query(value ="SELECT coalesce(sum(m.monto),0)\n" +
+            "FROM movimiento_caja m JOIN concepto c ON m.id_concepto = c.id_concepto\n" +
+            "WHERE m.estado = 'ABIERTO' AND c.es_ingreso = 'I' AND m.tipo_pago = ':tipo'",nativeQuery = true)
+    Integer ingresoTotalTipo(@Param("tipo") String tipo);
 }

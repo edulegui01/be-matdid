@@ -30,4 +30,7 @@ public interface CobroRepository extends JpaRepository<Cobro, Long> {
 
     @Query(value ="SELECT coalesce(sum(monto),0) FROM cobro WHERE estado = 'ABIERTO'", nativeQuery = true)
     Integer montoTotal();
+
+    @Query(value ="SELECT coalesce(sum(monto),0) FROM cobro WHERE estado = 'ABIERTO' AND tipo_cobro =':tipo'", nativeQuery = true)
+    Integer montoTotalTipo(@Param("tipo") String tipo);
 }

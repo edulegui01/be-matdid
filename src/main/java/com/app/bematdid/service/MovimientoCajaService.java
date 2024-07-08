@@ -73,6 +73,9 @@ public class MovimientoCajaService {
     public Map<String,Integer> saldoDisponible() {
         Map<String, Integer> montosTotales = new HashMap<String,Integer>();
         montosTotales.put("totalPagos",cobroRepository.montoTotal() + movimientoCajaRepository.ingresoTotal() - pagoRepository.montoTotal() - movimientoCajaRepository.egresoTotal());
+        montosTotales.put("totalEfectivo",cobroRepository.montoTotalTipo("EFECTIVO") + movimientoCajaRepository.ingresoTotalTipo("EFECTIVO") - pagoRepository.montoTotalTipo("EFECTIVO") - movimientoCajaRepository.egresoTotalTipo("EFECTIVO"));
+        montosTotales.put("totalTransferencia",cobroRepository.montoTotalTipo("TRANSFERENCIA") + movimientoCajaRepository.ingresoTotalTipo("TRANSFERENCIA") - pagoRepository.montoTotalTipo("TRANSFERENCIA") - movimientoCajaRepository.egresoTotalTipo("TRANSFERENCIA"));
+        montosTotales.put("totalCheque",cobroRepository.montoTotalTipo("CHEQUE") + movimientoCajaRepository.ingresoTotalTipo("CHEQUE") - pagoRepository.montoTotalTipo("CHEQUE") - movimientoCajaRepository.egresoTotalTipo("CHEQUE"));
         return montosTotales;
     }
 
