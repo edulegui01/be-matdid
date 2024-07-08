@@ -48,16 +48,16 @@ public class MovimientoCajaService {
     }
 
     public List<ObjectNode> listarTodosLosMovimientosCaja(){
-        Query nativeQuery = em.createNativeQuery("select p.id_pago as id,p.fecha, p.monto, 'PAGO DE MERCADERIA' as concepto,'E' as esIngreso, c.num_folio as comprobante, p.estado \n" +
+        Query nativeQuery = em.createNativeQuery("select p.id_pago as id,p.fecha, p.monto, 'PAGO DE MERCADERIA' as concepto,'E' as esIngreso,coalesce(p.tipo_pago,'') as tipo, c.num_folio as comprobante, p.estado \n" +
                 "from pago p\n" +
                 "join compra c on p.id_compra = c.id_compra\n" +
                 "where  p.estado = 'CERRADO'\n" +
                 "UNION\n" +
-                "SELEct c.id_cobro as id,c.fecha, c.monto, 'COBRO DE VENTA' as concepto,'I' as esIngreso, f.num_factura as comprobante, c.estado from cobro c\n" +
+                "SELEct c.id_cobro as id,c.fecha, c.monto, 'COBRO DE VENTA' as concepto,'I' as esIngreso, coalesce(c.tipo_cobro,'') as tipo,f.num_factura as comprobante, c.estado from cobro c\n" +
                 "join factura f on c.id_factura = f.id_factura\n" +
                 "where  c.estado = 'CERRADO'\n" +
                 "UNION\n" +
-                "SELECT mc.id_movimiento_caja as id,mc.fecha, mc.monto, c.nombre as concepto, c.es_ingreso as esIngreso, mc.comprobante as comprobante, mc.estado FROM movimiento_caja mc\n" +
+                "SELECT mc.id_movimiento_caja as id,mc.fecha, mc.monto, c.nombre as concepto, c.es_ingreso as esIngreso,coalesce(mc.tipo_pago,'') as tipo, mc.comprobante as comprobante, mc.estado FROM movimiento_caja mc\n" +
                 "join concepto c on mc.id_concepto = c.id_concepto\n" +
                 "where mc.estado = 'CERRADO'\n" +
                 "order by fecha desc, id desc", Tuple.class);
