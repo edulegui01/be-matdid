@@ -34,4 +34,7 @@ public interface PagoRepository extends JpaRepository<Pago, Long> {
 
     @Query(value ="SELECT coalesce(sum(monto),0) FROM pago WHERE estado = 'ABIERTO'", nativeQuery = true)
     Integer montoTotal();
+
+    @Query(value ="SELECT coalesce(sum(monto),0) FROM pago WHERE estado = 'ABIERTO' AND tipo_pago =:tipo", nativeQuery = true)
+    Integer montoTotalTipo(@Param("tipo") String tipo);
 }
